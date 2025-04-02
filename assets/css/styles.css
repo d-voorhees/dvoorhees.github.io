@@ -574,6 +574,20 @@ a.more-link {
 }
 
 /* dark theme */
+.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.navbar-light.dark-theme {
+  background-color: #121212;
+}
+
+.offcanvas.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
 #theme-toggle {
   background: none;
   border: none;
