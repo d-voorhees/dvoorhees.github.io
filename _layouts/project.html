@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+  <!-- Other head content specific to this layout -->
+</head>
+
+<body>
+    {% include navbar.html %}
+    <main>
+        <div class="container py-5">
+            <div class="col-10">
+                <article>
+                    <h1>{{ page.title }}</h1>
+                    <img src="{{ page.image }}" alt="{{ page.title }}">
+                    <p>{{ page.description }}</p>
+                    <div class="content">
+                        {{ content }}
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+</body>
+
+{% include footer.html %}
+
+</html>

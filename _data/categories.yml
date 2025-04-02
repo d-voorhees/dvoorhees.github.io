@@ -1,0 +1,69 @@
+---
+- name: AI/ML
+  slug: aiml
+  posts_count: 1
+  color: ''
+- name: Apps
+  posts_count: 3
+  color: "#008DD5"
+  slug: apps
+- name: Growth engineering
+  posts_count: 5
+  color: "#F56476"
+  slug: growth-engineering
+- name: SaaS
+  posts_count: 3
+  color: "#931197"
+  slug: saas
+- name: automagic
+  color: "#035E7B"
+  posts_count: 1
+  slug: automagic
+- name: defense forking
+  color: "#D1462F"
+  posts_count: 2
+  slug: defense-forking
+- name: developer portfolios
+  color: "#F5A1A0"
+  posts_count: 1
+  slug: developer-portfolios
+- name: developer relations
+  color: "#01CB84"
+  posts_count: 1
+  slug: developer-relations
+- name: github
+  color: "#E5675D"
+  posts_count: 2
+  slug: github
+- name: jekyll
+  color: "#E99A24"
+  posts_count: 4
+  slug: jekyll
+- name: methods & strategy
+  slug: methods-and-strategy
+  posts_count: 4
+  color: "#119DA4"
+- name: open source
+  color: "#F6E351"
+  posts_count: 2
+  slug: open-source
+- name: private equity
+  posts_count: 1
+  color: "#8CB369"
+  slug: private-equity
+- name: product development
+  color: "#2AA377"
+  posts_count: 1
+  slug: product-development
+- name: ruby
+  color: "#513BBF"
+  posts_count: 1
+  slug: ruby
+- name: technical communication
+  posts_count: 4
+  color: "#36C9C6"
+  slug: technical-communication
+- name: tutorials
+  color: "#6BBDC2"
+  posts_count: 2
+  slug: tutorials

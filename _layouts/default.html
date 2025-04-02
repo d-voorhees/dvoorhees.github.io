@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   {% include head.html %}
+  <!-- Other head content specific to this layout -->
+</head>
+
+<body class="home">
+    {% include navbar.html %}
+
+    <main>
+        {{ content }}
+    </main>
+</body>
+    
+{% include footer.html %}
+
+<!-- script that only applies to this page -->
+<script src="https://unpkg.com/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
+    
+</html>

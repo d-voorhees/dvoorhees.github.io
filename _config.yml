@@ -1,0 +1,15 @@
+title: D. Voorhees Software Engineer
+description: The blog and portfolio of Software Engineer
+baseurl: "" # Leave empty if publishing from the root of the repository
+url: "https://dvoorhees.com" # Replace with your custom domain
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+  pages:
+    output: true
+    permalink: /:name/
+
+permalink: /:year/:month/:day/:title/

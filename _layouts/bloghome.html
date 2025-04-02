@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include head.html %}
+    <!-- Other head content specific to this layout -->
+</head>
+
+<body class="blog-home">
+    {% include navbar.html %}
+    <main>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div style="padding: 100px 0;">
+                            <h1 id="category-title">Writings About Code & Projects </h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom w-105"></div>
+            <div class="container">
+                <div class="row vh-85 pt-5">
+                    <div class="col-md-3 border-md-end">
+                        <div class="category-list">
+                            <h2 class="h5">Categories</h2>
+                            {% assign sorted_categories = site.data.categories | sort: "posts_count" | reverse %}
+                            {% for category in sorted_categories %}
+                            <div class="category-item">
+                                <div class="square" style="background-color: {{ category.color | default: '#cccccc' }};"></div>
+                                <a href="/categories/?category={{ category.slug }}" class="category-link">
+                                    {{ category.name }}
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-9 pl-md-3">
+
+                        {% for post in site.posts %}
+                        <div class="blog-post">
+
+                            <div class="category-list">
+                                <div class="post-categories">
+                                    {% for category in post.categories %}
+                                    {% assign category_slug = category | downcase | replace: '&', 'and' | replace: ' ', '-' | replace: ',', '' %}
+                                    {% assign category_info = site.data.categories | where: "slug", category_slug | first %}
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: {{ category_info.color | default: '#bcaeae' }}; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="{{ site.url }}/categories/?category={{ category_slug }}" class="category-link">
+                                            {{ category }}
+                                        </a>
+                                    </span>
+                                    {% endfor %}
+
+
+                                </div>
+
+                            </div>
+                            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                            <p>{{ post.introduction }}</p>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+{% include footer.html %}
+
+</html>
