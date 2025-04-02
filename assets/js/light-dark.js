@@ -26,8 +26,10 @@ function toggleTheme() {
   const navbarLogo = document.querySelector(".navbar-logo");
   const offcanvasMenu = document.getElementById("offcanvasMenu");
 
+  // Toggle the dark-theme class on the body
   body.classList.toggle("dark-theme");
 
+  // Check if dark-theme is active and update elements accordingly
   if (body.classList.contains("dark-theme")) {
     localStorage.setItem("theme", "dark");
     themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
@@ -42,7 +44,10 @@ function toggleTheme() {
 }
 
 // Add event listener for the theme toggle button
-document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+document.addEventListener("DOMContentLoaded", () => {
+  initializeTheme(); // Initialize theme on page load
 
-// Run initialization when the page loads
-document.addEventListener("DOMContentLoaded", initializeTheme);
+  // Ensure the toggle button works properly
+  const themeToggleButton = document.getElementById("theme-toggle");
+  themeToggleButton.addEventListener("click", toggleTheme);
+});
