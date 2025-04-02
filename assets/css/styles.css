@@ -574,7 +574,7 @@ a.more-link {
 }
 
 /* dark theme */
-.dark-theme {
+body.dark-theme {
   background-color: #121212;
   color: #ffffff;
 }
@@ -585,7 +585,10 @@ a.more-link {
 
 .offcanvas.dark-theme {
   background-color: #121212;
-  color: #ffffff;
+}
+
+.offcanvas.dark-theme a {
+  color: #03cdda;
 }
 
 #theme-toggle {
