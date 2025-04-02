@@ -6,14 +6,14 @@ function initializeTheme() {
   const offcanvasMenu = document.getElementById("offcanvasMenu");
   const savedTheme = localStorage.getItem("theme");
 
-  // Apply saved theme or default to light
+  // Check for saved theme or default to light
   if (savedTheme === "dark") {
     body.classList.add("dark-theme");
     themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
     navbarLogo.src = "/assets/img/deepdive-lt.svg";
     offcanvasMenu.classList.add("dark-theme");
   } else {
-    body.classList.remove("dark-theme");
+    body.classList.remove("dark-theme"); // Ensure light theme is applied initially
     themeToggle.innerHTML = '<i class="jam jam-brightness-up"></i>';
     navbarLogo.src = "/assets/img/deepdive.svg";
     offcanvasMenu.classList.remove("dark-theme");
@@ -48,5 +48,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initializeTheme(); // Initialize theme on page load
 
   const themeToggleButton = document.getElementById("theme-toggle");
-  themeToggleButton.addEventListener("click", toggleTheme);
+  themeToggleButton.addEventListener("click", toggleTheme); // Bind the toggle function to the button
 });
