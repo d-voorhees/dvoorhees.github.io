@@ -2,21 +2,57 @@
 function initializeTheme() {
   const body = document.body;
   const themeToggle = document.getElementById("theme-toggle");
-  const navbarLogo = document.querySelector(".navbar-logo");
-  const offcanvasMenu = document.getElementById("offcanvasMenu");
+  const themeToggleTwo = document.getElementById("theme-toggle-two");
+  const logo = document.getElementById("main-logo");
   const savedTheme = localStorage.getItem("theme");
+  const offcanvasMenu = document.getElementById("offcanvasMenu");
 
-  // Check for saved theme or default to light
   if (savedTheme === "dark") {
     body.classList.add("dark-theme");
-    themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
-    navbarLogo.src = "/assets/img/deepdive-lt.svg";
-    offcanvasMenu.classList.add("dark-theme");
+
+    if (themeToggle) {
+      themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
+    }
+
+    if (themeToggleTwo) {
+      themeToggleTwo.innerHTML = '<i class="jam jam-moon"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive-lt.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive-lt.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.add("dark-theme");
+    }
   } else {
-    body.classList.remove("dark-theme"); // Ensure light theme is applied initially
-    themeToggle.innerHTML = '<i class="jam jam-brightness-up"></i>';
-    navbarLogo.src = "/assets/img/deepdive.svg";
-    offcanvasMenu.classList.remove("dark-theme");
+    body.classList.remove("dark-theme");
+
+    if (themeToggle) {
+      themeToggle.innerHTML = '<i class="jam jam-brightness-up"></i>';
+    }
+
+    if (themeToggleTwo) {
+      themeToggleTwo.innerHTML = '<i class="jam jam-brightness-up"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.remove("dark-theme");
+    }
   }
 }
 
@@ -24,29 +60,101 @@ function initializeTheme() {
 function toggleTheme() {
   const body = document.body;
   const themeToggle = document.getElementById("theme-toggle");
-  const navbarLogo = document.querySelector(".navbar-logo");
+  const logo = document.getElementById("main-logo");
   const offcanvasMenu = document.getElementById("offcanvasMenu");
 
-  // Toggle dark-theme class on body and other elements
+  body.classList.toggle("dark-theme");
+
   if (body.classList.contains("dark-theme")) {
-    body.classList.remove("dark-theme");
-    localStorage.setItem("theme", "light");
-    themeToggle.innerHTML = '<i class="jam jam-brightness-up"></i>';
-    navbarLogo.src = "/assets/img/deepdive.svg";
-    offcanvasMenu.classList.remove("dark-theme");
-  } else {
-    body.classList.add("dark-theme");
     localStorage.setItem("theme", "dark");
-    themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
-    navbarLogo.src = "/assets/img/deepdive-lt.svg";
-    offcanvasMenu.classList.add("dark-theme");
+
+    if (themeToggle) {
+      themeToggle.innerHTML = '<i class="jam jam-moon"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive-lt.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive-lt.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.add("dark-theme");
+    }
+  } else {
+    localStorage.setItem("theme", "light");
+
+    if (themeToggle) {
+      themeToggle.innerHTML = '<i class="jam jam-brightness-up"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.remove("dark-theme");
+    }
   }
 }
 
-// Add event listener for the theme toggle button
-document.addEventListener("DOMContentLoaded", () => {
-  initializeTheme(); // Initialize theme on page load
+// Function to toggle the theme on mobile
+function toggleThemeTwo() {
+  const body = document.body;
+  const themeToggleTwo = document.getElementById("theme-toggle-two");
+  const logo = document.getElementById("main-logo");
+  const offcanvasMenu = document.getElementById("offcanvasMenu");
 
-  const themeToggleButton = document.getElementById("theme-toggle");
-  themeToggleButton.addEventListener("click", toggleTheme); // Bind the toggle function to the button
-});
+  body.classList.toggle("dark-theme");
+
+  if (body.classList.contains("dark-theme")) {
+    localStorage.setItem("theme", "dark");
+
+    if (themeToggleTwo) {
+      themeToggleTwo.innerHTML = '<i class="jam jam-moon"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive-lt.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive-lt.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.add("dark-theme");
+    }
+  } else {
+    localStorage.setItem("theme", "light");
+
+    if (themeToggleTwo) {
+      themeToggleTwo.innerHTML = '<i class="jam jam-brightness-up"></i>';
+    }
+
+    if (logo) {
+      logo.src = "/assets/img/deepdive.svg";
+    }
+
+    // Update all logos with navbar-logo class
+    document.querySelectorAll("img.navbar-logo").forEach((img) => {
+      img.src = "/assets/img/deepdive.svg";
+    });
+
+    if (offcanvasMenu) {
+      offcanvasMenu.classList.remove("dark-theme");
+    }
+  }
+}
+
+// Run initialization when the page loads
+document.addEventListener("DOMContentLoaded", initializeTheme);

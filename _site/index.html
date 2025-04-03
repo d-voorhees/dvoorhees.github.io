@@ -51,90 +51,133 @@
 <body class="home">
     <!-- Google Tag Manager (noscript) -->
 <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
+    height="0"
+    width="0"
+    style="display: none; visibility: hidden"
+  ></iframe>
 </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- Desktop Navbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img id="main-logo" src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
-        </a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-                
-                
-                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-                
-                
-                
-                
-                
-                <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
-                
-                
-                
-                <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
-                
-                
-                <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
-
-            </ul>
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img
+        id="main-logo"
+        src="/assets/img/deepdive.svg"
+        alt="deep dive logo"
+        class="navbar-logo"
+      />
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/index.html">Home</a>
+        </li>
+         
+        <li class="nav-item">
+          <a class="nav-link" href="/about/"
+            >About</a
+          >
+        </li>
+            
+        <li class="nav-item">
+          <a class="nav-link" href="/blog/"
+            >Blog</a
+          >
+        </li>
+          
+        <li class="nav-item">
+          <a class="nav-link" href="/projects/"
+            >Projects</a
+          >
+        </li>
+         
+        <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <!-- Mobile Navbar with Off-Canvas Menu -->
 <nav class="navbar navbar-light bg-light d-md-none">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
-            <span class="jam jam-align-right"></span>
-        </button>
-        <button id="theme-toggle"></button>
-
-    </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img
+        src="/assets/img/deepdive.svg"
+        alt="deep dive logo"
+        class="navbar-logo"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasMenu"
+    >
+      <span class="jam jam-align-right"></span>
+    </button>
+    <button id="theme-toggle-two" onclick="toggleThemeTwo()">
+      Toggle Theme
+    </button>
+  </div>
 </nav>
 
 <!-- Off-Canvas Menu -->
-<div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
-            
-            
-            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-            
-            
-            
-            
-            
-            <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
-            
-            
-            
-            <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
-            
-            
+<div
+  class="offcanvas offcanvas-start d-md-none"
+  tabindex="-1"
+  id="offcanvasMenu"
+  aria-labelledby="offcanvasMenuLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasMenuLabel">
+      <img
+        id="main-logo"
+        src="/assets/img/deepdive.svg"
+        alt="deep dive logo"
+        class="navbar-logo"
+      />
+    </h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+       
+      <li class="nav-item">
+        <a class="nav-link" href="/about/"
+          >About</a
+        >
+      </li>
+          
+      <li class="nav-item">
+        <a class="nav-link" href="/blog/"
+          >Blog</a
+        >
+      </li>
+        
+      <li class="nav-item">
+        <a class="nav-link" href="/projects/"
+          >Projects</a
+        >
+      </li>
+       
+    </ul>
 
-        </ul>
-
-        <ul class="offcanvas-social-links">
-            
-        </ul>
-
-    </div>
+    <ul class="offcanvas-social-links">
+      
+    </ul>
+  </div>
 </div>
+
 
     <main>
         <!-- Jumbotron Section -->
