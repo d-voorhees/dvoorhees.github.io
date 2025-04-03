@@ -1,0 +1,103 @@
+{
+  "content": [
+    
+      {
+        "title": "Frameworks and Methodologies for Data-Driven Growth Engineering",
+        "url": "/2025/03/16/frameworks-and-methodologies-in-growth-engineering/",
+        "categories": ["growth engineering","methods & strategy"],
+        "introduction": "A look at some key frameworks in growth engineering, including AARRR, ICE scoring, North Star Metric, Growth Loops, and Jobs-to-be-Done, for optimizing user acquisition, retention, and revenue."
+      },
+    
+      {
+        "title": "Emerging Trends in Growth Engineering",
+        "url": "/2025/03/15/emerging-trends-in-growth-engineering/",
+        "categories": ["growth engineering","AI/ML"],
+        "introduction": "Machine learning, real-time analytics, privacy-preserving analytics, and conversational interfaces are reshaping growth engineering. Here we discuss how these trends are driving business growth and enhancing user experiences in 2025."
+      },
+    
+      {
+        "title": "You Don’t Have to Know It All - But You Do Have to Be Willing to Learn",
+        "url": "/2025/03/15/dont-have-to-know-it-all-software-engineering/",
+        "categories": ["methods & strategy"],
+        "introduction": "As software evolves at lightning speed, your ability to learn matters more than your current tech stack. I’ve found that those who master problem-solving thrive, while those fixated on specific languages get left behind."
+      },
+    
+      {
+        "title": "Growth Engineering: The Technical and Non-Technical Aspects",
+        "url": "/2025/03/12/growth-engineering-a-comprehensive-technical-and-non-technical-perspective/",
+        "categories": ["technical communication","growth engineering","SaaS","Apps"],
+        "introduction": "Explore the key strategies of growth engineering from both technical and non-technical perspectives, covering data, automation, and product-driven growth."
+      },
+    
+      {
+        "title": "Why Effective Messaging is Critical for App & SaaS Growth: Data-Backed Insights",
+        "url": "/2025/03/10/the-impact-of-effective-messaging-on-saa-s-and-app-performance-research-and-statistical-evidence/",
+        "categories": ["Technical communication","growth engineering","SaaS","Apps"],
+        "introduction": "Discover why effective messaging is crucial for Apps and SaaS success. Backed by data, this article explores how clear, compelling messaging boosts user engagement, conversions, and retention. Learn what the numbers reveal and how to optimize your messaging for maximum impact."
+      },
+    
+      {
+        "title": "Growth Engineering for App & SaaS Marketing: Effective Messaging Strategies",
+        "url": "/2025/03/05/effective-messaging-strategies-for-app-&-saa-s-marketing-best-practices/",
+        "categories": ["Technical communication","Methods & Strategy","Growth engineering","SaaS","Apps"],
+        "introduction": "Effective messaging is crucial for Apps and SaaS success. Backed by data, this article explores how clear, compelling messaging boosts user engagement, conversions, and retention. Learn what the numbers reveal and how to optimize your messaging for maximum impact."
+      },
+    
+      {
+        "title": "Allowed Jekyll Plugins on GitHub Pages: What You Can Use  ",
+        "url": "/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/",
+        "categories": ["github","jekyll"],
+        "introduction": "GitHub restricts the use of certain Jekyll plugins for security and performance reasons. Discover which Jekyll plugins are allowed on GitHub Pages, why some are restricted, and how to optimize your site within GitHub’s approved plugin list for security and performance."
+      },
+    
+      {
+        "title": "Code Wars: Open Source Software meets Private Equity, and the Defense Fork Dilemma",
+        "url": "/2025/01/11/private-equity-defense-forking-open-source/",
+        "categories": ["open source","defense forking","private equity"],
+        "introduction": "The Wordpress vs. WPEngine clash shows us what happens when open source ideals run up against private equity goals. There are serious implications for the future of open source software."
+      },
+    
+      {
+        "title": "Defense Forking: A Short History of Strategic Preservation",
+        "url": "/2025/01/10/what-is-defense-forking/",
+        "categories": ["open source","defense forking"],
+        "introduction": "Defense forking is a strategic software development approach where developers create a complete, independent copy of an existing codebase to preserve, protect, and potentially revive a project at risk of abandonment, vulnerability, or misalignment with community needs. The forkability of a project defines whether a software is truly open-source or not."
+      },
+    
+      {
+        "title": "Bridging the Technical Communication Divide: Sales Engineers vs Customers",
+        "url": "/2024/12/28/writing-documentation-that-reaches-your-audience/",
+        "categories": ["technical communication","methods & strategy"],
+        "introduction": "Struggling to explain your technical product to non-technical clients? Learn how to simplify complex concepts, focus on value, and improve sales with clear, relatable communication strategies."
+      },
+    
+      {
+        "title": "How to Drive Developer Growth and Engagement: The Art of Building Products Developers Actually Want to Use",
+        "url": "/2024/12/28/building-products-developers-want-to-use/",
+        "categories": ["product development","developer relations"],
+        "introduction": "The most successful developer products don't just solve problems; they make developers feel like better developers. They create a 'competency loop' – where each interaction leaves developers feeling more capable, more efficient, and more excited about what they can build next."
+      },
+    
+      {
+        "title": "Automatically Write Categories to the Data File in Jekyll",
+        "url": "/2024/12/13/auto-generate-categories-in-jekyll/",
+        "categories": ["jekyll","ruby","tutorials","automagic"],
+        "introduction": "Tired of manually adding new categories to a YAML file every time you have a radically new idea begetting a new category? Here's your solution."
+      },
+    
+      {
+        "title": "How to Include Non-Jekyll Content in Your Jekyll Site",
+        "url": "/2024/12/02/including-non-jekyll-content-in-jekyll/",
+        "categories": ["jekyll","tutorials"],
+        "introduction": "Looking to integrate non-Jekyll content into your Jekyll-powered site? Check out this quick walkthrough for embedding static files, dynamic content, and external resources without disrupting your workflow."
+      },
+    
+      {
+        "title": "The benefits of hosting a blog or developer portfolio on GitHub Pages, and how can you do it",
+        "url": "/2024/12/02/hosting-a-blog-or-developer-portfolio-for-free-on-github-pages/",
+        "categories": ["github","jekyll","developer portfolios"],
+        "introduction": "Using Jekyll and markdown, you can host your blog or developer portfolio on GitHub pages."
+      }
+    
+  ]
+}

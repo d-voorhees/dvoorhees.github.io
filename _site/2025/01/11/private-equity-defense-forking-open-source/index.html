@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Wars: Open Source Software meets Private Equity, and the Defense Fork Dilemma</title>
+<!-- Include SEO Meta Tags -->
+<!-- _includes/seo-meta.html -->
+
+
+
+
+<!-- SEO Title and Description -->
+<title>D. Voorhees Software Engineer</title>
+<meta name="description" content="The blog and portfolio of Software Engineer">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="D. Voorhees Software Engineer">
+<meta property="og:description" content="The blog and portfolio of Software Engineer">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://localhost:4000/2025/01/11/private-equity-defense-forking-open-source/">
+<meta property="og:image" content="">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D. Voorhees Software Engineer">
+<meta name="twitter:description" content="The blog and portfolio of Software Engineer">
+<meta name="twitter:image" content="">
+
+<!-- Other meta tags, stylesheets, and links -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jam-icons@2.0.0/css/jam.min.css" rel="stylesheet">
+<link rel=" preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KWNZPVBM');
+</script>
+ <!-- End Google Tag Manager -->
+    <!-- Other head content specific to this layout -->
+</head>
+
+<body class="post">
+    <!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+<!-- Desktop Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img id="main-logo" src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                
+                
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+                
+                
+                <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Navbar with Off-Canvas Menu -->
+<nav class="navbar navbar-light bg-light d-md-none">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+            <span class="jam jam-align-right"></span>
+        </button>
+        <button id="theme-toggle"></button>
+
+    </div>
+</nav>
+
+<!-- Off-Canvas Menu -->
+<div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            
+            
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+            
+            
+
+        </ul>
+
+        <ul class="offcanvas-social-links">
+            
+        </ul>
+
+    </div>
+</div>
+    <main>
+        <article>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <header>
+                            <div class="col-sm-10 col-12 category-list pt-5">
+                                <span class="category-item">
+                                    
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #F6E351; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=open-source" class="category-link">
+                                            open source
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #D1462F; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=defense-forking" class="category-link">
+                                            defense forking
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #8CB369; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=private-equity" class="category-link">
+                                            private equity
+                                        </a>
+                                    </span>
+                                    
+                                    
+
+                                </span>
+                            </div>
+
+                            <div class="col-sm-10 col-12 pb-4">
+                                <h1 id="category-title" class="mt-3">Code Wars: Open Source Software meets Private Equity, and the Defense Fork Dilemma</h1>
+                                <div class="post-introduction mt-2">
+                                    The Wordpress vs. WPEngine clash shows us what happens when open source ideals run up against private equity goals. There are serious implications for the future of open source software.
+                                </div>
+                                <p class="small">D. Voorhees <span>&#8226;</span> January 11, 2025 </p>
+                            </div>
+
+
+                        </header>
+                    </div>
+                </div>
+                <div class="border-bottom w-105"></div>
+                <div class="container">
+                    <div class="row vh-85">
+                        <div class="col-md-10 col-12">
+
+                            <div class="post-content">
+                                <h1 id="defense-forking-open-source-and-private-equity-lessons-from-the-wordpress-wpengine-dispute">Defense Forking, Open Source, and Private Equity: Lessons from the WordPress-WPEngine Dispute</h1>
+
+<p>The recent clash between WordPress and WP Engine that erupted in late 2024 has sparked intense debate throughout the open-source community. This conflict perfectly illustrates what happens when profit-driven private equity interests collide with community-driven open-source projects.</p>
+
+<h2 id="open-source-business-models-and-their-tensions">Open Source Business Models and Their Tensions</h2>
+
+<p>Companies interact with open source in several recognizable patterns. Some adopt an “open core” approach, where they maintain an open-source foundation but build proprietary features around it. MongoDB exemplifies this strategy—they switched to the Server Side Public License (SSPL) in 2018 specifically to prevent cloud providers from offering MongoDB as a service without contributing back.</p>
+
+<p>We also see “open source washing,” where companies claim open-source credentials while maintaining significant control. They accomplish this through various mechanisms:</p>
+<ul>
+  <li>Controlling the trademark while keeping the code open source</li>
+  <li>Maintaining exclusive direction over the project</li>
+  <li>Keeping critical components proprietary</li>
+  <li>Using complex licensing terms that limit commercial usage</li>
+</ul>
+
+<p>The WordPress-WP Engine dispute has brought these tensions into sharp focus, raising fundamental questions about trademark usage, governance structures, and commercial influence over open-source projects. As this controversy unfolds, many businesses are reconsidering their dependence on open-source platforms, potentially reshaping the entire content management and web hosting landscape.</p>
+
+<h2 id="what-is-defense-forking">What Is Defense Forking?</h2>
+
+<p>Defense forking occurs when a community creates an independent copy (or “fork”) of a project because they’re concerned about its direction or control. It’s essentially the community’s ultimate protection mechanism against unwanted changes.</p>
+
+<p>Communities typically resort to defense forking for several reasons:</p>
+<ul>
+  <li>When their goals no longer align with the original project’s vision</li>
+  <li>To implement improvements or fix issues being neglected in the main project</li>
+  <li>To revitalize development when the original project loses momentum</li>
+  <li>When there are serious disagreements about project governance</li>
+</ul>
+
+<p>Defense forking represents a significant decision with major implications. It splits the community, potentially weakening both the original and forked versions. The success of defensive forks typically depends on:</p>
+<ul>
+  <li>Whether enough developers and users migrate to the new project</li>
+  <li>The technical ability to maintain the code independently</li>
+  <li>Access to adequate resources and infrastructure</li>
+  <li>Support from the broader ecosystem</li>
+  <li>Establishing the fork as a legitimate successor</li>
+</ul>
+
+<h2 id="the-right-to-fork-a-fundamental-open-source-principle">The Right to Fork: A Fundamental Open Source Principle</h2>
+
+<p>The right to fork has evolved to become a cornerstone of open source. Richard Stallman took a pivotal step in 1985 when he released Emacs with explicit permission for users to create and distribute modified versions. The GNU General Public License (GPL) further cemented this right with its “Liberty or Death” clause, designed to protect the essential freedoms of GPL licensees.</p>
+
+<p>When the Open Source Initiative formed in 1998, they included forking rights as a key component of their Open Source Definition. Today, the “fork test” serves as a litmus test for genuine open source—if a license doesn’t permit forking, it simply isn’t open source.</p>
+
+<p>Cloud computing has intensified these tensions. Major providers can deploy open-source software at massive scale without necessarily contributing back, prompting the creation of new licenses like the Commons Clause and SSPL. Many view these licenses as compromising open-source principles to protect business interests.</p>
+
+<h2 id="open-source-a-proven-success-model">Open Source: A Proven Success Model</h2>
+
+<p>Open-source companies have increasingly dominated tech sectors thanks to their unique advantages. The free and accessible nature of open source allows for wider adoption, faster market penetration, and exponential growth. This has created a massive economic footprint with countless job opportunities across diverse sectors.</p>
+
+<p>Recent projections indicate the open source service market will reach $114.8 billion by 2032, growing at an impressive 16.70% CAGR from 2024 to 2032. This growth is fueled by businesses seeking customizable, cost-effective solutions for their evolving IT needs.</p>
+
+<p>The job creation extends far beyond platforms like WordPress. Open source has generated career opportunities for developers, designers, marketers, content creators, and many other professionals. The ecosystem supports millions of careers, from freelancers to employees at major tech companies. Specialized roles like open source program managers, community managers, and compliance specialists have emerged to meet the growing demand.</p>
+
+<p>Furthermore, open source has sparked innovation in cloud computing, AI, and blockchain, creating jobs in server management, DevOps, and technical support. Its collaborative nature has fostered a global community, expanding job opportunities across geographical boundaries.</p>
+
+<p>This success has attracted increasing attention from private equity firms, who recognize the tremendous value in open source software.</p>
+
+<h2 id="private-equity-and-defense-forking-a-complex-relationship">Private Equity and Defense Forking: A Complex Relationship</h2>
+
+<p>The intersection of private equity (PE) and defensive forking reveals interesting dynamics in how communities respond to corporate acquisitions. PE firms typically acquire open source companies to maximize financial returns, often implementing changes that conflict with open source values—like restricting features, changing licenses, or reducing community involvement. When this happens, defensive forking frequently emerges as the community’s response.</p>
+
+<p>When PE firms acquire open source companies, they often follow predictable patterns that trigger defense forks:</p>
+<ul>
+  <li>Reducing investment in the open source version</li>
+  <li>Moving key features to proprietary versions</li>
+  <li>Changing licensing terms</li>
+  <li>Increasing prices for commercial support</li>
+  <li>Limiting community involvement in decision-making</li>
+</ul>
+
+<p>A community’s ability to successfully fork depends heavily on having sufficient technical expertise, resources, and coordination. PE firms understand this vulnerability and sometimes deliberately make forking more difficult by:</p>
+<ul>
+  <li>Gradually moving critical components to closed source</li>
+  <li>Creating technical dependencies on proprietary services</li>
+  <li>Maintaining control of trademarks and branding</li>
+  <li>Timing license changes to maximize switching costs</li>
+</ul>
+
+<h2 id="the-evolving-pe-playbook-for-open-source">The Evolving PE Playbook for Open Source</h2>
+
+<p>Private equity firms have refined their approach to open source acquisitions over time. Initially, they often made dramatic changes that triggered immediate community resistance. Now, they tend to implement more gradual changes—slowly tightening restrictions, incrementally migrating features to proprietary versions, and subtly shifting governance to limit community participation.</p>
+
+<p>This evolution makes defense forking more challenging. When changes happen slowly—following a “boiling frog” approach—it’s harder to rally community support for a fork. By the time the community recognizes the need for action, significant technical barriers may already be in place.</p>
+
+<h2 id="cloud-providers-adding-another-layer-of-complexity">Cloud Providers: Adding Another Layer of Complexity</h2>
+
+<p>Cloud computing has further complicated defense forking. Major providers can leverage open source projects at massive scale without traditional reciprocity. This dynamic has led to defensive licensing strategies like the SSPL, which attempt to force cloud providers to contribute back. However, these licenses often make true defense forking more difficult, creating tension between protecting projects from cloud exploitation and maintaining the community’s right to fork.</p>
+
+<h2 id="modern-defense-forks-not-just-technical-challenges">Modern Defense Forks: Not Just Technical Challenges</h2>
+
+<p>The success of defense forks increasingly depends on social factors as much as technical ones. Modern software communities span multiple platforms—GitHub, Discord, Reddit, Twitter—making coordination more complex but also providing more channels for building support. The challenge isn’t just forking the code; it’s replicating the community infrastructure and maintaining momentum across these interconnected platforms.</p>
+
+<h2 id="wpengine-and-acf">WPEngine and ACF</h2>
+
+<p>In 2018, WPEngine, a managed Wordpress hosting service beloved by developers, received a significant investment from Silver Lake investors, giving them a majority stake in the company. Part of the new strategy under Silver Lake’s direction as majority shareholder WPEngine began a series of plugin acquisitions, most significantly Advanced Custom Fields, a wildly popular and well used extension that for many years was well maintained, reasonably priced, and all around a great tool for developers. Exactly the kind of product that private equity could see generating a lot of additional revenue out of.</p>
+
+<p>After the acquisition, changes came very quickly to the ACF Pro plugin. Unit testing was abandoned before new versions were pushed out, leading to problems with bugs where no bugs existed previously. What was once a one-time license purchase became a subscription model, where the yearly price exceeded the previous one time price by 34%; Silver Lake’s legal team wrote a lot of conditions into the license as well. They instituted a registration activation system that didn’t work properly in the first few releases, and bricked the plugin and parts of previously functioning websites if not completed. So while they made some short term investments in the plugin, the technical expertise was neglected in the pursuit of capital.</p>
+
+<p>I’m not entirely clear on the breaking point for Matt Mullenweg when he made the decision to defense fork the unpaid version of the plugin; he seemed particularly aggrieved about the cash cow Silver Lake was creating out of an important 3rd party Wordpress tool but cited unauthorized use of WordPress trademarks in public statements(see: manipulation of trademarks and branding, above.)</p>
+
+<p>But the response from the Wordpress “community” online can only be described as rabid, and rabidly against Matt Mullenweg for “picking on” poor WPEngine, a company with $400 million in yearly revenue in 2024; revenue that derives from an open source product, Wordpress.</p>
+
+<p>It was a power grab, the community said, he was a man drunk on power abusing users of his system. Maybe this is just the end of 2024 talking, as a lot of online discourse seems rabid these days; but it was shocking to me how this crop of developers seemed to not understand the base concepts of Open Source software.</p>
+
+<p>The WPEngine/ACF situation exemplifies a pattern we’ve seen repeatedly in open source: when private equity enters the picture, community interests often take a backseat to revenue optimization. The community’s divided response to Mullenweg’s defense fork reveals a deeper tension within open source – the struggle between commercial interests and community stewardship.</p>
+
+<p>This case highlights several critical aspects of modern defense forking:</p>
+
+<p>First, the speed of transformation after acquisition. The rapid shift from community-friendly policies to aggressive monetization strategies often catches users off-guard, leaving them with difficult choices about continuing to use increasingly restricted tools or seeking alternatives.</p>
+
+<p>Second, the technical deterioration that can follow acquisition. When private equity prioritizes revenue over code quality, previously stable software can become unreliable. The abandonment of unit testing in ACF’s case represents a common pattern where immediate financial goals overshadow technical excellence.</p>
+
+<p>Third, the complex role of community perception. The backlash against Mullenweg’s fork demonstrates how commercial interests can successfully frame defense forking as aggression rather than preservation. This reframing often succeeds because users have become more accustomed to commercial control of open source projects than to seeing the original open source principles in action.</p>
+
+<p>In many ways, the ACF situation represents a watershed moment for WordPress and open source more broadly. It forces us to confront essential questions about the relationship between commercial interests and community governance. When does optimization for profit cross the line into exploitation? At what point does defense forking become not just a right but a responsibility?</p>
+
+<p>Looking beyond WordPress, this case offers lessons for other open source communities facing similar challenges. The right to fork means little without the community support and technical capability to execute it effectively. As private equity continues to view successful open source projects as potential acquisition targets, communities need to maintain their capacity for independent action.</p>
+
+<p>The future may bring more such conflicts as private equity firms increasingly target open source projects with established user bases. The ACF case serves as both a warning and a template – warning of how quickly community interests can be subordinated to profit motives, and a template for how communities can respond through coordinated action.</p>
+
+<p>For developers and community leaders, the key lesson may be the importance of preparing for such eventualities before they occur. This includes maintaining technical capability independent of commercial entities, fostering strong community bonds, and ensuring clear understanding of open source principles among users and contributors.</p>
+
+                            
+                                <!-- LikeBtn.com BEGIN -->
+                                <span class="likebtn-wrapper" data-theme="padded" data-dislike_enabled="false" data-icon_dislike_show="false" data-voting_cancelable="false" data-group_identifier="blog likes" data-tooltip_enabled="false"></span>
+                                <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+                                <!-- LikeBtn.com END -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom w-105"></div>
+            <div class="container-fluid bg-light" id="more-writing">
+                <div class="container">
+                    <div class="col-md-10 col-12">
+                        <div class="row py-4">
+
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">open source</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #F6E351; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2025/01/10/what-is-defense-forking/">Defense Forking: A Short History of Strategic Preservation</a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">defense forking</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #D1462F; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2025/01/10/what-is-defense-forking/">Defense Forking: A Short History of Strategic Preservation</a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+</body>
+
+<footer>
+    <div class="container text-center">
+        <p><i class="jam jam-envelope"></i> d {at} dvoorhees {dot} com</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/light-dark.js"></script>
+<script src="/assets/js/theme.js"></script>
+
+
+</html>

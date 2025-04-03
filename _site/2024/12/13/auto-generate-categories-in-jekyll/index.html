@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automatically Write Categories to the Data File in Jekyll</title>
+<!-- Include SEO Meta Tags -->
+<!-- _includes/seo-meta.html -->
+
+
+
+
+<!-- SEO Title and Description -->
+<title>D. Voorhees Software Engineer</title>
+<meta name="description" content="The blog and portfolio of Software Engineer">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="D. Voorhees Software Engineer">
+<meta property="og:description" content="The blog and portfolio of Software Engineer">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://localhost:4000/2024/12/13/auto-generate-categories-in-jekyll/">
+<meta property="og:image" content="">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D. Voorhees Software Engineer">
+<meta name="twitter:description" content="The blog and portfolio of Software Engineer">
+<meta name="twitter:image" content="">
+
+<!-- Other meta tags, stylesheets, and links -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jam-icons@2.0.0/css/jam.min.css" rel="stylesheet">
+<link rel=" preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KWNZPVBM');
+</script>
+ <!-- End Google Tag Manager -->
+    <!-- Other head content specific to this layout -->
+</head>
+
+<body class="post">
+    <!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+<!-- Desktop Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img id="main-logo" src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                
+                
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+                
+                
+                <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Navbar with Off-Canvas Menu -->
+<nav class="navbar navbar-light bg-light d-md-none">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+            <span class="jam jam-align-right"></span>
+        </button>
+        <button id="theme-toggle"></button>
+
+    </div>
+</nav>
+
+<!-- Off-Canvas Menu -->
+<div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            
+            
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+            
+            
+
+        </ul>
+
+        <ul class="offcanvas-social-links">
+            
+        </ul>
+
+    </div>
+</div>
+    <main>
+        <article>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <header>
+                            <div class="col-sm-10 col-12 category-list pt-5">
+                                <span class="category-item">
+                                    
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #E99A24; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=jekyll" class="category-link">
+                                            jekyll
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #513BBF; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=ruby" class="category-link">
+                                            ruby
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #6BBDC2; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=tutorials" class="category-link">
+                                            tutorials
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #035E7B; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=automagic" class="category-link">
+                                            automagic
+                                        </a>
+                                    </span>
+                                    
+                                    
+
+                                </span>
+                            </div>
+
+                            <div class="col-sm-10 col-12 pb-4">
+                                <h1 id="category-title" class="mt-3">Automatically Write Categories to the Data File in Jekyll</h1>
+                                <div class="post-introduction mt-2">
+                                    Tired of manually adding new categories to a YAML file every time you have a radically new idea begetting a new category? Here's your solution.
+                                </div>
+                                <p class="small">D. Voorhees <span>&#8226;</span> December 13, 2024 </p>
+                            </div>
+
+
+                        </header>
+                    </div>
+                </div>
+                <div class="border-bottom w-105"></div>
+                <div class="container">
+                    <div class="row vh-85">
+                        <div class="col-md-10 col-12">
+
+                            <div class="post-content">
+                                <h2 id="writing-new-jekyll-categories-to-data-files">Writing new Jekyll categories to data files</h2>
+
+<p>Have a lot of ideas across different realms of expertise? To paraphrase Whitman, we all contain multitudes.</p>
+
+<p>However in some Jekyll themes where categories are managed in order to display content by category, categories must be entered manually in category data file, as Jekyll does not have a built-in functionality to dynamically update this file.</p>
+
+<p>Enter the custom Ruby script to solve your woes.</p>
+
+<h3 id="solution-use-a-ruby-script-to-extract-categories">Solution: Use a Ruby Script to Extract Categories</h3>
+
+<ol>
+  <li>
+    <p><strong>Add Categories in Front Matter</strong><br />
+    Ensure each post includes the <code class="language-plaintext highlighter-rouge">categories</code> field in its front matter in brackets, separated by commas. For example:</p>
+
+    <pre><code>---
+layout: post
+title: "Sample Post"
+categories: [Tech, Jekyll, Developer Portfolios]
+---</code></pre>
+  </li>
+  <li>
+    <p><strong>Create a Script to Extract Categories</strong><br />
+    Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the <code class="language-plaintext highlighter-rouge">_data</code> folder. In this example we’re also including a color variable for the category, as it is written for the ‘dev herald’ theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don’t need that don’t worry, this won’t trip you up.</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>require 'yaml'
+require 'date'
+
+posts_dir = "_posts"
+data_file = "_data/categories.yml"
+
+# Load existing categories from the YAML file
+existing_categories = if File.exist?(data_file)
+                        YAML.load_file(data_file) || []
+                      else
+                        []
+                      end
+
+# Convert the existing categories array to a hash for easier merging
+existing_categories_hash = existing_categories.each_with_object({}) do |category, hash|
+  hash[category['name']] = category
+end
+
+# Collect categories from posts and count occurrences
+new_categories = {}
+category_counts = Hash.new(0)
+
+Dir.glob("#{posts_dir}/**/*.md").each do |file|
+  front_matter = File.read(file).match(/---\s*\n(.*?)\n---/m)
+  next unless front_matter
+
+  data = YAML.safe_load(front_matter, permitted_classes: [Date])
+  next unless data['categories']
+
+  categories_list = data['categories']
+  categories_list = [categories_list] if categories_list.is_a?(String)
+
+  categories_list.each do |category|
+    new_categories[category] ||= { 'name' =&gt; category }
+    category_counts[category] += 1
+  end
+end
+
+# Merge new categories into the existing ones, preserving color information
+merged_categories = existing_categories_hash.merge(new_categories) do |_key, old_val, new_val|
+  old_val.merge(new_val)
+end
+
+# Update posts_count for each category
+merged_categories.each do |name, category|
+  category['posts_count'] = category_counts[name]
+  category['color'] ||= '' # Ensure color key exists, set to empty string if not present
+end
+
+# Convert merged hash back to an array for YAML output
+merged_categories_array = merged_categories.values
+
+# Write results to the _data/categories.yml file
+File.open(data_file, "w") { |f| f.write(merged_categories_array.to_yaml) }
+
+puts "Categories written to #{data_file}"
+</code></pre></div></div>
+
+<h2 id="automatically-run-this-script-when-compiling-jekyll">Automatically run this script when compiling Jekyll</h2>
+
+<p>To run this file automatically when you compile Jekyll, you’ll need to create a Rakefile, a Ruby script that defines tasks and dependencies for automating various aspects of software development and project management.</p>
+
+<ol>
+  <li><strong>Navigate to your Jekyll project’s root directory in the terminal.</strong>
+cd</li>
+  <li><strong>Create a new file named “Rakefile” (with no file extension):</strong>
+bash
+    <pre><code>touch Rakefile
+</code></pre>
+  </li>
+  <li><strong>Open the Rakefile in your text editor</strong>
+    and add the following content:
+    <pre><code>task :default =&gt; :build
+
+ task :build do
+   puts 'Extracting categories...'
+   ruby 'update_categories.rb'
+   puts 'Building Jekyll site...'
+   system 'bundle exec jekyll build'
+ end</code></pre>
+  </li>
+  <li>
+    <p><strong>Save the Rakefile.</strong></p>
+  </li>
+  <li><strong>To build your Jekyll site and run the category extraction script,</strong> use the following command instead of jekyll build:
+    <pre><code>bundle exec rake build
+</code></pre>
+  </li>
+</ol>
+
+<p>This setup will:</p>
+<ul>
+  <li>Extract categories from your posts</li>
+  <li>Count the number of posts in a category</li>
+  <li>Update the <code class="language-plaintext highlighter-rouge">_data/categories.yml</code> file</li>
+  <li>Build your Jekyll site</li>
+</ul>
+
+<p>The Rakefile acts as a coordinator, running your custom Ruby script before initiating the Jekyll build process. This method integrates smoothly with Jekyll without requiring plugins or complex setups.</p>
+
+<p>This approach ensures that your <code class="language-plaintext highlighter-rouge">_data/categories.yml</code> file stays up-to-date with all categories used across your posts. Run the script whenever you add or update posts with new categories. Running the script will overwrite the existing categories.yml page.</p>
+
+<h2 id="displaying-these-categories">Displaying these categories</h2>
+
+<p><strong>On post pages, with colors</strong></p>
+
+<pre><code>{% assign post_categories = page.categories %}
+{% for category in post_categories %}
+    {% assign category_info = site.data.categories | where: "name", category | first %}
+    {% if category_info %}
+        {% assign category_color = category_info.color | default: "#cccccc" %}
+&lt;div class="square" style="background-color: {{ category_color }}; border-radius: 15px; display: inline-block;"&gt;&lt;/div&gt;
+&lt;a href="/categories/?category={{ category | slugify }}" class="category-link"&gt;
+    {{ category | capitalize }}
+&lt;/a&gt;
+    {% endif %}
+{% endfor %}</code></pre>
+
+<p><strong>In a loop, linking to the category page, sorting list by most # posts in a category to least # posts in a category</strong></p>
+
+<pre><code>{% assign sorted_categories = site.data.categories | sort: &#x22;posts_count&#x22; | reverse %}
+{% for category in sorted_categories %}
+    &#x3C;div class=&#x22;category-item&#x22;&#x3E;
+        &#x3C;div class=&#x22;square&#x22; style=&#x22;background-color: {{ category.color | default: &#x27;#cccccc&#x27; }};&#x22;&#x3E;&#x3C;/div&#x3E;
+        &#x3C;a href=&#x22;/categories/?category={{ category.name | slugify }}&#x22; class=&#x22;category-link&#x22;&#x3E;
+            {{ category.name | capitalize }}
+        &#x3C;/a&#x3E;
+    &#x3C;/div&#x3E;
+{% endfor %}
+</code></pre>
+
+
+                            
+                                <!-- LikeBtn.com BEGIN -->
+                                <span class="likebtn-wrapper" data-theme="padded" data-dislike_enabled="false" data-icon_dislike_show="false" data-voting_cancelable="false" data-group_identifier="blog likes" data-tooltip_enabled="false"></span>
+                                <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+                                <!-- LikeBtn.com END -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom w-105"></div>
+            <div class="container-fluid bg-light" id="more-writing">
+                <div class="container">
+                    <div class="col-md-10 col-12">
+                        <div class="row py-4">
+
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">jekyll</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/">Allowed Jekyll Plugins on GitHub Pages: What You Can Use  </a>
+                            </div>
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2024/12/02/including-non-jekyll-content-in-jekyll/">How to Include Non-Jekyll Content in Your Jekyll Site</a>
+                            </div>
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2024/12/02/hosting-a-blog-or-developer-portfolio-for-free-on-github-pages/">The benefits of hosting a blog or developer portfolio on GitHub Pages, and how can you do it</a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">tutorials</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #6BBDC2; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2024/12/02/including-non-jekyll-content-in-jekyll/">How to Include Non-Jekyll Content in Your Jekyll Site</a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+</body>
+
+<footer>
+    <div class="container text-center">
+        <p><i class="jam jam-envelope"></i> d {at} dvoorhees {dot} com</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/light-dark.js"></script>
+<script src="/assets/js/theme.js"></script>
+
+
+</html>
