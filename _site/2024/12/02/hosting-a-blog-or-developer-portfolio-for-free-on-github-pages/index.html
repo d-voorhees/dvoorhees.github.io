@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The benefits of hosting a blog or developer portfolio on GitHub Pages, and how can you do it</title>
+<!-- Include SEO Meta Tags -->
+<!-- _includes/seo-meta.html -->
+
+
+
+
+<!-- SEO Title and Description -->
+<title>D. Voorhees Software Engineer</title>
+<meta name="description" content="The blog and portfolio of Software Engineer">
+
+<!-- Open Graph Tags -->
+<meta property="og:title" content="D. Voorhees Software Engineer">
+<meta property="og:description" content="The blog and portfolio of Software Engineer">
+<meta property="og:type" content="website">
+<meta property="og:url" content="http://localhost:4000/2024/12/02/hosting-a-blog-or-developer-portfolio-for-free-on-github-pages/">
+<meta property="og:image" content="">
+
+<!-- Twitter Card Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="D. Voorhees Software Engineer">
+<meta name="twitter:description" content="The blog and portfolio of Software Engineer">
+<meta name="twitter:image" content="">
+
+<!-- Other meta tags, stylesheets, and links -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jam-icons@2.0.0/css/jam.min.css" rel="stylesheet">
+<link rel=" preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KWNZPVBM');
+</script>
+ <!-- End Google Tag Manager -->
+    <!-- Other head content specific to this layout -->
+</head>
+
+<body class="post">
+    <!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+<!-- Desktop Navbar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img id="main-logo" src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                
+                
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+                
+                
+                
+                <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+                
+                
+                <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Navbar with Off-Canvas Menu -->
+<nav class="navbar navbar-light bg-light d-md-none">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+            <span class="jam jam-align-right"></span>
+        </button>
+        <button id="theme-toggle"></button>
+
+    </div>
+</nav>
+
+<!-- Off-Canvas Menu -->
+<div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            
+            
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/blog/">Blog</a></li>
+            
+            
+            
+            <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
+            
+            
+
+        </ul>
+
+        <ul class="offcanvas-social-links">
+            
+        </ul>
+
+    </div>
+</div>
+    <main>
+        <article>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row">
+                        <header>
+                            <div class="col-sm-10 col-12 category-list pt-5">
+                                <span class="category-item">
+                                    
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #E5675D; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=github" class="category-link">
+                                            github
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #E99A24; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=jekyll" class="category-link">
+                                            jekyll
+                                        </a>
+                                    </span>
+                                    
+                                    
+                                    
+                                    <span class="category-item">
+                                        <div class="square" style="background-color: #F5A1A0; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"></div>
+                                        <a href="http://localhost:4000/categories/?category=developer-portfolios" class="category-link">
+                                            developer portfolios
+                                        </a>
+                                    </span>
+                                    
+                                    
+
+                                </span>
+                            </div>
+
+                            <div class="col-sm-10 col-12 pb-4">
+                                <h1 id="category-title" class="mt-3">The benefits of hosting a blog or developer portfolio on GitHub Pages, and how can you do it</h1>
+                                <div class="post-introduction mt-2">
+                                    Using Jekyll and markdown, you can host your blog or developer portfolio on GitHub pages.
+                                </div>
+                                <p class="small">D. Voorhees <span>&#8226;</span> December 02, 2024 </p>
+                            </div>
+
+
+                        </header>
+                    </div>
+                </div>
+                <div class="border-bottom w-105"></div>
+                <div class="container">
+                    <div class="row vh-85">
+                        <div class="col-md-10 col-12">
+
+                            <div class="post-content">
+                                <h1 id="free-hosting-on-github-putting-your-code-blog-up-on-github-pages">Free Hosting on GitHub: Putting your code blog up on GitHub Pages</h1>
+
+<p>For developers seeking a reliable and cost-effective hosting solution for their personal portfolio or writings, GitHub Pages is an excellent choice. Not only does it offer free hosting with generous bandwidth, but it also integrates seamlessly with Git’s version control system, making it easy to manage and deploy your content.</p>
+
+<p>GitHub Pages works like a publishing system built on Git’s version control. GitHub Pages handles server maintenance and updates. Push your changes to Git, and your content deploys automatically with SSL certificates and optimized performance. The security is airtight because it’s simple: static content means no databases to inject or server-side code to exploit. It’s pure content delivery.</p>
+
+<p>It pairs static site delivery with tools like Jekyll for site generation. Content creation becomes straightforward – write in Markdown, and your files transform into web pages. The connection between writing and deployment is seamless.</p>
+
+<p>Below, I’ll walk you through the process of setting up your GitHub Pages site using both the web interface and command line methods.</p>
+
+<h2 id="why-choose-github-pages">Why Choose GitHub Pages?</h2>
+
+<ol>
+  <li>
+    <p><strong>SEO Benefits</strong>: Your content lives on the github.io domain (or your custom domain), benefiting from GitHub’s high domain authority. This can significantly enhance your site’s visibility in search engine results. Additionally, you can use your custom domain while maintaining these SEO benefits, and you have full control over meta tags, schemas, and other SEO elements.</p>
+  </li>
+  <li>
+    <p><strong>Version Control</strong>: Built on Git, GitHub Pages allows you to manage changes to your content easily. This means you can track updates, collaborate with others, and revert to previous versions if needed.</p>
+  </li>
+  <li>
+    <p><strong>Automatic Deployment</strong>: Once you push changes to Git, your content deploys automatically with SSL certificates, ensuring secure and optimized performance. This streamlined process saves you time and effort.</p>
+  </li>
+  <li>
+    <p><strong>Security</strong>: Since GitHub Pages hosts static content, there are no databases to inject or server-side code to exploit, making it a secure hosting option.</p>
+  </li>
+  <li>
+    <p><strong>Clean Design</strong>: GitHub Pages pairs well with tools like Jekyll for site generation. You can write in Markdown, and your files transform into web pages seamlessly.</p>
+  </li>
+  <li>
+    <p><strong>Technical Showcase</strong>: Your repositories on GitHub serve as a portfolio, showcasing your development skills to potential employers. Public code repositories tell the story of your work and demonstrate your capabilities.</p>
+  </li>
+  <li>
+    <p><strong>Cost-Effective</strong>: With free hosting and no hidden fees, GitHub Pages offers enterprise features at zero cost, powered by GitHub’s infrastructure and static hosting model.</p>
+  </li>
+</ol>
+
+<h2 id="setting-up-your-github-pages-site">Setting Up Your GitHub Pages Site</h2>
+
+<h3 id="using-web-interface-and-desktop-tools">Using Web Interface and Desktop Tools</h3>
+
+<h4 id="step-1-setting-up-your-repository">Step 1: Setting Up Your Repository</h4>
+
+<ol>
+  <li><strong>Sign Up for GitHub</strong>: If you haven’t already, go to <a href="https://github.com">github.com</a> and create an account.</li>
+  <li><strong>Create a New Repository</strong>:
+    <ul>
+      <li>Once logged in, click the “+” icon in the top right corner and choose “New repository.”</li>
+      <li>Name your repository exactly as <code class="language-plaintext highlighter-rouge">yourusername.github.io</code>, replacing “yourusername” with your actual GitHub username.</li>
+      <li>Ensure it’s set to “Public.”</li>
+      <li>Check the box that says “Add a README file.”</li>
+      <li>Click “Create repository.”</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-2-installing-github-desktop">Step 2: Installing GitHub Desktop</h4>
+
+<ol>
+  <li><strong>Download GitHub Desktop</strong>: Visit <a href="https://desktop.github.com">desktop.github.com</a> and download the application.</li>
+  <li><strong>Install and Set Up</strong>:
+    <ul>
+      <li>Install GitHub Desktop on your computer.</li>
+      <li>When you first open it, sign in with your GitHub account.</li>
+      <li>It will ask if you want to clone any repositories; say yes and choose the <code class="language-plaintext highlighter-rouge">yourusername.github.io</code> repository you just created.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-3-installing-ruby-and-jekyll">Step 3: Installing Ruby and Jekyll</h4>
+
+<ol>
+  <li><strong>Install Ruby</strong>:
+    <ul>
+      <li>For Windows, go to <a href="https://rubyinstaller.org">rubyinstaller.org</a> and download the Ruby installer with Devkit.</li>
+      <li>For Mac, Ruby usually comes pre-installed, but you can check if you need to update it.</li>
+    </ul>
+  </li>
+  <li><strong>Install Jekyll</strong>:
+    <ul>
+      <li>Once Ruby is installed, open “Start Command Prompt with Ruby” from your Start menu (Windows).</li>
+      <li>In that window, type: <code class="language-plaintext highlighter-rouge">gem install jekyll bundler</code></li>
+      <li>Close this window when it’s done; you won’t need to use the command line again.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-4-creating-your-blog-using-jekyll">Step 4: Creating Your Blog Using Jekyll</h4>
+
+<ol>
+  <li><strong>Open Repository Folder</strong>:
+    <ul>
+      <li>In GitHub Desktop, click “Show in Explorer” (Windows) or “Show in Finder” (Mac) to open your repository folder.</li>
+    </ul>
+  </li>
+  <li><strong>Download a Jekyll Theme</strong>:
+    <ul>
+      <li>Visit <a href="https://jekyllthemes.io">jekyllthemes.io</a> and download a pre-made theme. The “minima” theme is a good starting point.</li>
+    </ul>
+  </li>
+  <li><strong>Extract Theme Files</strong>:
+    <ul>
+      <li>Extract the downloaded theme files into your repository folder, replacing any existing files.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-5-setting-up-your-blog-structure">Step 5: Setting Up Your Blog Structure</h4>
+
+<ol>
+  <li><strong>Key Files and Folders</strong>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">_config.yml</code>: Controls your blog settings.</li>
+      <li><code class="language-plaintext highlighter-rouge">_posts</code>: Where your blog posts go.</li>
+      <li><code class="language-plaintext highlighter-rouge">index.md</code>: Your homepage.</li>
+      <li><code class="language-plaintext highlighter-rouge">about.md</code>: Your about page.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-6-customizing-your-blog">Step 6: Customizing Your Blog</h4>
+
+<ol>
+  <li><strong>Edit <code class="language-plaintext highlighter-rouge">_config.yml</code></strong>:
+    <ul>
+      <li>Open <code class="language-plaintext highlighter-rouge">_config.yml</code> in any text editor (like Notepad).</li>
+      <li>Change these basic settings:
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Your Blog Name</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s">What your blog is about</span>
+<span class="na">author</span><span class="pi">:</span> <span class="s">Your Name</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Create Your First Post</strong>:
+    <ul>
+      <li>Go to the <code class="language-plaintext highlighter-rouge">_posts</code> folder.</li>
+      <li>Create a new text file named: <code class="language-plaintext highlighter-rouge">2025-01-28-my-first-post.md</code> (use today’s date).</li>
+      <li>Open it in a text editor and add:
+        <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s">First</span><span class="nv"> </span><span class="s">Blog</span><span class="nv"> </span><span class="s">Post"</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">2025-01-28</span>
+<span class="nn">---</span>
+Welcome to my blog! This is my first post.
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-7-publishing-your-changes">Step 7: Publishing Your Changes</h4>
+
+<ol>
+  <li><strong>Commit Changes</strong>:
+    <ul>
+      <li>Go back to GitHub Desktop.</li>
+      <li>You’ll see your changes listed.</li>
+      <li>At the bottom, add a short message like “Set up blog.”</li>
+      <li>Click “Commit to main.”</li>
+    </ul>
+  </li>
+  <li><strong>Push to GitHub</strong>:
+    <ul>
+      <li>Click “Push origin” at the top.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="using-the-command-line">Using the Command Line</h3>
+
+<h4 id="step-1-setting-up-git">Step 1: Setting Up Git</h4>
+
+<ol>
+  <li><strong>Sign Up for GitHub</strong>: If you haven’t already, go to <a href="https://github.com">github.com</a> and create an account.</li>
+  <li><strong>Install Git</strong>:
+    <ul>
+      <li>Download Git from <a href="https://git-scm.com">git-scm.com</a>.</li>
+      <li>After installing, configure Git with your name and email:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"youremail@example.com"</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-2-creating-your-repository">Step 2: Creating Your Repository</h4>
+
+<ol>
+  <li><strong>Create a New Repository</strong>:
+    <ul>
+      <li>Log into GitHub.</li>
+      <li>Click the “+” icon in the top right corner.</li>
+      <li>Select “New repository.”</li>
+      <li>Name it exactly as <code class="language-plaintext highlighter-rouge">yourusername.github.io</code>, replacing “yourusername” with your actual GitHub username.</li>
+      <li>Make it public.</li>
+      <li>Check “Add a README file.”</li>
+      <li>Click “Create repository.”</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-3-cloning-your-repository">Step 3: Cloning Your Repository</h4>
+
+<ol>
+  <li><strong>Clone Repository</strong>:
+    <ul>
+      <li>On your new repository page, click the green “Code” button.</li>
+      <li>Copy the HTTPS URL (looks like <code class="language-plaintext highlighter-rouge">https://github.com/yourusername/yourusername.github.io.git</code>).</li>
+      <li>Open your computer’s terminal or command prompt.</li>
+      <li>Navigate to where you want to store your blog files:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>Documents <span class="c"># or wherever you prefer</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Clone the repository:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/yourusername/yourusername.github.io.git
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-4-installing-jekyll">Step 4: Installing Jekyll</h4>
+
+<ol>
+  <li><strong>Install Ruby</strong>:
+    <ul>
+      <li>Visit <a href="https://www.ruby-lang.org/en/downloads/">ruby-lang.org</a> to download Ruby.</li>
+      <li>Once Ruby is installed, open your terminal and install Jekyll:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem <span class="nb">install </span>bundler jekyll
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-5-creating-your-blog">Step 5: Creating Your Blog</h4>
+
+<ol>
+  <li><strong>Create a New Jekyll Site</strong>:
+    <ul>
+      <li>Navigate into your repository folder:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>yourusername.github.io
+</code></pre></div>        </div>
+      </li>
+      <li>Create a new Jekyll site in this directory:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new <span class="nb">.</span> <span class="nt">--force</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Test Locally</strong>:
+    <ul>
+      <li>Start a local server to view your blog:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>        </div>
+      </li>
+      <li>You can view your blog at <code class="language-plaintext highlighter-rouge">http://localhost:4000</code>.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="step-6-pushing-to-github">Step 6: Pushing to GitHub</h4>
+
+<ol>
+  <li><strong>Commit and Push Changes</strong>:
+    <ul>
+      <li>Add all files:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Commit with a message:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Initial blog setup"</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Push to GitHub:
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin main
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="enabling-github-pages">Enabling GitHub Pages</h2>
+
+<ol>
+  <li><strong>Navigate to Repository Settings</strong>:
+    <ul>
+      <li>Go back to your repository on GitHub.</li>
+      <li>Click “Settings.”</li>
+    </ul>
+  </li>
+  <li><strong>Configure GitHub Pages</strong>:
+    <ul>
+      <li>Scroll down to “Pages” in the left sidebar.</li>
+      <li>Under “Source”, select “Deploy from a branch.”</li>
+      <li>Choose the “main” branch and “/ (root)” folder.</li>
+      <li>Click “Save.”</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Your blog will be accessible at <code class="language-plaintext highlighter-rouge">https://yourusername.github.io</code> within a few minutes.</p>
+
+<h2 id="adding-new-posts">Adding New Posts</h2>
+
+<ol>
+  <li><strong>Create a New Post</strong>:
+    <ul>
+      <li>Create a new file in the <code class="language-plaintext highlighter-rouge">_posts</code> folder following the same naming pattern: <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-title.md</code>.</li>
+      <li>Add your content using the same format as your first post.</li>
+    </ul>
+  </li>
+  <li><strong>Commit and Push Changes</strong>:
+    <ul>
+      <li>Use GitHub Desktop to commit and push your changes.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="using-your-own-domain">Using Your Own Domain</h2>
+
+<p>You can also use your own domain name (e.g., <code class="language-plaintext highlighter-rouge">https://yourusername.com</code>) with GitHub Pages. Follow the <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages">official documentation</a> to set that up.</p>
+
+<p>By following these steps, you’ll have a professional-looking blog or portfolio hosted for free on GitHub Pages. This platform combines the power of version control with easy content management, making it an ideal choice for developers.</p>
+
+                            
+                                <!-- LikeBtn.com BEGIN -->
+                                <span class="likebtn-wrapper" data-theme="padded" data-dislike_enabled="false" data-icon_dislike_show="false" data-voting_cancelable="false" data-group_identifier="blog likes" data-tooltip_enabled="false"></span>
+                                <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+                                <!-- LikeBtn.com END -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-bottom w-105"></div>
+            <div class="container-fluid bg-light" id="more-writing">
+                <div class="container">
+                    <div class="col-md-10 col-12">
+                        <div class="row py-4">
+
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">github</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E5675D; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/">Allowed Jekyll Plugins on GitHub Pages: What You Can Use  </a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            <h3 class="mt-4 mb-3">More writing about <span class="lowercase">jekyll</span></h3>
+
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/">Allowed Jekyll Plugins on GitHub Pages: What You Can Use  </a>
+                            </div>
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2024/12/13/auto-generate-categories-in-jekyll/">Automatically Write Categories to the Data File in Jekyll</a>
+                            </div>
+                            
+                            <div class="single-blog-list">
+                                <span class="square" style="background-color: #E99A24; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                                <a href="/2024/12/02/including-non-jekyll-content-in-jekyll/">How to Include Non-Jekyll Content in Your Jekyll Site</a>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+    </main>
+</body>
+
+<footer>
+    <div class="container text-center">
+        <p><i class="jam jam-envelope"></i> d {at} dvoorhees {dot} com</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/light-dark.js"></script>
+<script src="/assets/js/theme.js"></script>
+
+
+</html>
