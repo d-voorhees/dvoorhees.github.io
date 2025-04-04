@@ -563,6 +563,7 @@ a.more-link {
     padding-top: 13px;
     padding-right: 0;
     margin-right: -8px;
+    padding-left: 0;
   }
   span.jam.jam-align-right {
     font-size: 48px;
@@ -571,7 +572,11 @@ a.more-link {
   #theme-toggle-two {
     font-size: 35px;
     float: right;
-    padding-top: 22px;
+    padding-top: 25px;
+  }
+  #theme-toggle-two i {
+    font-size: 28px;
+    color: #343434;
   }
   .jumbotron {
     padding: 30px 0;
@@ -619,6 +624,9 @@ body.dark-theme {
   font-size: 24px;
 }
 
+body.dark-theme #theme-toggle-two i {
+  color: f8f9fa;
+}
 body.dark-theme a {
   color: #adadad;
 }
@@ -636,7 +644,7 @@ body.dark-theme .blog-post h3 a {
 }
 
 body.dark-theme .bg-light {
-  background: #333 !important;
+  background: #121212 !important;
 }
 
 body.post.dark-theme #category-title {
@@ -674,6 +682,10 @@ body.dark-theme pre {
 }
 
 /* Offcanvas dark theme styling */
+.dark-theme #theme-toggle-two i {
+  color: #f8f9fa;
+}
+
 #offcanvasMenu.dark-theme {
   background-color: #212529;
   color: #f8f9fa;
