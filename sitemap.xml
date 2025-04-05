@@ -6,7 +6,7 @@ permalink: /sitemap.xml
 {% for page in site.pages %}
   {% unless page.url contains 'assets' or page.sitemap.exclude == 'yes' %}
     <url>
-      <loc>{{ site.url }}{{ page.url | remove: 'index.html' }}</loc>
+      <loc>{{ site.url }}{{ page.url | remove: 'index.html' | escape }}</loc>
       <lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.5</priority>
