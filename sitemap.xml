@@ -5,7 +5,7 @@ permalink: /sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% for page in site.pages %}
-    {% unless page.url contains 'assets' or page.sitemap.exclude == 'yes' %}
+    {% unless page.url contains 'assets' or page.sitemap.exclude == true %}
       <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' | escape }}</loc>
         <lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>

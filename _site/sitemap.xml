@@ -11,13 +11,6 @@
     
   
     
-      <url>
-        <loc>http://localhost:4000/all_content.json</loc>
-        <lastmod></lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.5</priority>
-      </url>
-    
   
     
       <url>

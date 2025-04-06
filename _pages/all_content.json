@@ -1,6 +1,8 @@
 ---
 layout: null
 permalink: /all_content.json
+sitemap:
+  exclude: true
 ---
 {
   "content": [
