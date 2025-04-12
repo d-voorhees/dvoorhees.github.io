@@ -1,7 +1,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ page.title | default: site.title }}</title>
-<link rel="canonical" href="{{ site.url }}/" />
+{% if page.url contains '/categories/' %}
+<link rel="canonical" href="{{ site.url }}/categories" />
+{% else %}
+<link
+  rel="canonical"
+  href="{{ site.url }}{{ page.url | remove: 'index.html' }}"
+/>
+{% endif %}
 
 <!-- Include SEO Meta Tags -->
 {% include seo-meta.html %}
