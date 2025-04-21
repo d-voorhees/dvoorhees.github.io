@@ -3,11 +3,12 @@ date: 2025-01-11
 layout: post
 title: "Code Wars: Open Source Software meets Private Equity, and the Defense Fork Dilemma"
 introduction: "The Wordpress vs. WPEngine clash shows us what happens when open source ideals run up against private equity goals. There are serious implications for the future of open source software."
-seo\_title: "Code Clash and Defense Forking: When Open Source Meets Private Equity - the Wordpress / WPEngine kerfuffle"
-seo\_description: "The Wordpress vs. WPEngine clash shows us what happens when open source ideals run up against private equity goals. There are serious implications for the future of open source software."
-seo\_image: "/assets/images/blog-post-image.jpg"
+seo_title: "Code Clash and Defense Forking: When Open Source Meets Private Equity - the Wordpress / WPEngine kerfuffle"
+seo_description: "The Wordpress vs. WPEngine clash shows us what happens when open source ideals run up against private equity goals. There are serious implications for the future of open source software."
+seo_image: "/assets/images/blog-post-image.jpg"
 categories: ["open source", "defense forking", "private equity"]
 ---
+
 # Defense Forking, Open Source, and Private Equity: Lessons from the WordPress-WPEngine Dispute
 
 The recent clash between WordPress and WP Engine that erupted in late 2024 has sparked intense debate throughout the open-source community. This conflict perfectly illustrates what happens when profit-driven private equity interests collide with community-driven open-source projects.
@@ -17,6 +18,7 @@ The recent clash between WordPress and WP Engine that erupted in late 2024 has s
 Companies interact with open source in several recognizable patterns. Some adopt an "open core" approach, where they maintain an open-source foundation but build proprietary features around it. MongoDB exemplifies this strategy—they switched to the Server Side Public License (SSPL) in 2018 specifically to prevent cloud providers from offering MongoDB as a service without contributing back.
 
 We also see "open source washing," where companies claim open-source credentials while maintaining significant control. They accomplish this through various mechanisms:
+
 - Controlling the trademark while keeping the code open source
 - Maintaining exclusive direction over the project
 - Keeping critical components proprietary
@@ -29,12 +31,14 @@ The WordPress-WP Engine dispute has brought these tensions into sharp focus, rai
 Defense forking occurs when a community creates an independent copy (or "fork") of a project because they're concerned about its direction or control. It's essentially the community's ultimate protection mechanism against unwanted changes.
 
 Communities typically resort to defense forking for several reasons:
+
 - When their goals no longer align with the original project's vision
 - To implement improvements or fix issues being neglected in the main project
 - To revitalize development when the original project loses momentum
 - When there are serious disagreements about project governance
 
 Defense forking represents a significant decision with major implications. It splits the community, potentially weakening both the original and forked versions. The success of defensive forks typically depends on:
+
 - Whether enough developers and users migrate to the new project
 - The technical ability to maintain the code independently
 - Access to adequate resources and infrastructure
@@ -66,6 +70,7 @@ This success has attracted increasing attention from private equity firms, who r
 The intersection of private equity (PE) and defensive forking reveals interesting dynamics in how communities respond to corporate acquisitions. PE firms typically acquire open source companies to maximize financial returns, often implementing changes that conflict with open source values—like restricting features, changing licenses, or reducing community involvement. When this happens, defensive forking frequently emerges as the community's response.
 
 When PE firms acquire open source companies, they often follow predictable patterns that trigger defense forks:
+
 - Reducing investment in the open source version
 - Moving key features to proprietary versions
 - Changing licensing terms
@@ -73,6 +78,7 @@ When PE firms acquire open source companies, they often follow predictable patte
 - Limiting community involvement in decision-making
 
 A community's ability to successfully fork depends heavily on having sufficient technical expertise, resources, and coordination. PE firms understand this vulnerability and sometimes deliberately make forking more difficult by:
+
 - Gradually moving critical components to closed source
 - Creating technical dependencies on proprietary services
 - Maintaining control of trademarks and branding
@@ -94,13 +100,13 @@ The success of defense forks increasingly depends on social factors as much as t
 
 ## WPEngine and ACF
 
-In 2018, WPEngine, a managed Wordpress hosting service beloved by developers, received a significant investment from Silver Lake investors, giving them a majority stake in the company. Part of the new strategy under Silver Lake's direction as majority shareholder WPEngine began a series of plugin acquisitions, most significantly Advanced Custom Fields, a wildly popular and well used extension that for many years was well maintained, reasonably priced, and all around a great tool for developers. Exactly the kind of product that private equity could see generating a lot of additional revenue out of. 
+In 2018, WPEngine, a managed Wordpress hosting service beloved by developers, received a significant investment from Silver Lake investors, giving them a majority stake in the company. Part of the new strategy under Silver Lake's direction as majority shareholder WPEngine began a series of plugin acquisitions, most significantly Advanced Custom Fields, a wildly popular and well used extension that for many years was well maintained, reasonably priced, and all around a great tool for developers. Exactly the kind of product that private equity could see generating a lot of additional revenue out of.
 
-After the acquisition, changes came very quickly to the ACF Pro plugin. Unit testing was abandoned before new versions were pushed out, leading to problems with bugs where no bugs existed previously. What was once a one-time license purchase became a subscription model, where the yearly price exceeded the previous one time price by 34%; Silver Lake's legal team wrote a lot of conditions into the license as well. They instituted a registration activation system that didn't work properly in the first few releases, and bricked the plugin and parts of previously functioning websites if not completed. So while they made some short term investments in the plugin, the technical expertise was neglected in the pursuit of capital. 
+After the acquisition, changes came very quickly to the ACF Pro plugin. Unit testing was abandoned before new versions were pushed out, leading to problems with bugs where no bugs existed previously. What was once a one-time license purchase became a subscription model, where the yearly price exceeded the previous one time price by 34%; Silver Lake's legal team wrote a lot of conditions into the license as well. They instituted a registration activation system that didn't work properly in the first few releases, and bricked the plugin and parts of previously functioning websites if not completed. So while they made some short term investments in the plugin, the technical expertise was neglected in the pursuit of capital.
 
 I'm not entirely clear on the breaking point for Matt Mullenweg when he made the decision to defense fork the unpaid version of the plugin; he seemed particularly aggrieved about the cash cow Silver Lake was creating out of an important 3rd party Wordpress tool but cited unauthorized use of WordPress trademarks in public statements(see: manipulation of trademarks and branding, above.)
 
-But the response from the Wordpress "community" online can only be described as rabid, and rabidly against Matt Mullenweg for "picking on" poor WPEngine, a company with $400 million in yearly revenue in 2024; revenue that derives from an open source product, Wordpress. 
+But the response from the Wordpress "community" online can only be described as rabid, and rabidly against Matt Mullenweg for "picking on" poor WPEngine, a company with $400 million in yearly revenue in 2024; revenue that derives from an open source product, Wordpress.
 
 It was a power grab, the community said, he was a man drunk on power abusing users of his system. Maybe this is just the end of 2024 talking, as a lot of online discourse seems rabid these days; but it was shocking to me how this crop of developers seemed to not understand the base concepts of Open Source software.
 

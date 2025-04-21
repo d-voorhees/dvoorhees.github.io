@@ -1,23 +1,24 @@
 ---
-date: 2025-03-15 
+date: 2025-03-15
 layout: post
 title: "Emerging Trends in Growth Engineering"
 introduction: "Machine learning, real-time analytics, privacy-preserving analytics, and conversational interfaces are reshaping growth engineering. Here we discuss how these trends are driving business growth and enhancing user experiences in 2025."
-seo\_title: "Emerging Technical Trends in Growth Engineering for 2025"
-seo\_description: "Machine learning, real-time analytics, privacy-preserving analytics, and conversational interfaces are reshaping growth engineering. Here we discuss how these trends are driving business growth and enhancing user experiences in 2025."
-seo\_image: "/assets/images/blog-post-image.jpg"
-categories: [ "growth engineering", "AI/ML" ]
---- 
+seo_title: "Emerging Technical Trends in Growth Engineering for 2025"
+seo_description: "Machine learning, real-time analytics, privacy-preserving analytics, and conversational interfaces are reshaping growth engineering. Here we discuss how these trends are driving business growth and enhancing user experiences in 2025."
+seo_image: "/assets/images/blog-post-image.jpg"
+categories: ["growth engineering", "AI/ML"]
+---
 
 # Growth Engineering: Technical Trends in 2025
 
-As we move further into 2025, growth engineering continues to evolve with new technologies and methodologies, particularly in the realm of AI / machine learning, dynamic content customization, predicting user actions, user retention systems, 
+As we move further into 2025, growth engineering continues to evolve with new technologies and methodologies, particularly in the realm of AI / machine learning, dynamic content customization, predicting user actions, user retention systems,
 
 ## Machine Learning for Personalization
 
 Machine learning is revolutionizing personalization by creating truly individualized user experiences that drive measurable business outcomes. These systems go beyond basic segmentation to deliver dynamic experiences that adapt in real time.
 
 ML systems analyze multiple data streams simultaneously, including:
+
 - Browsing patterns and engagement metrics
 - Purchase and interaction history
 - Demographic and firmographic information

@@ -3,23 +3,24 @@ date: 2024-12-13
 layout: post
 title: "Automatically Write Categories to the Data File in Jekyll"
 introduction: "Tired of manually adding new categories to a YAML file every time you have a radically new idea begetting a new category? Here's your solution."
-seo\_title: "Automatically Write Categories to the Data File in Jekyll"
-seo\_description: "Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further."
-seo\_image: "/assets/images/blog-post-image.jpg"
+seo_title: "Automatically Write Categories to the Data File in Jekyll"
+seo_description: "Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further."
+seo_image: "/assets/images/blog-post-image.jpg"
 categories: [jekyll, ruby, tutorials, automagic]
 ---
+
 ## Writing new Jekyll categories to data files
 
-Have a lot of ideas across different realms of expertise? To paraphrase Whitman, we all contain multitudes. 
+Have a lot of ideas across different realms of expertise? To paraphrase Whitman, we all contain multitudes.
 
-However in some Jekyll themes where categories are managed in order to display content by category, categories must be entered manually in category data file, as Jekyll does not have a built-in functionality to dynamically update this file. 
+However in some Jekyll themes where categories are managed in order to display content by category, categories must be entered manually in category data file, as Jekyll does not have a built-in functionality to dynamically update this file.
 
-Enter the custom Ruby script to solve your woes. 
+Enter the custom Ruby script to solve your woes.
 
 ### Solution: Use a Ruby Script to Extract Categories
 
 1. **Add Categories in Front Matter**  
-	   Ensure each post includes the `categories` field in its front matter in brackets, separated by commas. For example:
+    Ensure each post includes the `categories` field in its front matter in brackets, separated by commas. For example:
 
    <pre><code>---
    layout: post
@@ -28,7 +29,7 @@ Enter the custom Ruby script to solve your woes.
    ---</code></pre>
 
 2. **Create a Script to Extract Categories**  
-	   Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the `_data` folder. In this example we're also including a color variable for the category, as it is written for the 'dev herald' theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don't need that don't worry, this won't trip you up.
+    Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the `_data` folder. In this example we're also including a color variable for the category, as it is written for the 'dev herald' theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don't need that don't worry, this won't trip you up.
 
 ```
 require 'yaml'
@@ -89,37 +90,36 @@ File.open(data_file, "w") { |f| f.write(merged_categories_array.to_yaml) }
 puts "Categories written to #{data_file}"
 ```
 
-
-
 ## Automatically run this script when compiling Jekyll
 
-To run this file automatically when you compile Jekyll, you'll need to create a Rakefile, a Ruby script that defines tasks and dependencies for automating various aspects of software development and project management. 
+To run this file automatically when you compile Jekyll, you'll need to create a Rakefile, a Ruby script that defines tasks and dependencies for automating various aspects of software development and project management.
 
 1.  **Navigate to your Jekyll project's root directory in the terminal.**
-	cd
+    cd
 2.  **Create a new file named "Rakefile" (with no file extension):**
-	bash
-	<pre><code>touch Rakefile
-	</code></pre>
+bash
+<pre><code>touch Rakefile
+</code></pre>
 
-3. **Open the Rakefile in your text editor**
-	   and add the following content:
-	<pre><code>task :default => :build
+3.  **Open the Rakefile in your text editor**
+and add the following content:
+<pre><code>task :default => :build
 
-	task :build do
-	  puts 'Extracting categories...'
-	  ruby 'update_categories.rb'
-	  puts 'Building Jekyll site...'
-	  system 'bundle exec jekyll build'
-	end</code></pre>
+task :build do
+  puts 'Extracting categories...'
+  ruby 'update_categories.rb'
+  puts 'Building Jekyll site...'
+  system 'bundle exec jekyll build'
+end</code></pre>
 
 4.  **Save the Rakefile.**
 
 5.  **To build your Jekyll site and run the category extraction script,** use the following command instead of jekyll build:
-	<pre><code>bundle exec rake build
-	</code></pre>
+<pre><code>bundle exec rake build
+</code></pre>
 
 This setup will:
+
 - Extract categories from your posts
 - Count the number of posts in a category
 - Update the `_data/categories.yml` file
@@ -127,12 +127,13 @@ This setup will:
 
 The Rakefile acts as a coordinator, running your custom Ruby script before initiating the Jekyll build process. This method integrates smoothly with Jekyll without requiring plugins or complex setups.
 
-This approach ensures that your `_data/categories.yml` file stays up-to-date with all categories used across your posts. Run the script whenever you add or update posts with new categories. Running the script will overwrite the existing categories.yml page. 
+This approach ensures that your `_data/categories.yml` file stays up-to-date with all categories used across your posts. Run the script whenever you add or update posts with new categories. Running the script will overwrite the existing categories.yml page.
 
 ## Displaying these categories
 
 **On post pages, with colors**
 {% raw %}
+
 <pre><code>{% assign post_categories = page.categories %}
 {% for category in post_categories %}
     {% assign category_info = site.data.categories | where: "name", category | first %}
@@ -144,12 +145,12 @@ This approach ensures that your `_data/categories.yml` file stays up-to-date wit
 &lt;/a&gt;
     {% endif %}
 {% endfor %}</code></pre>
+
 {% endraw %}
-
-
 
 **In a loop, linking to the category page, sorting list by most # posts in a category to least # posts in a category**
 {% raw %}
+
 <pre><code>{% assign sorted_categories = site.data.categories | sort: &#x22;posts_count&#x22; | reverse %}
 {% for category in sorted_categories %}
     &#x3C;div class=&#x22;category-item&#x22;&#x3E;
@@ -160,4 +161,5 @@ This approach ensures that your `_data/categories.yml` file stays up-to-date wit
     &#x3C;/div&#x3E;
 {% endfor %}
 </code></pre>
+
 {% endraw %}

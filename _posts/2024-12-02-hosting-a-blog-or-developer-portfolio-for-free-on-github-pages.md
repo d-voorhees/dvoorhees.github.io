@@ -1,17 +1,16 @@
 ---
-date: 2024-12-02 
+date: 2024-12-02
 layout: post
 title: "The benefits of hosting a blog or developer portfolio on GitHub Pages, and how can you do it"
 introduction: "Using Jekyll and markdown, you can host your blog or developer portfolio on GitHub pages."
-seo\_title: "How to host a blog for free on GitHub"
-seo\_description: "Using Jekyll and markdown, you can host your blog on GitHub pages."
-seo\_image: "/assets/images/blog-post-image.jpg"
+seo_title: "How to host a blog for free on GitHub"
+seo_description: "Using Jekyll and markdown, you can host your blog on GitHub pages."
 categories: [github, jekyll, "developer portfolios"]
 ---
 
 # Free Hosting on GitHub: Putting your code blog up on GitHub Pages
 
-For developers seeking a reliable and cost-effective hosting solution for their personal portfolio or writings, GitHub Pages is an excellent choice. Not only does it offer free hosting with generous bandwidth, but it also integrates seamlessly with Git's version control system, making it easy to manage and deploy your content. 
+For developers seeking a reliable and cost-effective hosting solution for their personal portfolio or writings, GitHub Pages is an excellent choice. Not only does it offer free hosting with generous bandwidth, but it also integrates seamlessly with Git's version control system, making it easy to manage and deploy your content.
 
 GitHub Pages works like a publishing system built on Git's version control. GitHub Pages handles server maintenance and updates. Push your changes to Git, and your content deploys automatically with SSL certificates and optimized performance. The security is airtight because it's simple: static content means no databases to inject or server-side code to exploit. It's pure content delivery.
 
@@ -104,6 +103,7 @@ Below, I’ll walk you through the process of setting up your GitHub Pages site 
      title: "My First Blog Post"
      date: 2025-01-28
      ---
+
      Welcome to my blog! This is my first post.
      ```
 
@@ -168,6 +168,7 @@ Below, I’ll walk you through the process of setting up your GitHub Pages site 
 #### Step 5: Creating Your Blog
 
 1. **Create a New Jekyll Site**:
+
    - Navigate into your repository folder:
      ```bash
      cd yourusername.github.io
@@ -203,6 +204,7 @@ Below, I’ll walk you through the process of setting up your GitHub Pages site 
 ## Enabling GitHub Pages
 
 1. **Navigate to Repository Settings**:
+
    - Go back to your repository on GitHub.
    - Click "Settings."
 
@@ -217,6 +219,7 @@ Your blog will be accessible at `https://yourusername.github.io` within a few mi
 ## Adding New Posts
 
 1. **Create a New Post**:
+
    - Create a new file in the `_posts` folder following the same naming pattern: `YYYY-MM-DD-title.md`.
    - Add your content using the same format as your first post.
 

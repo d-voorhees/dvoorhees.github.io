@@ -1,13 +1,13 @@
 ---
-date: 2025-03-15 
+date: 2025-03-15
 layout: post
 title: "You Don’t Have to Know It All - But You Do Have to Be Willing to Learn"
 introduction: "As software evolves at lightning speed, your ability to learn matters more than your current tech stack. I’ve found that those who master problem-solving thrive, while those fixated on specific languages get left behind."
-seo\_title: "The Learning Engineer: Why Problem-Solving Skills Outrank Programming Languages | Tech Career Growth"
-seo\_description: "Continuous learning is the #1 skill for software engineers in 2025. Strong problem-solving abilities trump programming language expertise. Find actionable strategies to build your learning engine for long-term tech career success."
-seo\_image: "/assets/images/blog-post-image.jpg"
-categories: [ "methods & strategy" ]
---- 
+seo_title: "The Learning Engineer: Why Problem-Solving Skills Outrank Programming Languages | Tech Career Growth"
+seo_description: "Continuous learning is the #1 skill for software engineers in 2025. Strong problem-solving abilities trump programming language expertise. Find actionable strategies to build your learning engine for long-term tech career success."
+
+categories: ["methods & strategy"]
+---
 
 # Learning: The Software Engineer's True North
 
