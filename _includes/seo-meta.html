@@ -1,23 +1,16 @@
-{% if page.seo_title %}{
 <!-- _includes/seo-meta.html -->
 {% assign seo_title = page.seo_title | default: site.title %} {% assign
 seo_description = page.seo_description | default: site.description %} {% assign
 seo_image = page.seo_image | default: site.social_image %}
 
-<!-- SEO Title and Description -->
 <title>{{ seo_title }}</title>
 <meta name="description" content="{{ seo_description }}" />
-
-<!-- Open Graph Tags -->
 <meta property="og:title" content="{{ seo_title }}" />
 <meta property="og:description" content="{{ seo_description }}" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ page.url | absolute_url }}" />
 <meta property="og:image" content="{{ seo_image | absolute_url }}" />
-
-<!-- Twitter Card Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ seo_title }}" />
 <meta name="twitter:description" content="{{ seo_description }}" />
 <meta name="twitter:image" content="{{ seo_image | absolute_url }}" />
-} {% endif %}
