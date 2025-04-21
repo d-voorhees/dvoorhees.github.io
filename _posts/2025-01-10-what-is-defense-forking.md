@@ -3,11 +3,12 @@ date: 2025-01-10
 layout: post
 title: "Defense Forking: A Short History of Strategic Preservation"
 introduction: "Defense forking is a strategic software development approach where developers create a complete, independent copy of an existing codebase to preserve, protect, and potentially revive a project at risk of abandonment, vulnerability, or misalignment with community needs. The forkability of a project defines whether a software is truly open-source or not."
-seo\_title: "Defense Forking: A Short History of Strategic Preservation"
-seo\_description: "Explore defense forking: the strategic art of preserving and reviving open-source software through community-driven technological conservation."
-seo\_image: "/assets/images/blog-post-image.jpg"
+seo_title: "Defense Forking: A Short History of Strategic Preservation"
+seo_description: "Explore defense forking: the strategic art of preserving and reviving open-source software through community-driven technological conservation."
+seo_image: "/assets/images/blog-post-image.jpg"
 categories: ["open source", "defense forking"]
 ---
+
 # Defense Forking: A Short History of Strategic Preservation
 
 Defense forking is a strategic software development approach where developers create a complete, independent copy of an existing codebase to preserve, protect, and potentially revive a project at risk of abandonment, vulnerability, or misalignment with community needs.
