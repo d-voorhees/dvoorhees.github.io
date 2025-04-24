@@ -1,13 +1,16 @@
 ---
 layout: default
-title: Home
+title: Dev Logs - Experiments in Code, Communication & Strategy
+description: A technical builder's journey through growth engineering and practical tooling. Insights on SaaS, open source, developer relations, and AI integration—from Ruby to Jekyll, with methods that scale and pitfalls to note.
+seo_title: Dev Logs - Experiments in Code, Communication & Strategy
+seo_description: A technical builder's journey through growth engineering and practical tooling. Insights on SaaS, open source, developer relations, and AI integration—from Ruby to Jekyll, with methods that scale and pitfalls to note.
 ---
 
 <!-- Jumbotron Section -->
 <section class="jumbotron bg-gray">
   <div class="container">
   <div class="col-sm-10 col-12">
-    <h1 class="h1">Deep Dives into Code, Growth, and Open-Source Innovation</h1>
+    <h1 class="h1">Dev Logs: Experiments in Code, Communication & Strategy</h1>
   </div>
   </div>
 </section>
