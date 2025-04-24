@@ -4,31 +4,27 @@
 <head>
     <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Automatically Write Categories to the Data File in Jekyll</title>
-<link rel="canonical" href="http://localhost:4000/" />
 
 <!-- Include SEO Meta Tags -->
 <!-- _includes/seo-meta.html -->
+  
 
-
-
-
-<!-- SEO Title and Description -->
-<title>D. Voorhees Software Engineer</title>
-<meta name="description" content="The blog and portfolio of Software Engineer">
-
-<!-- Open Graph Tags -->
-<meta property="og:title" content="D. Voorhees Software Engineer">
-<meta property="og:description" content="The blog and portfolio of Software Engineer">
-<meta property="og:type" content="website">
-<meta property="og:url" content="http://localhost:4000/2024/12/13/auto-generate-categories-in-jekyll/">
-<meta property="og:image" content="">
-
-<!-- Twitter Card Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="D. Voorhees Software Engineer">
-<meta name="twitter:description" content="The blog and portfolio of Software Engineer">
-<meta name="twitter:image" content="">
+<title>Automatically Write Categories to the Data File in Jekyll</title>
+<meta name="description" content="Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further." />
+<meta property="og:title" content="Automatically Write Categories to the Data File in Jekyll" />
+<meta property="og:description" content="Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:4000/2024/12/13/auto-generate-categories-in-jekyll/" />
+<meta property="og:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Automatically Write Categories to the Data File in Jekyll" />
+<meta name="twitter:description" content="Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further." />
+<meta name="twitter:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
+ 
+<link
+  rel="canonical"
+  href="http://localhost:4000/2024/12/13/auto-generate-categories-in-jekyll/"
+/>
 
 <!-- Other meta tags, stylesheets, and links -->
 <link
@@ -281,7 +277,7 @@
 <ol>
   <li>
     <p><strong>Add Categories in Front Matter</strong><br />
-    Ensure each post includes the <code class="language-plaintext highlighter-rouge">categories</code> field in its front matter in brackets, separated by commas. For example:</p>
+ Ensure each post includes the <code class="language-plaintext highlighter-rouge">categories</code> field in its front matter in brackets, separated by commas. For example:</p>
 
     <pre><code>---
 layout: post
@@ -291,7 +287,7 @@ categories: [Tech, Jekyll, Developer Portfolios]
   </li>
   <li>
     <p><strong>Create a Script to Extract Categories</strong><br />
-    Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the <code class="language-plaintext highlighter-rouge">_data</code> folder. In this example we’re also including a color variable for the category, as it is written for the ‘dev herald’ theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don’t need that don’t worry, this won’t trip you up.</p>
+ Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the <code class="language-plaintext highlighter-rouge">_data</code> folder. In this example we’re also including a color variable for the category, as it is written for the ‘dev herald’ theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don’t need that don’t worry, this won’t trip you up.</p>
   </li>
 </ol>
 
@@ -361,31 +357,37 @@ puts "Categories written to #{data_file}"
   <li><strong>Navigate to your Jekyll project’s root directory in the terminal.</strong>
 cd</li>
   <li><strong>Create a new file named “Rakefile” (with no file extension):</strong>
-bash
-    <pre><code>touch Rakefile
+bash</li>
+</ol>
+<pre><code>touch Rakefile
 </code></pre>
-  </li>
-  <li><strong>Open the Rakefile in your text editor</strong>
-    and add the following content:
-    <pre><code>task :default =&gt; :build
 
- task :build do
-   puts 'Extracting categories...'
-   ruby 'update_categories.rb'
-   puts 'Building Jekyll site...'
-   system 'bundle exec jekyll build'
- end</code></pre>
-  </li>
+<ol>
+  <li><strong>Open the Rakefile in your text editor</strong>
+and add the following content:</li>
+</ol>
+<pre><code>task :default =&gt; :build
+
+task :build do
+  puts 'Extracting categories...'
+  ruby 'update_categories.rb'
+  puts 'Building Jekyll site...'
+  system 'bundle exec jekyll build'
+end</code></pre>
+
+<ol>
   <li>
     <p><strong>Save the Rakefile.</strong></p>
   </li>
-  <li><strong>To build your Jekyll site and run the category extraction script,</strong> use the following command instead of jekyll build:
-    <pre><code>bundle exec rake build
-</code></pre>
+  <li>
+    <p><strong>To build your Jekyll site and run the category extraction script,</strong> use the following command instead of jekyll build:</p>
   </li>
 </ol>
+<pre><code>bundle exec rake build
+</code></pre>
 
 <p>This setup will:</p>
+
 <ul>
   <li>Extract categories from your posts</li>
   <li>Count the number of posts in a category</li>

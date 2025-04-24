@@ -4,31 +4,27 @@
 <head>
     <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How to Include Non-Jekyll Content in Your Jekyll Site</title>
-<link rel="canonical" href="http://localhost:4000/" />
 
 <!-- Include SEO Meta Tags -->
 <!-- _includes/seo-meta.html -->
+  
 
-
-
-
-<!-- SEO Title and Description -->
-<title>D. Voorhees Software Engineer</title>
-<meta name="description" content="The blog and portfolio of Software Engineer">
-
-<!-- Open Graph Tags -->
-<meta property="og:title" content="D. Voorhees Software Engineer">
-<meta property="og:description" content="The blog and portfolio of Software Engineer">
-<meta property="og:type" content="website">
-<meta property="og:url" content="http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/">
-<meta property="og:image" content="">
-
-<!-- Twitter Card Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="D. Voorhees Software Engineer">
-<meta name="twitter:description" content="The blog and portfolio of Software Engineer">
-<meta name="twitter:image" content="">
+<title>How to Include Non-Jekyll Content in Your Jekyll Site: A Complete Guide</title>
+<meta name="description" content="Learn how to seamlessly integrate non-Jekyll content into your Jekyll-powered site. Explore different methods for embedding static files, dynamic content, and external resources without disrupting your workflow." />
+<meta property="og:title" content="How to Include Non-Jekyll Content in Your Jekyll Site: A Complete Guide" />
+<meta property="og:description" content="Learn how to seamlessly integrate non-Jekyll content into your Jekyll-powered site. Explore different methods for embedding static files, dynamic content, and external resources without disrupting your workflow." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/" />
+<meta property="og:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="How to Include Non-Jekyll Content in Your Jekyll Site: A Complete Guide" />
+<meta name="twitter:description" content="Learn how to seamlessly integrate non-Jekyll content into your Jekyll-powered site. Explore different methods for embedding static files, dynamic content, and external resources without disrupting your workflow." />
+<meta name="twitter:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
+ 
+<link
+  rel="canonical"
+  href="http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/"
+/>
 
 <!-- Other meta tags, stylesheets, and links -->
 <link
@@ -272,7 +268,6 @@
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">exclude</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">documentation</span>
-
 </code></pre></div></div>
 
 <p>This will tell Jekyll to ignore the <code class="language-plaintext highlighter-rouge">/documentation</code> folder and all its contents when building the site. The HTML files in this folder will be served as-is, without Jekyll processing them.</p>
