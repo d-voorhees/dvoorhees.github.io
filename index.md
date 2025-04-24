@@ -10,7 +10,7 @@ seo_description: A technical builder's journey through growth engineering and pr
 <section class="jumbotron bg-gray">
   <div class="container">
   <div class="col-sm-10 col-12">
-    <h1 class="h1">Dev Logs: Experiments in Code, Communication & Strategy</h1>
+    <h1 class="h1">Experiments in Code, Communication & Strategy</h1>
   </div>
   </div>
 </section>
