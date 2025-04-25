@@ -3,7 +3,7 @@
   
     
       <url>
-        <loc>http://localhost:4000/about/</loc>
+        <loc>https://dvoorhees.com/about/</loc>
         <lastmod></lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -14,7 +14,7 @@
   
     
       <url>
-        <loc>http://localhost:4000/blog/</loc>
+        <loc>https://dvoorhees.com/blog/</loc>
         <lastmod></lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -23,7 +23,7 @@
   
     
       <url>
-        <loc>http://localhost:4000/projects/</loc>
+        <loc>https://dvoorhees.com/projects/</loc>
         <lastmod></lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
@@ -33,98 +33,98 @@
 
   
     <url>
-      <loc>http://localhost:4000/2025/03/16/frameworks-and-methodologies-in-growth-engineering/</loc>
+      <loc>https://dvoorhees.com/2025/03/16/frameworks-and-methodologies-in-growth-engineering/</loc>
       <lastmod>2025-03-16T00:00:00-06:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/03/15/emerging-trends-in-growth-engineering/</loc>
+      <loc>https://dvoorhees.com/2025/03/15/emerging-trends-in-growth-engineering/</loc>
       <lastmod>2025-03-15T00:00:00-06:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/03/15/dont-have-to-know-it-all-software-engineering/</loc>
+      <loc>https://dvoorhees.com/2025/03/15/dont-have-to-know-it-all-software-engineering/</loc>
       <lastmod>2025-03-15T00:00:00-06:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/03/12/growth-engineering-a-comprehensive-technical-and-non-technical-perspective/</loc>
+      <loc>https://dvoorhees.com/2025/03/12/growth-engineering-a-comprehensive-technical-and-non-technical-perspective/</loc>
       <lastmod>2025-03-12T00:00:00-06:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/03/10/the-impact-of-effective-messaging-on-saa-s-and-app-performance-research-and-statistical-evidence/</loc>
+      <loc>https://dvoorhees.com/2025/03/10/the-impact-of-effective-messaging-on-saa-s-and-app-performance-research-and-statistical-evidence/</loc>
       <lastmod>2025-03-10T00:00:00-06:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/03/05/effective-messaging-strategies-for-app-&amp;-saa-s-marketing-best-practices/</loc>
+      <loc>https://dvoorhees.com/2025/03/05/effective-messaging-strategies-for-app-&amp;-saa-s-marketing-best-practices/</loc>
       <lastmod>2025-03-05T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/</loc>
+      <loc>https://dvoorhees.com/2025/02/07/git-hub-restricts-the-use-of-certain-jekyll-plugins/</loc>
       <lastmod>2025-02-07T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/01/11/private-equity-defense-forking-open-source/</loc>
+      <loc>https://dvoorhees.com/2025/01/11/private-equity-defense-forking-open-source/</loc>
       <lastmod>2025-01-11T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2025/01/10/what-is-defense-forking/</loc>
+      <loc>https://dvoorhees.com/2025/01/10/what-is-defense-forking/</loc>
       <lastmod>2025-01-10T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2024/12/28/writing-documentation-that-reaches-your-audience/</loc>
+      <loc>https://dvoorhees.com/2024/12/28/writing-documentation-that-reaches-your-audience/</loc>
       <lastmod>2024-12-28T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2024/12/28/building-products-developers-want-to-use/</loc>
+      <loc>https://dvoorhees.com/2024/12/28/building-products-developers-want-to-use/</loc>
       <lastmod>2024-12-28T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2024/12/13/auto-generate-categories-in-jekyll/</loc>
+      <loc>https://dvoorhees.com/2024/12/13/auto-generate-categories-in-jekyll/</loc>
       <lastmod>2024-12-13T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/</loc>
+      <loc>https://dvoorhees.com/2024/12/02/including-non-jekyll-content-in-jekyll/</loc>
       <lastmod>2024-12-02T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>
   
     <url>
-      <loc>http://localhost:4000/2024/12/02/hosting-a-blog-or-developer-portfolio-for-free-on-github-pages/</loc>
+      <loc>https://dvoorhees.com/2024/12/02/hosting-a-blog-or-developer-portfolio-for-free-on-github-pages/</loc>
       <lastmod>2024-12-02T00:00:00-07:00</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
