@@ -5,6 +5,12 @@ seo_description: A running log of projects and ideas—covering growth engineeri
 baseurl: "" # Leave empty if publishing from the root of the repository
 url: "https://dvoorhees.com" # Replace with your custom domain
 
+defaults:
+  - scope:
+      type: posts
+    values:
+      applause_button: true
+
 collections:
   projects:
     output: true

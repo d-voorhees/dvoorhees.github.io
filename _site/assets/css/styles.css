@@ -598,6 +598,15 @@ a.more-link {
   }
 }
 
+/* applause button */
+applause-button .style-root {
+  --main-color: #129b69 !important;
+  gap: 1.15 rem !important;
+}
+applause-button .clap-count {
+  font-size: 1.25rem !important;
+}
+
 /* dark theme */
 body.dark-theme {
   background-color: #121212;
@@ -679,6 +688,10 @@ body.dark-theme pre code {
 
 body.dark-theme pre {
   background: #dbdbdb;
+}
+
+body.dark-theme applause-button .style-root {
+  --main-color: #03cdda !important;
 }
 
 /* Offcanvas dark theme styling */
