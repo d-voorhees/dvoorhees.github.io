@@ -607,6 +607,19 @@ applause-button .clap-count {
   font-size: 1.25rem !important;
 }
 
+.clap-count svg {
+  height: 1em;
+  vertical-align: middle;
+  width: 1em;
+}
+.clap-count .flat {
+  fill: var(--body-bg);
+}
+
+.clap-count .outline {
+  fill: var(--accent-color);
+}
+
 /* dark theme */
 body.dark-theme {
   background-color: #121212;
