@@ -588,13 +588,42 @@ a.more-link {
     display: none;
   }
   .single-category .d-flex.cat-cat {
-    padding: 40px 0;
+    padding: 2rem 0;
   }
   .blog-home .blog-post p {
     font-size: 1.25em;
   }
   .blog-home col-md-3 border-md-end {
     display: none;
+  }
+  .blog-home .blog-post:first-of-type {
+    padding-top: 1.5em;
+  }
+  .blog-home .category-list > div {
+    display: inline-flex;
+  }
+  .blog-home .p-100 {
+    padding: 35px 0;
+  }
+  .blog-home .pt-5 {
+    padding-top: 2rem !important;
+  }
+  .blog-home .col-md-3 .category-list .category-item:last-of-type {
+    padding-bottom: 2rem;
+  }
+  h1#category-title {
+    margin-top: 10px;
+  }
+  @media (max-width: 768px) {
+    #category-title {
+      display: inline-flex;
+      gap: 1rem;
+    }
+
+    .cat-cat {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
