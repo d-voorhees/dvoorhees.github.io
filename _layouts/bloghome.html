@@ -12,7 +12,7 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <div style="padding: 100px 0">
+              <div class="p-100">
                 <h1 id="category-title">Writings About Code & Projects</h1>
               </div>
             </div>
@@ -21,9 +21,9 @@
         <div class="border-bottom w-105"></div>
         <div class="container">
           <div class="row vh-85 pt-5">
-            <div class="col-md-3 border-md-end">
+            <div class="col-md-3 border-bottom">
               <div class="category-list">
-                <h2 class="h5">Categories</h2>
+                <h2 class="h5">View by category</h2>
                 {% assign sorted_categories = site.data.categories | sort:
                 "posts_count" | reverse %} {% for category in sorted_categories
                 %}

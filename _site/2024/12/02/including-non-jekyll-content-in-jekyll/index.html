@@ -13,16 +13,16 @@
 <meta property="og:title" content="How to Include Non-Jekyll Content in Your Jekyll Site: A Complete Guide" />
 <meta property="og:description" content="Learn how to seamlessly integrate non-Jekyll content into your Jekyll-powered site. Explore different methods for embedding static files, dynamic content, and external resources without disrupting your workflow." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://dvoorhees.com/2024/12/02/including-non-jekyll-content-in-jekyll/" />
-<meta property="og:image" content="https://dvoorhees.com/assets/images/blog-post-image.jpg" />
+<meta property="og:url" content="http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/" />
+<meta property="og:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="How to Include Non-Jekyll Content in Your Jekyll Site: A Complete Guide" />
 <meta name="twitter:description" content="Learn how to seamlessly integrate non-Jekyll content into your Jekyll-powered site. Explore different methods for embedding static files, dynamic content, and external resources without disrupting your workflow." />
-<meta name="twitter:image" content="https://dvoorhees.com/assets/images/blog-post-image.jpg" />
+<meta name="twitter:image" content="http://localhost:4000/assets/images/blog-post-image.jpg" />
  
 <link
   rel="canonical"
-  href="https://dvoorhees.com/2024/12/02/including-non-jekyll-content-in-jekyll/"
+  href="http://localhost:4000/2024/12/02/including-non-jekyll-content-in-jekyll/"
 />
 
 <!-- Other meta tags, stylesheets, and links -->
@@ -217,7 +217,7 @@
                         style="background-color: #E99A24; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"
                       ></div>
                       <a
-                        href="https://dvoorhees.com/categories/?category=jekyll"
+                        href="http://localhost:4000/categories/?category=jekyll"
                         class="category-link"
                       >
                         jekyll
@@ -230,7 +230,7 @@
                         style="background-color: #6BBDC2; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"
                       ></div>
                       <a
-                        href="https://dvoorhees.com/categories/?category=tutorials"
+                        href="http://localhost:4000/categories/?category=tutorials"
                         class="category-link"
                       >
                         tutorials
@@ -313,7 +313,11 @@
 </ul>
 
 
-                  <applause-button style="width: 40px; height: 40px" />
+                  <applause-button
+                    style="width: 40px; height: 40px"
+                    multiclap="true"
+                    api="https://applause.chabouis.fr"
+                  />
                 </div>
               </div>
             </div>
@@ -380,13 +384,14 @@
   </body>
 
   <footer>
-    <div class="container text-center">
-        <p><i class="jam jam-envelope"></i> d {at} dvoorhees {dot} com</p>
-    </div>
+  <div class="container text-center">
+    <p><i class="jam jam-envelope"></i> d {at} dvoorhees {dot} com</p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/light-dark.js"></script>
 <script src="/assets/js/theme.js"></script>
+<script src="/assets/js/clap-count.js"></script>
 
 </html>

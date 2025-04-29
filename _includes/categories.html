@@ -1,214 +1,236 @@
 <head>
-    {% include head.html %}
-    <!-- Other head content specific to this layout -->
+  {% include head.html %}
+  <!-- Other head content specific to this layout -->
 </head>
 
 <body>
-    {% include navbar.html %}
-    <main>
-        <div class="container-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div style="padding: 100px 0;" class="d-flex cat-cat">
-                            <h1 id="category-title">Categories</h1>
-                        </div>
-                    </div>
-                </div>
+  {% include navbar.html %}
+  <main>
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="p-100 d-flex cat-cat">
+              <h1 id="category-title">Categories</h1>
             </div>
-            <div class="border-bottom w-105"></div>
-            <div class="container">
-                <div class="row vh-85">
-                    <div class="col-md-3 border-md-end">
-                        <div class="category-list my-5">
-
-
-                            <div class="category-list">
-                                <h2 class="h5">More Categories</h2>
-                                {% assign sorted_categories = site.data.categories | sort: "posts_count" | reverse %}
-                                {% for category in sorted_categories %}
-                                <div class="category-item">
-                                    <div class="square" style="background-color: {{ category.color | default: '#cccccc' }};"></div>
-                                    <a href="/categories/?category={{ category.name | url_encode }}" class="category-link">
-                                        {{ category.name }}
-                                    </a>
-                                </div>
-                                {% endfor %}
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                    <div class="col-md-9 pl-md-3 py-5">
-
-                        <ul id="content-list"></ul>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </main>
+      </div>
+      <div class="border-bottom w-105"></div>
+      <div class="container">
+        <div class="row vh-85">
+          <div class="col-md-3 border-md-end">
+            <div class="category-list my-5">
+              <div class="category-list">
+                <h2 class="h5">More Categories</h2>
+                {% assign sorted_categories = site.data.categories | sort:
+                "posts_count" | reverse %} {% for category in sorted_categories
+                %}
+                <div class="category-item">
+                  <div
+                    class="square"
+                    style="background-color: {{ category.color | default: '#cccccc' }};"
+                  ></div>
 
-    {% include footer.html %}
+                  <a
+                    href="/categories/?category={{ category.name | url_encode }}"
+                    class="category-link"
+                  >
+                    {{ category.name }}
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9 pl-md-3 py-5">
+            <ul id="content-list"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        // Helper function to format title for display
-        function formatTitle(title) {
-            return title.split('-')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                .join(' ');
-        }
+  {% include footer.html %}
 
-        // New function to normalize category names
-        function normalizeCategory(category) {
-            return category.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-');
-        }
+  <script>
+    function formatTitle(title) {
+      if (!title) return "";
+      return title
+        .split("-")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ");
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = decodeURIComponent(urlParams.get('category'));
+    function normalizeCategory(category) {
+      return category
+        ? category
+            .toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+        : "";
+    }
 
-            // Parse the categories data
-            const categoriesData = JSON.parse('{{ site.data.categories | jsonify }}');
+    function updateCategoryPage(category) {
+      const categoryTitle = document.getElementById("category-title");
+      const contentList = document.getElementById("content-list");
 
-            console.log('Selected Category:', category);
-            console.log('Categories Data:', categoriesData);
+      document.body.classList.add("single-category");
 
-            if (category) {
-                document.body.classList.add('single-category');
-            }
+      let categoriesData = [];
+      try {
+        categoriesData = JSON.parse(`{{ site.data.categories | jsonify }}`);
+      } catch (e) {
+        console.error("Error parsing categories JSON:", e);
+        return;
+      }
 
-            if (category) {
-                fetch('/all_content.json')
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log('Full Data:', data);
+      const categoryInfo = categoriesData.find(
+        (c) => normalizeCategory(c.name) === normalizeCategory(category)
+      );
 
-                        const categoryTitle = document.getElementById('category-title');
-                        const contentList = document.getElementById('content-list');
+      if (categoryTitle) {
+        const squareSpan = document.createElement("span");
+        squareSpan.style.backgroundColor = categoryInfo?.color || "#bcaeae";
+        squareSpan.style.display = "inline-block";
+        squareSpan.style.width = "35px";
+        squareSpan.style.aspectRatio = "1 / 1";
+        squareSpan.style.minWidth = "35px";
+        squareSpan.style.maxWidth = "35px";
+        squareSpan.style.minHeight = "35px";
+        squareSpan.style.maxHeight = "35px";
+        squareSpan.style.marginRight = "10px";
+        squareSpan.style.verticalAlign = "middle";
+        squareSpan.style.borderRadius = "100%";
 
-                        // Find the category info using normalized comparison
-                        const categoryInfo = categoriesData.find(
-                            (c) => normalizeCategory(c.name) === normalizeCategory(category)
-                        );
+        categoryTitle.innerHTML = "";
+        categoryTitle.appendChild(squareSpan);
+        categoryTitle.appendChild(
+          document.createTextNode(
+            `Content categorized as ${
+              categoryInfo?.name || formatTitle(category)
+            }`
+          )
+        );
+      }
 
-                        if (categoryInfo) {
-                            // Create the color square span
-                            const squareSpan = document.createElement('span');
-                            squareSpan.style.backgroundColor = categoryInfo.color || '#bcaeae';
-                            squareSpan.style.display = 'inline-block';
-                            squareSpan.style.width = '35px';
-                            squareSpan.style.height = '35px';
-                            squareSpan.style.marginRight = '10px';
-                            squareSpan.style.verticalAlign = 'middle';
-                            squareSpan.style.borderRadius = '100%';
+      fetch("/all_content.json")
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
+          return response.json();
+        })
+        .then((data) => {
+          const posts = data.content.filter((post) =>
+            (post.categories || []).some(
+              (cat) => normalizeCategory(cat) === normalizeCategory(category)
+            )
+          );
 
-                            // Update the category title with formatted text
-                            categoryTitle.innerHTML = '';
-                            categoryTitle.appendChild(squareSpan);
-                            categoryTitle.appendChild(
-                                document.createTextNode(
-                                    `Content categorized as ${categoryInfo.name}`
-                                )
-                            );
-                        } else {
-                            // Use formatTitle if no category info found, but keep the prefix and add a default color square
-                            const squareSpan = document.createElement('span');
-                            squareSpan.style.backgroundColor = '#bcaeae';
-                            squareSpan.style.display = 'inline-block';
-                            squareSpan.style.width = '35px';
-                            squareSpan.style.height = '35px';
-                            squareSpan.style.marginRight = '10px';
-                            squareSpan.style.verticalAlign = 'middle';
-                            squareSpan.style.borderRadius = '100%';
+          contentList.innerHTML = "";
 
-                            categoryTitle.innerHTML = '';
-                            categoryTitle.appendChild(squareSpan);
-                            categoryTitle.appendChild(
-                                document.createTextNode(
-                                    `Content categorized as ${formatTitle(category)}`
-                                )
-                            );
-                        }
+          if (posts.length === 0) {
+            contentList.innerHTML = "<p>No posts found for this category.</p>";
+            return;
+          }
 
-                        contentList.innerHTML = '';
+          posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                        // Filter posts by matching categories using normalized comparison
-                        const filteredPosts = data.content.filter((item) => {
-                            console.log(`Post: ${item.title}, Categories:`, item.categories);
-                            const match = item.categories.some(cat =>
-                                normalizeCategory(cat) === normalizeCategory(category)
-                            );
-                            console.log(`Match for ${item.title}:`, match);
-                            return match;
-                        });
+          posts.forEach((item) => {
+            const postDiv = document.createElement("div");
+            postDiv.className = "blog-post";
 
-                        console.log('Filtered Posts:', filteredPosts);
+            const categoryListDiv = document.createElement("div");
+            categoryListDiv.className = "category-list";
 
-                        if (filteredPosts.length === 0) {
-                            contentList.innerHTML = '<p>No posts found for this category.</p>';
-                        } else {
-                            filteredPosts.forEach((item) => {
-                                const postDiv = document.createElement('div');
-                                postDiv.className = 'blog-post';
+            (item.categories || []).forEach((cat) => {
+              const catInfo = categoriesData.find(
+                (c) => normalizeCategory(c.name) === normalizeCategory(cat)
+              );
+              if (catInfo) {
+                const categoryDiv = document.createElement("div");
+                categoryDiv.className = "category-item";
 
-                                const categoryListDiv = document.createElement('div');
-                                categoryListDiv.className = 'category-list';
+                const squareDiv = document.createElement("span");
+                squareDiv.style.backgroundColor = catInfo.color || "#bcaeae";
+                squareDiv.style.display = "inline-block";
+                squareDiv.style.width = "15px";
+                squareDiv.style.height = "15px";
+                squareDiv.style.marginRight = "5px";
+                squareDiv.style.borderRadius = "50%";
+                categoryDiv.appendChild(squareDiv);
 
-                                item.categories.forEach((cat) => {
-                                    const categoryInfo = categoriesData.find(
-                                        (c) => normalizeCategory(c.name) === normalizeCategory(cat)
-                                    );
+                const link = document.createElement("a");
+                link.href = `/categories/?category=${encodeURIComponent(
+                  catInfo.name
+                )}`;
+                link.className = "category-link";
+                link.textContent = catInfo.name;
 
-                                    if (categoryInfo) {
-                                        const categoryDiv = document.createElement('div');
-                                        categoryDiv.className = 'category-item';
+                categoryDiv.appendChild(link);
+                categoryListDiv.appendChild(categoryDiv);
+              }
+            });
 
-                                        const squareDiv = document.createElement('span');
-                                        squareDiv.style.backgroundColor = categoryInfo.color || '#bcaeae';
-                                        squareDiv.style.display = 'inline-block';
-                                        squareDiv.style.width = '15px';
-                                        squareDiv.style.height = '15px';
-                                        squareDiv.style.marginRight = '5px';
-                                        squareDiv.style.borderRadius = '50%';
-                                        categoryDiv.appendChild(squareDiv);
+            postDiv.appendChild(categoryListDiv);
 
-                                        const link = document.createElement('a');
-                                        link.href = `/categories/?category=${encodeURIComponent(categoryInfo.slug)}`;
-                                        link.className = 'category-link';
-                                        link.textContent = categoryInfo.name;
-                                        categoryDiv.appendChild(link);
+            const titleLink = document.createElement("h3");
+            titleLink.innerHTML = `<a href="${item.url}">${item.title}</a>`;
+            postDiv.appendChild(titleLink);
 
-                                        categoryListDiv.appendChild(categoryDiv);
-                                    }
-                                });
+            const introductionParagraph = document.createElement("p");
+            introductionParagraph.textContent =
+              item.introduction || "No introduction available.";
+            postDiv.appendChild(introductionParagraph);
 
-                                postDiv.appendChild(categoryListDiv);
-
-                                const titleLink = document.createElement('h3');
-                                titleLink.innerHTML = `<a href="${item.url}">${item.title}</a>`;
-                                postDiv.appendChild(titleLink);
-
-                                const introductionParagraph = document.createElement('p');
-                                introductionParagraph.textContent = item.introduction || 'No introduction available.';
-                                postDiv.appendChild(introductionParagraph);
-
-                                contentList.appendChild(postDiv);
-                            });
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Fetch Error:', error);
-                    });
-            } else {
-                document.getElementById('category-title').textContent = 'Please select a category to view content.';
-            }
+            contentList.appendChild(postDiv);
+          });
+        })
+        .catch((err) => {
+          console.error("Error fetching posts:", err);
+          contentList.innerHTML = `<p>Error loading content: ${err.message}</p>`;
         });
+    }
 
-    </script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialCategory = decodeURIComponent(
+        urlParams.get("category") || ""
+      );
 
+      if (initialCategory) {
+        updateCategoryPage(initialCategory);
+      } else {
+        const categoryTitle = document.getElementById("category-title");
+        if (categoryTitle) {
+          categoryTitle.textContent =
+            "Please select a category to view content.";
+        }
+      }
 
+      document.querySelectorAll(".category-link").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const category = new URL(link.href).searchParams.get("category");
+          if (category) {
+            history.pushState(
+              {},
+              "",
+              `?category=${encodeURIComponent(category)}`
+            );
+            updateCategoryPage(category);
+          }
+        });
+      });
+    });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    window.addEventListener("popstate", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const category = decodeURIComponent(urlParams.get("category") || "");
+      updateCategoryPage(category);
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
