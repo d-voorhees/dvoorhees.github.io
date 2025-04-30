@@ -31,13 +31,9 @@
 />
 <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}" />
 
-{% if page.applause_button %}
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/applause-button/dist/applause-button.css"
-/>
-<script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
-{% endif %}
+{% unless page.noClap %}
+<script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_62b5846521e6aee45b208d97bb60c2"></script>
+{% endunless %}
 
 <!-- Google Tag Manager -->
 <script>
