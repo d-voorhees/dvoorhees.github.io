@@ -56,11 +56,16 @@
                 <div class="post-content">
                   {{ content | remove_first: page.title }}
 
-                  <applause-button
-                    style="width: 40px; height: 40px"
-                    multiclap="true"
-                    api="https://applause.chabouis.fr"
-                  />
+                  <div class="clap-button">
+                    <lyket-clap
+                      data-lyket-type="clap"
+                      data-lyket-namespace="blog"
+                      data-lyket-id="{{ page.url | slugify }}"
+                      data-lyket-template="medium"
+                      data-lyket-api-key="pt_62b5846521e6aee45b208d97bb60c2"
+                    >
+                    </lyket-clap>
+                  </div>
                 </div>
               </div>
             </div>
