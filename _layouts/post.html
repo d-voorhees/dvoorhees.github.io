@@ -60,7 +60,7 @@
                     <lyket-clap
                       data-lyket-type="clap"
                       data-lyket-namespace="blog"
-                      data-lyket-id="{{ page.url | slugify }}"
+                      data-lyket-id="{{ page.slug | default: page.title | slugify }}"
                       data-lyket-template="medium"
                       data-lyket-api-key="pt_62b5846521e6aee45b208d97bb60c2"
                     >

@@ -9,7 +9,7 @@ defaults:
   - scope:
       type: posts
     values:
-      applause_button: true
+      lyket_button: true
 
 collections:
   projects:
