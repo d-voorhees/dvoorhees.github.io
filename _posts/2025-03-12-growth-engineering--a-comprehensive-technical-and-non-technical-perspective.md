@@ -33,8 +33,10 @@ From a technical standpoint, growth engineering involves skill sets that span so
 
 #### Full-Stack Engineering
 
-- Growth engineers often need to create features that enhance user experience while ensuring seamless integration with existing systems, so proficiency in both frontend and backend development is crucial, as is the ability to quickly pick up how other systems and code languages work.
-- They work with various programming languages and frameworks, adapting to the technology stack of their organization. Some skills would include
+Growth engineers often need to create features that enhance user experience while ensuring seamless integration with existing systems, so proficiency in both frontend and backend development is crucial, as is the ability to quickly pick up how other systems and code languages work. They work with various programming languages and frameworks, adapting to the technology stack of their organization.
+
+Some skills would include
+
 - Proficiency in multiple programming languages (e.g., Python, JavaScript, Ruby)
 - Experience with web and mobile development frameworks (e.g., React, Angular, Flutter)
 - Strong understanding of database technologies (SQL and NoSQL)
@@ -73,9 +75,7 @@ While technical prowess forms the foundation of growth engineering, non-technica
 
 #### Strategic Thinking and Business Acumen:
 
-- Growth engineers must possess a deep understanding of business objectives and how their work contributes to key performance indicators (KPIs).
-- They need to think strategically about which areas of the product or user journey offer the highest potential for growth.
-- Example: Identifying that improving the checkout process could have a more significant impact on revenue than adding new features, and prioritizing experiments accordingly.
+Growth engineers must possess a deep understanding of business objectives and how their work contributes to key performance indicators (KPIs). They need to think strategically about which areas of the product or user journey offer the highest potential for growth. For example: Identifying that improving the checkout process could have a more significant impact on revenue than adding new features, and prioritizing experiments accordingly.
 
 #### Cross-Team Collaboration and Communication:
 
