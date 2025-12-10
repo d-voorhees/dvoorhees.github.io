@@ -1,109 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% include head.html %}
-    <!-- Other head content specific to this layout -->
-  </head>
 
-  <body class="post">
-    {% include navbar.html %}
-    <main>
-      <article>
-        <div class="container-fluid">
-          <div class="container">
-            <div class="row">
-              <header>
-                <div class="col-sm-10 col-12 category-list pt-5">
+<head>
+  {% include head.html %}
+  <!-- Other head content specific to this layout -->
+</head>
+
+<body class="post">
+  {% include navbar.html %}
+  <main>
+    <article>
+      <div class="container-fluid">
+        <div class="container">
+          <div class="row">
+            <header>
+              <div class="col-sm-10 col-12 category-list pt-5">
+                <span class="category-item">
+                  {% if page.categories %} {% for category in page.categories
+                  %} {% assign category_slug = category | downcase | replace:
+                  '&', 'and' | replace: ' ', '-' | replace: ',', '' %} {%
+                  assign category_info = site.data.categories | where: "slug",
+                  category_slug | first %}
                   <span class="category-item">
-                    {% if page.categories %} {% for category in page.categories
-                    %} {% assign category_slug = category | downcase | replace:
-                    '&', 'and' | replace: ' ', '-' | replace: ',', '' %} {%
-                    assign category_info = site.data.categories | where: "slug",
-                    category_slug | first %}
-                    <span class="category-item">
-                      <div
-                        class="square"
-                        style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;"
-                      ></div>
-                      <a
-                        href="{{ site.url }}/categories/?category={{ category_slug }}"
-                        class="category-link"
-                      >
-                        {{ category }}
-                      </a>
-                    </span>
-                    {% endfor %} {% endif %}
+                    <div class="square"
+                      style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">
+                    </div>
+                    <a href="{{ site.url }}/categories/?category={{ category_slug }}" class="category-link">
+                      {{ category }}
+                    </a>
                   </span>
-                </div>
-
-                <div class="col-sm-10 col-12 pb-4">
-                  <h1 id="category-title" class="mt-3">{{ page.title }}</h1>
-                  <div class="post-introduction mt-2">
-                    {{ page.introduction }}
-                  </div>
-                  <p class="small">
-                    D. Voorhees <span>&#8226;</span> {{ page.date | date: "%B
-                    %d, %Y" }}
-                  </p>
-                </div>
-              </header>
-            </div>
-          </div>
-          <div class="border-bottom w-105"></div>
-          <div class="container">
-            <div class="row vh-85">
-              <div class="col-md-10 col-12">
-                <div class="post-content">
-                  {{ content | remove_first: page.title }}
-
-                  <div class="clap-button">
-                    <lyket-clap
-                      data-lyket-type="clap"
-                      data-lyket-namespace="blog"
-                      data-lyket-id="{{ page.slug | default: page.title | slugify }}"
-                      data-lyket-template="medium"
-                      data-lyket-api-key="pt_62b5846521e6aee45b208d97bb60c2"
-                    >
-                    </lyket-clap>
-                  </div>
-                </div>
+                  {% endfor %} {% endif %}
+                </span>
               </div>
-            </div>
+
+              <div class="col-sm-10 col-12 pb-4">
+                <h1 id="category-title" class="mt-3">{{ page.title }}</h1>
+                <div class="post-introduction mt-2">
+                  {{ page.introduction }}
+                </div>
+                <p class="small">
+                  D. Voorhees <span>&#8226;</span> published on {{ page.date | date: "%B
+                  %d, %Y" }}{% if page.updated %} <span>&#8226;</span> updated on {{ page.updated | date: "%B %d, %Y"
+                  }}{% endif %}
+                </p>
+              </div>
+            </header>
           </div>
         </div>
         <div class="border-bottom w-105"></div>
-        <div class="container-fluid bg-light" id="more-writing">
-          <div class="container">
+        <div class="container">
+          <div class="row vh-85">
             <div class="col-md-10 col-12">
-              <div class="row py-4">
-                {% for category in page.categories %} {% assign category_slug =
-                category | downcase | replace: '&', 'and' | replace: ' ', '-' |
-                replace: ',', '' %} {% assign category_info =
-                site.data.categories | where: "slug", category_slug | first %}
-                {% assign related_posts = site.categories[category] | where_exp:
-                "post", "post.url != page.url" %} {% if related_posts.size > 0
-                %}
-                <h3 class="mt-4 mb-3">
-                  More writing about
-                  <span class="lowercase">{{ category }}</span>
-                </h3>
+              <div class="post-content">
+                {{ content | remove_first: page.title }}
 
-                {% for post in related_posts %}
-                <div class="single-blog-list">
-                  <span
-                    class="square"
-                    style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"
-                  ></span>
-                  <a href="{{ post.url }}">{{ post.title }}</a>
+                <div class="clap-button">
+                  <lyket-clap data-lyket-type="clap" data-lyket-namespace="blog"
+                    data-lyket-id="{{ page.slug | default: page.title | slugify }}" data-lyket-template="medium"
+                    data-lyket-api-key="pt_62b5846521e6aee45b208d97bb60c2">
+                  </lyket-clap>
                 </div>
-                {% endfor %} {% endif %} {% endfor %}
               </div>
             </div>
           </div>
         </div>
-      </article>
-    </main>
-  </body>
+      </div>
+      <div class="border-bottom w-105"></div>
+      <div class="container-fluid bg-light" id="more-writing">
+        <div class="container">
+          <div class="col-md-10 col-12">
+            <div class="row py-4">
+              {% for category in page.categories %} {% assign category_slug =
+              category | downcase | replace: '&', 'and' | replace: ' ', '-' |
+              replace: ',', '' %} {% assign category_info =
+              site.data.categories | where: "slug", category_slug | first %}
+              {% assign related_posts = site.categories[category] | where_exp:
+              "post", "post.url != page.url" %} {% if related_posts.size > 0
+              %}
+              <h3 class="mt-4 mb-3">
+                More writing about
+                <span class="lowercase">{{ category }}</span>
+              </h3>
 
-  {% include footer.html %}
+              {% for post in related_posts %}
+              <div class="single-blog-list">
+                <span class="square"
+                  style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </div>
+              {% endfor %} {% endif %} {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+
+{% include footer.html %}
+
 </html>
