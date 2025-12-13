@@ -1,11 +1,7 @@
 <!-- Google Tag Manager (noscript) -->
 <noscript>
-  <iframe
-    src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM"
-    height="0"
-    width="0"
-    style="display: none; visibility: hidden"
-  ></iframe>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KWNZPVBM" height="0" width="0"
+    style="display: none; visibility: hidden"></iframe>
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 
@@ -13,12 +9,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ '/' | relative_url }}">
-      <img
-        id="main-logo"
-        src="/assets/img/deepdive.svg"
-        alt="deep dive logo"
-        class="navbar-logo"
-      />
+      Danielle Voorhees • Growth Engineering & Technical Strategy
     </a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
@@ -28,9 +19,7 @@
         {% for page in site.pages %} {% unless page.url == "/" or page.url
         contains "all_content.json" %}
         <li class="nav-item">
-          <a class="nav-link" href="{{ page.url | relative_url }}"
-            >{{ page.title }}</a
-          >
+          <a class="nav-link" href="{{ page.url | relative_url }}">{{ page.title }}</a>
         </li>
         {% endunless %} {% endfor %}
         <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
@@ -43,18 +32,9 @@
 <nav class="navbar navbar-light bg-light d-md-none">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img
-        src="/assets/img/deepdive.svg"
-        alt="deep dive logo"
-        class="navbar-logo"
-      />
+      <img src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo" />
     </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasMenu"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
       <span class="jam jam-align-right"></span>
     </button>
     <button id="theme-toggle-two" onclick="toggleThemeTwo()">
@@ -64,27 +44,12 @@
 </nav>
 
 <!-- Off-Canvas Menu -->
-<div
-  class="offcanvas offcanvas-start d-md-none"
-  tabindex="-1"
-  id="offcanvasMenu"
-  aria-labelledby="offcanvasMenuLabel"
->
+<div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasMenuLabel">
-      <img
-        id="main-logo"
-        src="/assets/img/deepdive.svg"
-        alt="deep dive logo"
-        class="navbar-logo"
-      />
+      <img id="main-logo" src="/assets/img/deepdive.svg" alt="deep dive logo" class="navbar-logo" />
     </h5>
-    <button
-      type="button"
-      class="btn-close text-reset"
-      data-bs-dismiss="offcanvas"
-      aria-label="Close"
-    ></button>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <ul class="nav flex-column">
@@ -92,9 +57,7 @@
       {% for page in site.pages %} {% unless page.url == "/" or page.url
       contains "all_content.json" %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ page.url | relative_url }}"
-          >{{ page.title }}</a
-        >
+        <a class="nav-link" href="{{ page.url | relative_url }}">{{ page.title }}</a>
       </li>
       {% endunless %} {% endfor %}
     </ul>

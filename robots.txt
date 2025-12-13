@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /_site/
+Disallow: /assets/js/
+Disallow: /assets/css/
+
+Sitemap: https://dvoorhees.com/sitemap.xml
+
+

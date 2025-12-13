@@ -1,16 +1,40 @@
 <!-- _includes/seo-meta.html -->
-{% assign seo_title = page.seo_title | default: site.title %} {% assign
-seo_description = page.seo_description | default: site.description %} {% assign
-seo_image = page.seo_image | default: site.social_image %}
+{% assign seo_title = page.seo_title | default: page.title | default: site.title %}
+{% assign seo_description = page.seo_description | default: page.description | default: site.description %}
+{% assign seo_image = page.seo_image | default: site.social_image | default: site.url | append: '/assets/img/default-og.jpg' %}
+{% assign author_name = page.author | default: site.author | default: 'D. Voorhees' %}
+{% assign site_name = site.title | default: 'Dev Logs' %}
 
 <title>{{ seo_title }}</title>
 <meta name="description" content="{{ seo_description }}" />
+<meta name="author" content="{{ author_name }}" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
+<meta property="og:url" content="{{ page.url | absolute_url }}" />
 <meta property="og:title" content="{{ seo_title }}" />
 <meta property="og:description" content="{{ seo_description }}" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="{{ page.url | absolute_url }}" />
 <meta property="og:image" content="{{ seo_image | absolute_url }}" />
+<meta property="og:site_name" content="{{ site_name }}" />
+{% if page.layout == 'post' %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+{% if page.updated %}
+<meta property="article:modified_time" content="{{ page.updated | date_to_xmlschema }}" />
+{% endif %}
+<meta property="article:author" content="{{ author_name }}" />
+{% if page.categories %}
+  {% for category in page.categories %}
+<meta property="article:tag" content="{{ category }}" />
+  {% endfor %}
+{% endif %}
+{% endif %}
+
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ seo_title }}" />
 <meta name="twitter:description" content="{{ seo_description }}" />
 <meta name="twitter:image" content="{{ seo_image | absolute_url }}" />
+{% if site.twitter_username %}
+<meta name="twitter:site" content="@{{ site.twitter_username }}" />
+<meta name="twitter:creator" content="@{{ site.twitter_username }}" />
+{% endif %}
