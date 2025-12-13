@@ -4,6 +4,9 @@ seo_title: Dev Logs - Experiments in Code, Communication & Strategy
 seo_description: A running log of projects and ideas—covering growth engineering, open source, SaaS, developer relations, and the tools that keep things moving (or break them entirely).
 baseurl: "" # Leave empty if publishing from the root of the repository
 url: "https://dvoorhees.com" # Replace with your custom domain
+author: "D. Voorhees"
+twitter_username: "" # Add your Twitter handle without @ (e.g., "dvoorhees")
+social_image: "/assets/img/default-og.jpg" # Default Open Graph image
 
 defaults:
   - scope:

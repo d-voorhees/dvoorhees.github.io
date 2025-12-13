@@ -8,7 +8,11 @@ permalink: /sitemap.xml
     {% unless page.url contains 'assets' or page.sitemap.exclude == true %}
       <url>
         <loc>{{ site.url }}{{ page.url | remove: 'index.html' | escape }}</loc>
+        {% if page.last_modified_at %}
         <lastmod>{{ page.last_modified_at | date_to_xmlschema }}</lastmod>
+        {% else %}
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        {% endif %}
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
       </url>
@@ -18,7 +22,11 @@ permalink: /sitemap.xml
   {% for post in site.posts %}
     <url>
       <loc>{{ site.url }}{{ post.url | escape }}</loc>
+      {% if post.updated %}
+      <lastmod>{{ post.updated | date_to_xmlschema }}</lastmod>
+      {% else %}
       <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+      {% endif %}
       <changefreq>monthly</changefreq>
       <priority>0.7</priority>
     </url>

@@ -4,6 +4,41 @@
 <head>
   {% include head.html %}
   <!-- Other head content specific to this layout -->
+  {% assign seo_description = page.seo_description | default: page.description | default: site.description %}
+  {% assign seo_image = page.seo_image | default: site.social_image | default: site.url | append:
+  '/assets/img/default-og.jpg' %}
+  {% assign author_name = page.author | default: site.author | default: 'D. Voorhees' %}
+  {% assign site_name = site.title | default: 'Dev Logs' %}
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ seo_description | escape }}",
+  "image": "{{ seo_image | absolute_url }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  {% if page.updated %}
+  "dateModified": "{{ page.updated | date_to_xmlschema }}",
+  {% else %}
+  "dateModified": "{{ page.date | date_to_xmlschema }}",
+  {% endif %}
+  "author": {
+    "@type": "Person",
+    "name": "{{ author_name }}",
+    "url": "{{ site.url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site_name }}",
+    "url": "{{ site.url }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }{% if page.categories %},
+  "keywords": "{{ page.categories | join: ', ' }}"{% endif %}
+}
+  </script>
 </head>
 
 <body class="post">
@@ -23,7 +58,7 @@
                   category_slug | first %}
                   <span class="category-item">
                     <div class="square"
-                      style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 15px; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">
+                      style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 15px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;">
                     </div>
                     <a href="{{ site.url }}/categories/?category={{ category_slug }}" class="category-link">
                       {{ category }}
