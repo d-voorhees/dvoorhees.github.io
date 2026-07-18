@@ -60,6 +60,7 @@ a {
 
 .navbar-brand {
   font-size: 14px;
+  padding-left: 15px;
 }
 
 .navbar-collapse {
@@ -610,44 +611,17 @@ a.more-link {
 /* mobile */
 @media all and (max-width: 767px) {
   .navbar>.container-fluid {
-    height: 80px;
-    flex-wrap: nowrap;
-    display: block;
+    min-height: auto;
+    height: auto;
+    max-height: 80px;
   }
 
-  img.navbar-logo {
-    padding: 8px 20px 20px 0;
-    height: 95px;
+  .navbar-nav li {
+    padding: 6px 8px;
   }
 
-  .offcanvas img.navbar-logo {
-    padding: 0;
-    height: 80px;
-  }
-
-  button.navbar-toggler {
-    border: none;
-    float: right;
-    padding-top: 13px;
-    padding-right: 0;
-    margin-right: -8px;
-    padding-left: 0;
-  }
-
-  span.jam.jam-align-right {
-    font-size: 38.4px;
-    color: #393838;
-  }
-
-  #theme-toggle-two {
-    font-size: 28px;
-    float: right;
-    padding-top: 25px;
-  }
-
-  #theme-toggle-two i {
-    font-size: 22.4px;
-    color: #343434;
+  .blog-home .col-md-3 .category-list .category-item {
+    padding: 5px 0;
   }
 
   .jumbotron {
@@ -683,15 +657,15 @@ a.more-link {
   }
 
   .blog-home .p-100 {
-    padding: 35px 0;
+    padding: 15px 0;
   }
 
   .blog-home .pt-5 {
-    padding-top: 2rem !important;
+    padding-top: 1rem !important;
   }
 
   .blog-home .col-md-3 .category-list .category-item:last-of-type {
-    padding-bottom: 2rem;
+    padding-bottom: .5rem;
   }
 
   h1#category-title {

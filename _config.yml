@@ -7,7 +7,7 @@ url: "https://dvoorhees.com" # Replace with your custom domain
 author: "D. Voorhees"
 twitter_username: "" # Add your Twitter handle without @ (e.g., "dvoorhees")
 social_image: "/assets/img/default-og.jpg" # Default Open Graph image
-css_version: 3 # Bump this whenever styles.css changes, to bust browser cache
+css_version: 6 # Bump this whenever styles.css changes, to bust browser cache
 
 defaults:
   - scope:
