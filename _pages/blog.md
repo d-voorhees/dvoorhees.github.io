@@ -3,7 +3,7 @@ layout: bloghome
 title: "Blog"
 seo_title: "Technical writings"
 seo_description: ""
-permalink: /blog/
+permalink: /
 ---
 # Blog
 

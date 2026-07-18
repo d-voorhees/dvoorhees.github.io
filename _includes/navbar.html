@@ -9,12 +9,12 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light d-none d-md-block">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ '/' | relative_url }}">
-      Danielle Voorhees • Engineering, architecture, and the decisions behind the systems I build
+      D. Voorhees
     </a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/index.html">Home</a>
+          <a class="nav-link" href="{{ '/' | relative_url }}">Home</a>
         </li>
         {% for page in site.pages %} {% unless page.url == "/" or page.url
         contains "all_content.json" %}
@@ -53,7 +53,7 @@
   </div>
   <div class="offcanvas-body">
     <ul class="nav flex-column">
-      <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ '/' | relative_url }}">Home</a></li>
       {% for page in site.pages %} {% unless page.url == "/" or page.url
       contains "all_content.json" %}
       <li class="nav-item">

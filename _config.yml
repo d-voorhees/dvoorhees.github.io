@@ -24,3 +24,6 @@ collections:
     permalink: /:name/
 
 permalink: /:year/:month/:day/:title/
+
+exclude:
+  - index.md.bak

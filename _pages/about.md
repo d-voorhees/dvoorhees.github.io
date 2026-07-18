@@ -10,7 +10,7 @@ permalink: /about/
 
 I'm Danielle. I design and build the systems that let a business's platforms actually work together: CRMs, ERPs, fulfillment systems, payment processors, analytics infrastructure, and whatever custom application sits at the center of it. The platform changes from engagement to engagement, WordPress, Django, HubSpot, Airtable, a full-stack build from scratch. The discipline underneath does not. Thirteen years running <a href="https://mediumandmessage.com/?utm_source=dvoorhees">Medium & Message</a>, a consultancy where I've been the sole technical lead on more than a hundred client engagements.
 
-Some years before that, I was the sole web lead for the Bank of America Newsroom, ranked the number one digital newsroom in financial services by the Financial Times Bowen Craggs Index under my leadership, and I taught Statistics and Macroeconomics at the college level.
+Some years before that, I ran a digital newsroom website in the Fortune Top 25, and I taught Statistics and Macroeconomics at the college level.
 
 ## What I actually do
 
