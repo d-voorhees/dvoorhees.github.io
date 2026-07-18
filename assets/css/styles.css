@@ -344,6 +344,33 @@ body.home h3 a,
   font-size: 15px;
 }
 
+.post-content ul,
+.post-content ol {
+  padding-left: 1.4em;
+  margin-bottom: 1em;
+}
+
+.post-content ul li,
+.post-content ol li {
+  margin-bottom: 0.5em;
+}
+
+.post-content ul li::marker {
+  color: #129b69;
+  font-size: 1em;
+}
+
+.post-content ol li::marker {
+  color: #129b69;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+body.dark-theme .post-content ul li::marker,
+body.dark-theme .post-content ol li::marker {
+  color: #4fd1a5;
+}
+
 .post .category-link {
   margin-right: 10px;
 }

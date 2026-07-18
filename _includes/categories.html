@@ -17,7 +17,7 @@
             <div class="category-list">
               <h2 class="h5">More Categories</h2>
               {% assign sorted_categories = site.data.categories | sort:
-              "posts_count" | reverse %} {% for category in sorted_categories %}
+              "name" %} {% for category in sorted_categories %}
               <div class="category-item">
                 <div
                   class="square"

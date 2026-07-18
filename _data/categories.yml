@@ -2,7 +2,7 @@
 - name: architecture
   slug: architecture
   posts_count: 1
-  color: ''
+  color: "#3366CC"
 - name: defense forking
   color: "#D1462F"
   posts_count: 2
