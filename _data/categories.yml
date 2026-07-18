@@ -7,17 +7,13 @@
   color: "#D1462F"
   posts_count: 2
   slug: defense-forking
-- name: developer portfolios
-  color: "#F5A1A0"
-  posts_count: 1
-  slug: developer-portfolios
 - name: github
   color: "#E5675D"
-  posts_count: 2
+  posts_count: 1
   slug: github
 - name: jekyll
   color: "#E99A24"
-  posts_count: 4
+  posts_count: 3
   slug: jekyll
 - name: methods & strategy
   slug: methods-and-strategy
