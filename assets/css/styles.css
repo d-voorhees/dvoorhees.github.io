@@ -65,11 +65,14 @@ a {
 .navbar-collapse {
   display: flex !important;
   flex-basis: auto;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .navbar-nav {
   flex-direction: row;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .navbar-nav li {

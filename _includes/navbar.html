@@ -8,10 +8,10 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ '/' | relative_url }}">
-      D. Voorhees
-    </a>
     <div class="navbar-collapse">
+      <a class="navbar-brand" href="{{ '/' | relative_url }}">
+        D. Voorhees
+      </a>
       <ul class="navbar-nav ms-auto">
         {% for page in site.pages %} {% unless page.url == "/" or page.url
         contains "all_content.json" %}
