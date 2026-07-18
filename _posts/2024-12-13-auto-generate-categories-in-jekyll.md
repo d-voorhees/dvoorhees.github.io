@@ -6,7 +6,7 @@ introduction: "Tired of manually adding new categories to a YAML file every time
 seo_title: "Automatically Write Categories to the Data File in Jekyll"
 seo_description: "Tired of manually writing new categories to Jekyll every time you have a radically new idea requiring a new category? Look no further."
 seo_image: "/assets/images/blog-post-image.jpg"
-categories: [jekyll, ruby, tutorials, automagic]
+categories: [jekyll, ruby, tutorials]
 ---
 
 ## Writing new Jekyll categories to data files

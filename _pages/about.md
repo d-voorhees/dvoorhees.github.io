@@ -54,4 +54,4 @@ This is where I document what I'm learning while implementing these systems. Som
 
 If you're dealing with analytics that don't produce decisions, websites that look professional but don't convert, or gaps between what your marketing team wants to accomplish and what your technical infrastructure can support—these articles might prove useful.
 
-All consulting work happens through [Medium & Message](https://mediumandmessage.com/?utm_source=dvoorhees). For other inquiries: d {at} dvoorhees {dot} com.
+All consulting work happens through [Medium & Message](https://mediumandmessage.com/?utm_source=dvoorhees). For other inquiries: d@dVoorhees.com.

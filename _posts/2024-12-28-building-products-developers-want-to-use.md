@@ -7,7 +7,7 @@ introduction: "Developer tools promise seamless integration but deliver hours of
 seo_title: "Why Most Developer Tools Fail: Lessons from Building Products and Growth Systems"
 seo_description: "Most developer tools fail not because of technical limitations, but because they violate fundamental principles of user experience. Real lessons from building products and implementing growth systems."
 seo_image: "/assets/images/blog-post-image.jpg"
-categories: ["product development", "developer relations", "methods & strategy"]
+categories: ["product development", "methods & strategy"]
 ---
 
 # Why Most Developer Tools Fail: Lessons from Building Epigramm and Implementing Growth Systems
