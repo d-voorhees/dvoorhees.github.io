@@ -5,7 +5,7 @@ title: "How I Built and Deployed a Full-Stack Django + Next.js App for Free in 2
 introduction: "The full production stack for Bird by Bird, a Django + Next.js + GraphQL app with managed Postgres, transactional email, and HTTPS, costs nothing per month to run. Here is how I built it and what went wrong along the way."
 seo_title: "How I Built and Deployed a Full-Stack Django + Next.js App for Free in 2026"
 seo_description: "How I built and deployed Bird by Bird, a full-stack Django + Next.js + GraphQL app, for $0/month using Fly.io, Neon, Vercel, and Resend."
-categories: ["engineering", "deployment"]
+categories: ["engineering", "deployment", "integrations"]
 ---
 
 I built Bird by Bird because I wanted to work with a specific stack: Django on the backend, GraphQL as the contract between layers, Next.js on the frontend, PostgreSQL underneath. The app itself is a focus tool. It shows one task at a time and keeps everything else out of view. The idea came from Anne Lamott's *Bird by Bird*, specifically the story of her brother panicking over a school report on birds the night before it was due, and their father sitting beside him and saying: bird by bird, buddy, just take it bird by bird.

@@ -6,7 +6,7 @@ introduction: "GitHub restricts the use of certain Jekyll plugins for security a
 seo_title: "Allowed Jekyll Plugins on GitHub Pages: What You Can Use  "
 seo_description: "GitHub restricts the use of certain Jekyll plugins for security and performance reasons. Discover which Jekyll plugins are allowed on GitHub Pages, why some are restricted, and how to optimize your site within GitHub’s approved plugin list for security and performance."
 
-categories: ["github", "jekyll"]
+categories: ["github projects", "jekyll"]
 ---
 
 # Allowed Jekyll Plugins on GitHub Pages: What You Can Use

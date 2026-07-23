@@ -5,7 +5,7 @@ title: "How I Built a Streaming AI Chat Tool in PHP Without Node or a Database"
 introduction: "A streaming LLM chat tool with HMAC token auth and CRM tagging, running on ordinary PHP shared hosting for the cost of an OpenAI API key. Here is how it works and what I learned switching providers mid-build."
 seo_title: "Streaming AI Chat in PHP Without Node or a Database"
 seo_description: "How to build a streaming AI chat tool in PHP with server-sent events, HMAC token auth, and CRM tagging, no Node, no database, no framework."
-categories: ["architecture", "tutorials", "systems design", "projects on github"]
+categories: ["architecture", "tutorials", "systems design", "github projects", "integrations"]
 ---
 
 I built a diagnostic framework describing five patterns in how businesses use (or misunderstand) their own analytics data, each with a recommended metric to track. It worked as a concept. It failed as content. Readers had to identify their own pattern, choose the right metric, and map it to a real decision they had made, and that is a lot to ask of someone reading a guide. Almost nobody finished it.

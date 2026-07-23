@@ -6,7 +6,7 @@ introduction: "A retail client's stack held up fine through the first two integr
 seo_title: "Designing a Systems Architecture That Survives the Next Integration"
 seo_description: "What breaks when a third integration hits a system built for one. Lessons from a retail client's order data architecture and the default I now build around."
 seo_image: "/assets/images/blog-post-image.jpg"
-categories: ["architecture", "systems design"]
+categories: ["architecture", "systems design", "integrations"]
 ---
 
 # Designing a Systems Architecture That Survives the Next Integration

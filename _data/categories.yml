@@ -1,23 +1,35 @@
 ---
 - name: architecture
   slug: architecture
-  posts_count: 1
+  posts_count: 3
   color: "#3366CC"
 - name: defense forking
   color: "#D1462F"
   posts_count: 2
   slug: defense-forking
-- name: github
-  color: "#E5675D"
+- name: deployment
+  slug: deployment
   posts_count: 1
-  slug: github
+  color: ''
+- name: engineering
+  slug: engineering
+  posts_count: 1
+  color: ''
+- name: github projects
+  slug: github-projects
+  posts_count: 3
+  color: ''
+- name: integrations
+  slug: integrations
+  posts_count: 7
+  color: ''
 - name: jekyll
   color: "#E99A24"
   posts_count: 3
   slug: jekyll
 - name: methods & strategy
   slug: methods-and-strategy
-  posts_count: 6
+  posts_count: 7
   color: "#119DA4"
 - name: open source
   color: "#F6E351"
@@ -37,9 +49,9 @@
   slug: ruby
 - name: systems design
   slug: systems-design
-  posts_count: 1
+  posts_count: 3
   color: ''
 - name: tutorials
   color: "#6BBDC2"
-  posts_count: 2
+  posts_count: 3
   slug: tutorials

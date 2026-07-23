@@ -5,7 +5,7 @@ title: "WordPress as an Integration Hub, Not a CMS"
 introduction: "Most WordPress installations in a mature business are not really content management systems anymore. They are the middle layer connecting a CRM to an ERP to a fulfillment platform to a payment processor, wearing the costume of a website. Once you see it that way, the work looks different."
 seo_title: "WordPress as an Integration Hub, Not a CMS"
 seo_description: "Why the useful way to think about WordPress in a mature business stack is as the integration layer between operational systems, not as a website builder. What that reframe changes about how you build."
-categories: ["methods & strategy", "product development"]
+categories: ["methods & strategy", "product development", "integrations"]
 ---
 
 # WordPress as an Integration Hub, Not a CMS

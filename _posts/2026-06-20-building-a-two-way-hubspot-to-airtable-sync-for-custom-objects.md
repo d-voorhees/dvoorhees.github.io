@@ -5,7 +5,7 @@ title: "Building a Two-Way HubSpot to Airtable Sync for Custom Objects"
 introduction: "Most no-code connectors cannot reach HubSpot custom objects, and none of them make a defensible call when a record changes on both sides between syncs. This is the TypeScript sync engine I built to handle both problems, and what I learned getting there."
 seo_title: "Building a Two-Way HubSpot to Airtable Sync for Custom Objects"
 seo_description: "Zapier and Make cannot reach HubSpot custom objects for two-way sync, and neither resolves conflicts. Here is the open-source TypeScript sync engine I built to handle both."
-categories: ["integrations", "github", "systems design", "architecture"]
+categories: ["integrations", "github projects", "systems design", "architecture"]
 tags: []
 ---
 
