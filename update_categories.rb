@@ -51,7 +51,7 @@ end
 
 merged_categories.each do |key, category|
   category['posts_count'] = category_counts[key]
-  category['color'] ||= ''
+  category['color'] = format('#%06X', rand(0x1000000)) if category['color'].nil? || category['color'].empty?
   
   unless category.key?('slug')
     category['slug'] = category['name'].downcase.gsub(/&/, 'and')
