@@ -22,7 +22,7 @@
 - name: integrations
   slug: integrations
   posts_count: 7
-  color: ''
+  color: "#C2185B"
 - name: jekyll
   color: "#E99A24"
   posts_count: 3
