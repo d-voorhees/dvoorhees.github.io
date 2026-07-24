@@ -1,0 +1,5 @@
+#!/bin/sh
+# Auto-refresh _data/categories.yml from post front matter before each commit.
+
+ruby update_categories.rb || exit 1
+git add _data/categories.yml

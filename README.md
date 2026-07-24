@@ -14,9 +14,11 @@ The goal was a blog that loads fast, costs nothing to host, and has zero moving 
 
 ## Custom-built automation
 
-**Self-updating category system.** Categories are not maintained in a config file. [`update_categories.rb`](update_categories.rb) runs before every build, scans every post's front matter, and regenerates [`_data/categories.yml`](_data/categories.yml). It extracts categories from `categories:` front matter across all posts, auto-generates URL-safe slugs (handling `&`, `/`, punctuation, whitespace), counts posts per category, and keeps counts current. Manually-set fields like category color are preserved across regeneration through a merge instead of an overwrite. Categories with no remaining posts are pruned. The result is written as Jekyll data and consumed via `site.data.categories` in Liquid.
+**Self-updating category system.** Categories are not maintained in a config file. [`update_categories.rb`](update_categories.rb) scans every post's front matter and regenerates [`_data/categories.yml`](_data/categories.yml). It extracts categories from `categories:` front matter across all posts, auto-generates URL-safe slugs (handling `&`, `/`, punctuation, whitespace), counts posts per category, and keeps counts current. Manually-set fields like category color are preserved across regeneration through a merge instead of an overwrite. Categories with no remaining posts are pruned. The result is written as Jekyll data and consumed via `site.data.categories` in Liquid.
 
 Adding a new category requires no manual YAML editing.
+
+This script runs via `rake build` locally, and via a tracked `pre-commit` git hook ([`.githooks/pre-commit`](.githooks/pre-commit)) that runs it automatically and stages the result before every commit. That hook exists because GitHub Pages' default production build only runs `jekyll build` — it does not execute the Rakefile or any custom Ruby — so `_data/categories.yml` needs to already be correct in the commit that gets pushed. The hook lives in a tracked `.githooks/` directory (git ignores repo-local `.git/hooks/` by design) — run `git config core.hooksPath .githooks` once after cloning to activate it.
 
 **Zero-plugin SEO layer.** [`_includes/seo-meta.html`](_includes/seo-meta.html) is a single reusable Liquid include that generates Open Graph, Twitter Card, and article metadata for every page. It uses a cascading fallback chain (page-level to site-level defaults) so posts only need to override what is different.
 
@@ -35,6 +37,7 @@ Adding a new category requires no manual YAML editing.
 
 ```bash
 bundle install
+git config core.hooksPath .githooks   # one-time: activate the pre-commit category hook
 rake build          # runs the category script, then jekyll build
 bundle exec jekyll serve   # local dev server at localhost:4000
 ```
