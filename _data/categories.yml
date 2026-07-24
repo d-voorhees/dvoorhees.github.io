@@ -7,17 +7,13 @@
   color: "#D1462F"
   posts_count: 2
   slug: defense-forking
-- name: deployment
-  slug: deployment
-  posts_count: 1
-  color: "#C0F8C8"
 - name: engineering
   slug: engineering
   posts_count: 1
   color: "#B58269"
 - name: github projects
   slug: github-projects
-  posts_count: 6
+  posts_count: 7
   color: "#129b69"
 - name: integrations
   slug: integrations
