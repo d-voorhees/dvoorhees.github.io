@@ -18,7 +18,7 @@
 - name: github projects
   slug: github-projects
   posts_count: 6
-  color: "#FBF9BB"
+  color: "#129b69"
 - name: integrations
   slug: integrations
   posts_count: 6
@@ -40,7 +40,7 @@
   color: "#8CB369"
   slug: private-equity
 - name: product development
-  color: "#2AA377"
+  color: "#1d6d50"
   posts_count: 3
   slug: product-development
 - name: ruby
