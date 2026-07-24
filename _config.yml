@@ -9,6 +9,10 @@ twitter_username: "" # Add your Twitter handle without @ (e.g., "dvoorhees")
 social_image: "/assets/img/default-og.jpg" # Default Open Graph image
 css_version: 6 # Bump this whenever styles.css changes, to bust browser cache
 
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
+
 defaults:
   - scope:
       type: posts
