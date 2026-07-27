@@ -11,16 +11,14 @@ categories: [jekyll, ruby, tutorials]
 
 ## Writing new Jekyll categories to data files
 
-Have a lot of ideas across different realms of expertise? To paraphrase Whitman, we all contain multitudes.
+If a Jekyll theme displays content by category, something usually has to maintain a list of every category the site uses, often in a `_data/categories.yml` file with color assignments or other metadata attached. Jekyll does not update that file for you. Add a new category to a post's front matter and the data file just does not know about it until someone edits it by hand.
 
-However in some Jekyll themes where categories are managed in order to display content by category, categories must be entered manually in category data file, as Jekyll does not have a built-in functionality to dynamically update this file.
-
-Enter the custom Ruby script to solve your woes.
+This gets tedious fast if you write across a lot of different topics, so instead of adding each new category to the YAML file manually, this Ruby script scans every post, pulls out the categories in use, and writes the results to `_data/categories.yml` for you.
 
 ### Solution: Use a Ruby Script to Extract Categories
 
-1. **Add Categories in Front Matter**  
-    Ensure each post includes the `categories` field in its front matter in brackets, separated by commas. For example:
+1. **Add categories in front matter.**
+    Every post needs a `categories` field in its front matter, in brackets, separated by commas:
 
    <pre><code>---
    layout: post
@@ -28,8 +26,8 @@ Enter the custom Ruby script to solve your woes.
    categories: [Tech, Jekyll, Developer Portfolios]
    ---</code></pre>
 
-2. **Create a Script to Extract Categories**  
-    Write a Ruby script to parse all posts, extract their categories, and write them into a YAML file in the `_data` folder. In this example we're also including a color variable for the category, as it is written for the 'dev herald' theme which this site is using (and is available to you free on Github), and the theme uses color assignments with each category. If you don't need that don't worry, this won't trip you up.
+2. **Create a script to extract categories.**
+    This script parses every post, extracts its categories, and writes them into a YAML file in the `_data` folder. It also tracks a `color` field per category, since this is written for the "dev herald" theme (free on GitHub), which assigns each category a color. If your theme does not use category colors, the `color` key will just sit unused; it will not break anything.
 
 ```
 require 'yaml'
@@ -90,19 +88,20 @@ File.open(data_file, "w") { |f| f.write(merged_categories_array.to_yaml) }
 puts "Categories written to #{data_file}"
 ```
 
-## Automatically run this script when compiling Jekyll
+A few things worth knowing about how this behaves before you rely on it:
 
-To run this file automatically when you compile Jekyll, you'll need to create a Rakefile, a Ruby script that defines tasks and dependencies for automating various aspects of software development and project management.
+- The regex-based front matter parser expects clean YAML between two `---` lines. A post with malformed front matter gets silently skipped, not flagged, so a typo in a post's front matter means that post's categories just never make it into the data file.
+- The merge step preserves any `color` you have manually set on an existing category and updates its `posts_count`, so this is not a full overwrite of your color scheme each run. It does rewrite the entire file on every run, and it does not remove a category that no longer appears on any post, so your category list will only ever grow unless you prune it by hand.
+- On a large site, this script re-reads every post file on every build, which is fine at a few hundred posts and worth watching if that number gets much larger.
 
-1.  **Navigate to your Jekyll project's root directory in the terminal.**
-    cd
-2.  **Create a new file named "Rakefile" (with no file extension):**
-bash
-<pre><code>touch Rakefile
-</code></pre>
+### Automatically run this script when compiling Jekyll
 
-3.  **Open the Rakefile in your text editor**
-and add the following content:
+To run this automatically on every build, add a Rakefile at the root of your Jekyll project:
+
+<pre><code>touch Rakefile</code></pre>
+
+Open it in your editor and add:
+
 <pre><code>task :default => :build
 
 task :build do
@@ -112,26 +111,16 @@ task :build do
   system 'bundle exec jekyll build'
 end</code></pre>
 
-4.  **Save the Rakefile.**
+From then on, build the site with:
 
-5.  **To build your Jekyll site and run the category extraction script,** use the following command instead of jekyll build:
 <pre><code>bundle exec rake build
 </code></pre>
 
-This setup will:
-
-- Extract categories from your posts
-- Count the number of posts in a category
-- Update the `_data/categories.yml` file
-- Build your Jekyll site
-
-The Rakefile acts as a coordinator, running your custom Ruby script before initiating the Jekyll build process. This method integrates smoothly with Jekyll without requiring plugins or complex setups.
-
-This approach ensures that your `_data/categories.yml` file stays up-to-date with all categories used across your posts. Run the script whenever you add or update posts with new categories. Running the script will overwrite the existing categories.yml page.
+instead of a plain `jekyll build`. This runs the category extraction script first, then builds the site, so `_data/categories.yml` is always current before Jekyll reads it. The tradeoff is that `rake build` is now a required step. A teammate who runs `jekyll build` directly, out of habit, will get a site built against a stale categories file.
 
 ## Displaying these categories
 
-**On post pages, with colors**
+**On post pages, with colors:**
 {% raw %}
 
 <pre><code>{% assign post_categories = page.categories %}
@@ -148,18 +137,20 @@ This approach ensures that your `_data/categories.yml` file stays up-to-date wit
 
 {% endraw %}
 
-**In a loop, linking to the category page, sorting list by most # posts in a category to least # posts in a category**
+**Sorted by post count, most to least:**
 {% raw %}
 
-<pre><code>{% assign sorted_categories = site.data.categories | sort: &#x22;posts_count&#x22; | reverse %}
+<pre><code>{% assign sorted_categories = site.data.categories | sort: "posts_count" | reverse %}
 {% for category in sorted_categories %}
-    &#x3C;div class=&#x22;category-item&#x22;&#x3E;
-        &#x3C;div class=&#x22;square&#x22; style=&#x22;background-color: {{ category.color | default: &#x27;#cccccc&#x27; }};&#x22;&#x3E;&#x3C;/div&#x3E;
-        &#x3C;a href=&#x22;/categories/?category={{ category.name | slugify }}&#x22; class=&#x22;category-link&#x22;&#x3E;
+    &lt;div class="category-item"&gt;
+        &lt;div class="square" style="background-color: {{ category.color | default: '#cccccc' }};"&gt;&lt;/div&gt;
+        &lt;a href="/categories/?category={{ category.name | slugify }}" class="category-link"&gt;
             {{ category.name | capitalize }}
-        &#x3C;/a&#x3E;
-    &#x3C;/div&#x3E;
+        &lt;/a&gt;
+    &lt;/div&gt;
 {% endfor %}
 </code></pre>
 
 {% endraw %}
+
+Run the extraction script whenever you add a post with a new category. Everything downstream, the colored squares, the sorted category list, reads from that one data file, so keeping it current is the only maintenance this setup actually needs.

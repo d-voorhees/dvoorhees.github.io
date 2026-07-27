@@ -36,16 +36,16 @@ It shows up as migrations that have to happen live, on production, because the b
 
 ## How I approach it now
 
-Before I create the first field in a new system, I try to answer four questions.
+Before I create the first field in a new system, the question I start with is whether the entities in the business are actually the same thing as the entities in the tool. A HubSpot contact is not always the same thing as a customer. A WordPress post is not always the same thing as a piece of content. The vocabulary of the tool is a starting point, not a description, and getting this one wrong is what put the inventory-as-attribute decision on the wrong track before anyone had typed a line of code.
 
-What are the entities in this business, and are they actually the same thing as the entities in the tool. A HubSpot contact is not always the same thing as a customer. A WordPress post is not always the same thing as a piece of content. The vocabulary of the tool is a starting point, not a description.
+From there I want to know what the business is actually going to ask of this data, and whether the shape I'm about to build can answer it. If the answer is no, or if I can't tell yet, that's a signal to slow down and get the questions written down before building anything.
 
-What are the questions the business is going to want to ask of this data, and can the shape of the model answer them. If the answer is no, or if I cannot tell yet, that is a signal to slow down and get the questions written down before I build.
+The relationship structure gets the most scrutiny, because it's the part that's hardest to migrate later: which connections are one-to-one, which are one-to-many, and which are secretly many-to-many even though the current data makes them look simpler than that. Getting this one wrong is what turned three weeks of expected work into a live production migration on the retailer's inventory system.
 
-Which relationships are one-to-one, which are one-to-many, and which are many-to-many. The wrong answer to this question is the single most expensive kind of wrong answer, because relationship structure is the thing that is hardest to migrate later.
+Last, and lowest-stakes by comparison: what's likely to change. Business rules change, product categories reorganize, locations open and close, and the model needs room for the kinds of change that are foreseeable — without getting so abstracted in anticipation of hypothetical change that nobody can reason about it anymore.
 
-What is likely to change. Business rules change. Product categories reorganize. Locations open and close. The model needs to accommodate the kinds of change that are foreseeable, without being so abstracted that no human can reason about it.
+None of these questions are platform-specific. They apply to a HubSpot custom object build with the same force they apply to a WordPress custom post type build or an Airtable base design. The tool changes. The discipline does not.
 
-None of these questions are platform-specific. They apply to a HubSpot custom object build with the same force they apply to a WordPress custom post type build or an Airtable base design. The tool changes. The discipline does not. The tools have different names for what they do, and different limits on what they will let you do, but the underlying question, what are the entities and how do they relate, is the same question, and it gets answered right or it gets answered wrong, and the consequences show up in the same places either way.
+This is also not a process I run on everything. A one-off internal script that answers a single question and gets deleted next quarter doesn't need four questions' worth of upfront modeling — the cost of a wrong guess there is an afternoon, not a live migration. The four questions earn their time on anything that's going to outlive the person who built it and get asked questions nobody has thought of yet, which is most of what actually gets called a "system" rather than a script.
 
-The six-figure product line was in the data the whole time. The system just did not know how to see it.
+I still think about the seven-location retailer's product line sitting in data the original model had no vocabulary to describe, and I use it as my own test now: before I ship a model, can I name a real question the business would ask that this shape genuinely cannot answer? If I can name one, I'm not done yet.

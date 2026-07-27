@@ -5,7 +5,7 @@ title: "Auditing GA4 Attribution in Code: Duplicate Conversions, Channel Discrep
 introduction: "GA4's interface can show you one attribution problem on one day. It cannot show you the same five problems across 30 days, three data sources, and a client-ready report. This is the toolkit I built to run those audits programmatically, and the decisions behind the duplicate detection logic, sample data design, and report structure."
 seo_title: "Auditing GA4 Attribution in Code: Duplicate Conversions, Channel Discrepancies, and UTM Drift"
 seo_description: "A Python toolkit for catching GA4 attribution errors at scale: duplicate conversions with CallRail, channel discrepancies with Google Ads, and UTM inconsistencies, with client-ready report output."
-categories: ["architecture", "github projects"]
+categories: ["architecture"]
 tags: []
 ---
 
@@ -17,17 +17,17 @@ I built [ga4-attribution-audit](https://github.com/d-voorhees/ga4-attribution-au
 
 ## The audits and why each exists
 
-Five checks cover the attribution problems I have seen cause the most damage to budget decisions.
+Five checks cover the attribution problems I have seen cause the most damage to budget decisions, and they are not equally consequential. Channel discrepancy is the one most likely to change an actual media budget allocation, because it directly disputes which channel gets credit for a conversion. Duplicate detection distorts a cost-per-acquisition number without changing which channel gets credit for it. The other three (attribution gaps, hygiene, UTM consistency) are closer to data-quality issues that make the first two audits more or less trustworthy.
+
+Channel discrepancy reporting compares GA4's default channel grouping against Google Ads campaign attribution for the same sessions, matched on GCLID where present and on a landing-page-plus-timestamp window when it is not. Google Ads knows a click happened from a specific campaign. GA4 may assign that session to Direct or Organic if auto-tagging (Google Ads' mechanism for appending a GCLID parameter to the destination URL automatically) failed, if the landing page stripped the GCLID, or if the session timed out and restarted before the conversion. The audit flags a mismatch whenever a matched conversion carries a different channel label in each system. The landing-page-plus-timestamp fallback match is looser than the GCLID match and can produce false positives when two different users convert from the same landing page within the matching window; the report notes which match type produced each flagged row so the reviewer can weight GCLID-matched discrepancies more heavily than fallback-matched ones.
 
 Duplicate conversion detection cross-references GA4 conversion event timestamps against CallRail call start times. Phone call tracking is the most common source of double-counted conversions. A user clicks a dynamic number on the site, CallRail records the call, and GA4 records a conversion event from the GTM tag. Both are measuring the same customer action, and the marketing team's cost-per-acquisition calculation is off by the number of duplicates.
 
-Channel discrepancy reporting compares GA4's default channel grouping against Google Ads campaign attribution for the same sessions. Google Ads knows a click happened from a specific campaign. GA4 may assign that session to Direct or Organic if auto-tagging failed, if the landing page stripped the GCLID, or if the session timed out and restarted before the conversion. The audit matches conversions across both systems and flags mismatches.
+Attribution gap detection surfaces three patterns: conversions tagged as Direct/none (which often mask untagged email, social, or referral traffic), high-traffic landing pages with no UTM parameters (making channel ROI impossible to calculate for traffic arriving on those pages), and conversions that fall outside the configured attribution window. This audit has the highest false-positive rate of the five. Some Direct traffic is genuinely direct (a customer typing the URL from memory or a bookmark), and the audit has no way to distinguish that from a failed UTM. It flags every Direct/none conversion above the volume threshold and leaves the judgment of which ones are real gaps to the reviewer.
 
-Attribution gap detection surfaces three patterns: conversions tagged as Direct/none (which often mask untagged email, social, or referral traffic), high-traffic landing pages with no UTM parameters (making channel ROI impossible to calculate for traffic arriving on those pages), and conversions that fall outside the configured attribution window.
+Conversion event hygiene inventories every event in the property with counts and share of total. Events firing hundreds of times per day relative to actual conversions are usually misconfigured GTM triggers. Configured conversion events with zero activity over the audit period are likely deprecated in practice but still marked as conversions in GA4 admin. The `suspicious_event_count_threshold` default will misfire on any property where a single legitimate event (a scroll-depth or engagement event, for instance) is just naturally high-volume; the audit does not distinguish high-volume-by-design from high-volume-by-misconfiguration, so a first run on an unfamiliar property tends to need one round of threshold tuning before the hygiene report is useful.
 
-Conversion event hygiene inventories every event in the property with counts and share of total. Events firing hundreds of times per day relative to actual conversions are usually misconfigured GTM triggers. Configured conversion events with zero activity over the audit period are likely deprecated in practice but still marked as conversions in GA4 admin.
-
-UTM consistency surfaces casing variants and non-standard medium values. GA4 treats `Facebook`, `facebook`, and `FaceBook` as three sources. Medium values like `print` or `flyer` may be intentional (offline campaign tracking) or accidental (someone typed a UTM by hand). The audit groups variants so the reviewer can decide which are real and which are errors.
+UTM consistency surfaces casing variants and non-standard medium values. GA4 treats `Facebook`, `facebook`, and `FaceBook` as three sources. Medium values like `print` or `flyer` may be intentional (offline campaign tracking) or accidental (someone typed a UTM by hand). The audit groups variants so the reviewer can decide which are real and which are errors, but it cannot tell the difference between a genuine typo and a deliberate convention some clients use to distinguish otherwise-identical campaigns run through different ad accounts. Grouping variants that were intentionally kept separate would be the wrong fix, so the audit reports the groupings without merging anything automatically.
 
 ## The duplicate detection matching problem
 
@@ -55,7 +55,7 @@ The toolkit accepts data via CSV export or live API pull. CSV is the default mod
 
 Most agency analytics engineers already export GA4 and Google Ads data to CSV for client work. Making CSV the primary input means the toolkit runs without service account credentials, OAuth configuration, or API quota management. The setup cost is zero: export the files, point the configuration at them, run the audit.
 
-API mode exists for teams that want automated or scheduled runs. The GA4 Data API client in Python is mature and the Google Ads API integration is well-documented. But requiring API setup as a prerequisite to first use would have eliminated the "run this in two minutes and see if it is useful" path. The CSV-first approach keeps that path open.
+API mode exists for teams that want automated or scheduled runs. The GA4 Data API client in Python is mature and the Google Ads API integration is well-documented. But requiring API setup as a prerequisite to first use would have eliminated the "run this in two minutes and see if it is useful" path. The CSV-first approach keeps that path open, at the cost of freshness: a CSV export is a snapshot, and an audit run against last week's export will not catch a tracking break that started three days ago. Anyone running this on a recurring basis against a live account should move to API mode once the initial evaluation is done.
 
 ## Report structure
 
@@ -73,8 +73,6 @@ I chose independent modules because they are simpler to test, simpler to reason 
 
 ## The part that requires human judgment
 
-Attribution auditing surfaces problems. It does not decide what to do about them. A channel discrepancy between GA4 and Google Ads requires investigating auto-tagging configuration, UTM parameters, and cross-domain tracking on the specific site. A duplicate conversion requires deciding which system (GA4 or CallRail) is the source of truth for that conversion type. A UTM casing inconsistency requires deciding whether `facebook` and `Facebook` should be merged or whether they represent intentional segmentation.
-
-The toolkit is designed around this constraint. The report presents findings with context and methodology. The remediation is the analytics engineer's job, because the correct fix depends on the specific implementation, the specific client, and the specific business rules. Automating the detection saves hours of manual cross-referencing. Automating the remediation would require assumptions about the client's tracking architecture that the toolkit does not and should not make.
+A channel discrepancy between GA4 and Google Ads requires investigating auto-tagging configuration, UTM parameters, and cross-domain tracking on the specific site. A duplicate conversion requires deciding which system, GA4 or CallRail, is the source of truth for that conversion type. A UTM casing inconsistency requires deciding whether `facebook` and `Facebook` should be merged or whether they represent intentional segmentation someone set up on purpose. None of those decisions can be made generically, which is why the toolkit stops at detection: the report gives the finding and the methodology behind it, and the fix depends on facts about the specific client that no audit script has access to.
 
 The code is at [github.com/d-voorhees/ga4-attribution-audit](https://github.com/d-voorhees/ga4-attribution-audit).

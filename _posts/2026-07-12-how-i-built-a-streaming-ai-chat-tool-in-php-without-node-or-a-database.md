@@ -24,17 +24,17 @@ This post is the build story. The README covers the complete setup. Read this fi
 
 A visitor submits their email, gets redirected to a chat interface, answers seven questions about their business and a real decision they made, and receives a personalized breakdown of which analytics decision pattern they fall into. At the end, the tool classifies them into one of five archetypes and tags them in MailerLite so they get the right follow-up sequence automatically.
 
-Four requirements shaped every architectural decision. The API key could never reach the browser. The chat page had to be access-controlled without a login system or a database. The AI's response had to feel immediate rather than making visitors wait for a full round-trip. And everything had to run on standard shared PHP hosting.
+Four requirements shaped the architecture, and one drove more of the design than the other three combined. The API key could never reach the browser. Everything had to run on standard shared PHP hosting. The AI's response had to feel immediate rather than making visitors wait for a full round-trip. The hardest one: the chat page had to be access-controlled without a login system or a database, since that constraint is what eventually produced the whole HMAC token design below.
 
 ---
 
 ## The first version used Claude. I switched.
 
-I started with Claude Sonnet via the Anthropic API. The quality was excellent. The system prompt I wrote is long: it covers seven question types, six diagnosis stages, a lookup table mapping roughly 25 business model types to specific metrics, and instructions for appending a hidden classification tag at the end of the output without the visitor seeing it.
+I started with Claude Sonnet via the Anthropic API. It correctly followed the six-stage structure, applied the business-model lookup table to edge cases I hadn't explicitly covered in the prompt, and never dropped the hidden classification tag. The system prompt I wrote is long: it covers seven question types, six diagnosis stages, a lookup table mapping roughly 25 business model types to specific metrics, and instructions for appending a hidden classification tag at the end of the output without the visitor seeing it.
 
 At that prompt length, cost per conversation ran about $0.60 at the time of development. Claude's pricing has changed since then, so your numbers will differ, but the core problem was real. At any meaningful volume, $0.60 per conversation does not work for a tool at this price point.
 
-Switching to `gpt-4o-mini` brought cost to $0.02-0.04 per conversation. I ran both models on the same prompts for a week. For this specific task, a structured multi-stage conversation following explicit sequential instructions, the quality difference was not significant enough to justify the cost gap.
+Switching to `gpt-4o-mini` brought cost to $0.02-0.04 per conversation. I ran both models on the same prompts for a week and read the transcripts side by side: same stage sequence, same tag placement, same handling of business models outside the common ones in the lookup table. For this specific task, a structured multi-stage conversation following explicit sequential instructions, gpt-4o-mini held up. That is not a universal result. A prompt that needed more open-ended reasoning between stages, rather than following a fixed sequence, is exactly where I would expect the gap to reopen.
 
 The switch itself took about two hours: new endpoint, updated auth header, new request payload shape, updated SSE response parser in the JavaScript. The chat interface did not change at all. I will come back to why.
 
@@ -54,7 +54,7 @@ Keeping the provider behind this proxy is also what made the provider switch che
 
 The chat page needed to work only for email-verified visitors, stay out of search engine indexes, and stop working after a reasonable window. A login system backed by a database would have handled all of that, but I did not want to build or maintain either.
 
-HMAC-SHA256 tokens solve this cleanly. When a visitor signs up, `diagnostic-token.php` takes their email and the current timestamp, signs the concatenated string with a secret key using `hash_hmac`, and base64-encodes the result into a URL-safe string. The visitor gets redirected to `diagnostic-chat.html?token=xxx`.
+HMAC-SHA256 tokens (a way to sign a piece of data so any tampering is detectable without storing anything server-side) handle this instead. When a visitor signs up, `diagnostic-token.php` takes their email and the current timestamp, signs the concatenated string with a secret key using `hash_hmac`, and base64-encodes the result into a URL-safe string. The visitor gets redirected to `diagnostic-chat.html?token=xxx`.
 
 When the chat page loads, it calls `diagnostic-validate.php`, which re-derives the expected signature from the token's own payload and compares it to the signature embedded in the token. Matching signatures and a timestamp within one hour renders the chat. A tampered or expired token shows a soft error page with a link to sign up again.
 
@@ -74,6 +74,8 @@ Server-Sent Events stream the response token-by-token as the model produces it. 
 
 SSE works here because the communication is one-directional: the server sends, the browser receives. WebSockets handle bidirectional communication, which this tool does not need, and they require a handshake protocol to manage. SSE runs over standard HTTP with two PHP settings: `ob_implicit_flush(true)` and `ob_end_clean()` to disable output buffering. The JavaScript side uses the `EventSource` API to listen for chunks and appends them to the chat interface as they arrive. The `streamResponse` function in `diagnostic-chat.html` has the full implementation.
 
+One limit worth knowing before you deploy this: disabling PHP's own output buffering does not guarantee streaming end to end. Some shared hosts, reverse proxies, and CDNs buffer responses at a layer PHP does not control, which can quietly turn your token-by-token stream back into a single delayed block with no error to tell you why. Test on your actual hosting, not just locally, before you assume this works.
+
 ---
 
 ## The hidden tag that drives CRM automation
@@ -82,7 +84,9 @@ At the end of the diagnosis, the AI appends a string the visitor never sees: `[[
 
 The JavaScript watches the streamed output for that pattern using a regular expression. When it finds the tag, it strips it from the visible text and simultaneously fires a background POST to `diagnostic-tag.php` with the email address and the leak type. `diagnostic-tag.php` calls the MailerLite API and adds the subscriber to the right group. Each group triggers a different nurture sequence.
 
-Why the hidden tag rather than parsing the conversation server-side after completion? Timing. The classification needs to fire after the visitor has read the diagnosis. Embedding the tag in the AI's output and letting the JavaScript trigger on it handles that precisely. Parsing the full response server-side would mean either waiting for completion before tagging or building a second streaming parser on the PHP side. The hidden tag is simpler and fires at exactly the right moment.
+Why the hidden tag rather than parsing the conversation server-side after completion? Timing. The classification needs to fire after the visitor has read the diagnosis. Embedding the tag in the AI's output and letting the JavaScript trigger on it handles that. Parsing the full response server-side would mean either waiting for completion before tagging or building a second streaming parser on the PHP side.
+
+The tradeoff is that the background POST is fire-and-forget: if that request fails, whether MailerLite is briefly down or the visitor closes the tab mid-request, nothing retries it and nothing surfaces the failure. A visitor completes the diagnosis and never gets tagged, with no log entry pointing at why. For a low-stakes lead-nurture sequence that is a tolerable failure mode. For something where the tag drives a purchase or a support handoff, you would want a retry or at least a server-side log of failed tag attempts.
 
 ---
 
@@ -90,13 +94,15 @@ Why the hidden tag rather than parsing the conversation server-side after comple
 
 The full production prompt is the core product logic of a live tool and is not published. What is in the repo is a placeholder that documents the structure: the seven question types, the six diagnosis stages, the business model lookup table, and the hidden tag format. That is enough to write your own prompt for a different application.
 
-One structural decision is worth explaining separately. Earlier versions of the prompt delivered the full diagnosis in one block at the end. Engagement dropped sharply. Visitors read the first paragraph and left. The current prompt delivers the diagnosis in six sequential stages, each ending with a question the visitor must answer before the next stage appears. Total output is longer. Completion rate is substantially higher. Forcing sequential interaction keeps attention through the content that matters most.
+One structural decision is worth explaining separately. Earlier versions of the prompt gave the full diagnosis in one block at the end. Engagement dropped sharply. Visitors read the first paragraph and left. The current prompt breaks the diagnosis into six sequential stages, each ending with a question the visitor must answer before the next stage appears. Total output is longer. Completion rate is substantially higher. Forcing sequential interaction keeps attention through the content that matters most.
 
 ---
 
 ## What to build on this
 
-A product onboarding flow, a lead qualification tool, and a support triage bot would all use the same four PHP files with different system prompts and tag mappings. To adapt this repo: replace the system prompt in `diagnostic-api.php` with your own conversation logic, update the tag mapping in `diagnostic-tag.php` to match your outcomes and your CRM groups, and wire your email signup handler to call `generateDiagnosticToken($email)` and redirect to the chat page.
+The same four PHP files work for anything that gates a personalized AI conversation behind an email signup: a product onboarding flow, a lead qualification tool. A support triage bot is a different shape. It usually needs to work for an existing customer, not a first-time visitor giving up an email address, which means the HMAC-token pattern here would need to authenticate against an account or ticket ID instead of an email and timestamp, not just swap in a new system prompt.
+
+To adapt this repo for the onboarding or lead-qualification case: replace the system prompt in `diagnostic-api.php` with your own conversation logic, update the tag mapping in `diagnostic-tag.php` to match your outcomes and your CRM groups, and wire your email signup handler to call `generateDiagnosticToken($email)` and redirect to the chat page.
 
 The README at [github.com/d-voorhees/streaming-ai-chat-php](https://github.com/d-voorhees/streaming-ai-chat-php) covers the complete setup, the config file shape, and how to generate test tokens without touching your live CRM.
 

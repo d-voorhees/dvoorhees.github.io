@@ -11,9 +11,13 @@
   slug: engineering
   posts_count: 1
   color: "#B58269"
+- name: github
+  slug: github
+  posts_count: 1
+  color: "#AEC1FD"
 - name: github projects
   slug: github-projects
-  posts_count: 7
+  posts_count: 3
   color: "#129b69"
 - name: integrations
   slug: integrations

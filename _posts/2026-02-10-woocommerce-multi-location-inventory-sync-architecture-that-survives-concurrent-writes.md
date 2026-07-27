@@ -5,7 +5,7 @@ title: "WooCommerce Multi-Location Inventory Sync Architecture That Survives Con
 introduction: "WooCommerce tracks one stock number per SKU. Multi-location retailers need inventory that handles concurrent writes from an ERP, a POS, and online sales without losing data. This is the architecture I built, the conflict resolution strategies I shipped, and the reconciliation decision I almost got wrong."
 seo_title: "WooCommerce Multi-Location Inventory Sync Architecture That Survives Concurrent Writes"
 seo_description: "How to sync WooCommerce inventory across multiple retail locations with webhook ingestion, conflict resolution, and daily ERP reconciliation."
-categories: ["architecture", "github projects"]
+categories: ["architecture"]
 tags: []
 ---
 
@@ -19,7 +19,7 @@ A seven-location brick-and-mortar retailer with a few thousand active SKUs is no
 
 The ERP is the system of record for inventory. Register adjustments happen at the POS. Online orders happen on WooCommerce. All three can write to the same SKU within seconds of each other. A register clerk does a cycle count and corrects stock at location three while a customer buys the last unit online. The webhook carrying the cycle count arrives after WooCommerce has already decremented.
 
-Any architecture that processes webhooks synchronously (validate and update stock inline, return 200) breaks under this scenario. The webhook sender times out on a slow WooCommerce response. A retry arrives after the first request already wrote. Two workers process the same SKU and one overwrites the other.
+Any architecture that processes webhooks synchronously (validate and update stock inline, return 200) breaks under this scenario. The webhook sender times out on a slow WooCommerce response. A retry arrives after the first request already wrote. Two workers process the same SKU and one overwrites the other. Failures that survive retries need somewhere to land for a human to review, which is what the dead-letter queue described later in this post is for.
 
 ## Webhook ingestion: validate, persist, queue, 202
 
@@ -31,7 +31,7 @@ This is the pattern I have seen break most often in WooCommerce integrations. De
 
 ## Why Action Scheduler
 
-WooCommerce already ships Action Scheduler. Using it for the processing queue means retries, admin-visible job status, and job grouping work without operating Redis, RabbitMQ, or any second queue infrastructure. The tradeoff is throughput. Very high-volume catalogs (tens of thousands of SKU updates per hour) need a dedicated Action Scheduler runner process and possibly the high-volume plugin. For seven retail locations and SKU counts in the low tens of thousands, the built-in runner is sufficient.
+WooCommerce already ships Action Scheduler. Using it for the processing queue means retries, admin-visible job status, and job grouping work without operating Redis, RabbitMQ, or any second queue infrastructure. Throughput is the ceiling. Very high-volume catalogs (tens of thousands of SKU updates per hour) need a dedicated Action Scheduler runner process and possibly the high-volume plugin. For seven retail locations and SKU counts in the low tens of thousands, the built-in runner is sufficient.
 
 I evaluated a custom database queue as well. It would have given more control over job priorities and batch processing, but it would also have meant reimplementing retry logic, failure tracking, and admin visibility that Action Scheduler already provides. The build cost of a custom queue only makes sense when Action Scheduler's limitations are the actual bottleneck, and they were not for this use case.
 
@@ -57,7 +57,7 @@ The shipped version implements both strategies behind a `ResolverInterface` and 
 
 When two Action Scheduler jobs fire for the same SKU concurrently, the resolver needs to see consistent state. WordPress transients provide a cheap, single-node lock: before writing, the processor attempts to set a transient keyed to the SKU. If the transient already exists, the job backs off and retries. If it does not, the job acquires the lock, processes, and deletes the transient.
 
-The tradeoff is multi-node WordPress. Transients stored in the database work across nodes, but transients stored in an object cache (Memcached, Redis) are node-local unless the cache is shared. Production deployments need Redis-backed transients with a shared cache. The reference implementation documents this constraint and works correctly in both configurations, but the default Docker environment is single-node, so the object-cache edge case requires manual setup to test.
+Multi-node WordPress is where this breaks down. Transients stored in the database work across nodes, but transients stored in an object cache (Memcached, Redis) are node-local unless the cache is shared. Production deployments need Redis-backed transients with a shared cache. The reference implementation documents this constraint and works correctly in both configurations, but the default Docker environment is single-node, so the object-cache edge case requires manual setup to test.
 
 ## Reconciliation: compare only, never auto-heal
 
@@ -67,7 +67,7 @@ Auto-healing is tempting and dangerous. If the discrepancy is caused by a legiti
 
 Compare-only reconciliation generates a Markdown report that operations can review. A human decides whether the discrepancy is a timing gap, a sync bug, or a real inventory error. The dead-letter queue provides the other half of the picture: payloads that failed processing are visible in WordPress admin with enough context to diagnose what went wrong.
 
-I was initially planning to include an auto-heal mode behind a configuration flag. The further I got into the failure scenarios, the clearer it became that the compare-only approach was the correct default, and that auto-heal was the kind of feature that sounds responsible until it runs unsupervised at 2 AM and overwrites stock for 40 SKUs.
+I was initially planning to include an auto-heal mode behind a configuration flag. Working through the failure scenarios changed my mind. Picture the daily reconciliation job running unsupervised overnight: it finds a discrepancy on 40 SKUs because the resolver itself has a bug, and an auto-heal mode would apply that same buggy resolver logic to "fix" all 40, compounding the error at the exact moment no one is watching. That scenario is what moved auto-heal from a planned feature to a documented non-goal, and compare-only became the shipped default.
 
 ## The dead-letter queue
 
@@ -77,14 +77,16 @@ The replay button re-enqueues the event as a new Action Scheduler job. This cove
 
 The dead-letter page is also the canary for sync logic bugs. If the same payload type keeps landing in the dead letter queue, the problem is in the resolver or the payload validator, and the entries provide the exact input needed to write a regression test.
 
+The queue has no automatic replay limit. A payload that fails every time it is replayed (because the underlying data is genuinely invalid, not just delayed) will sit in the dead-letter store indefinitely unless an operator notices and either fixes the data or deletes the entry. A production deployment running this at real volume would want an alert on entries older than some threshold, since the admin page alone depends on someone remembering to check it.
+
 ## The mock ERP
 
 The reference implementation includes a small Express server that simulates an external inventory system. It accepts inbound stock queries, returns current state, and introduces intentional latency (up to 3 seconds per request) and random failures (5% of requests return a 500). The latency and failure rate are configurable.
 
-The mock ERP exists because testing sync architecture against a polite, fast, always-available service proves nothing useful. The architecture needs to survive slow responses, dropped connections, and intermittent errors. The mock makes those conditions reproducible.
+The mock ERP exists because testing sync architecture against a polite, fast, always-available service proves nothing useful. The architecture needs to survive slow responses, dropped connections, and intermittent errors. The mock makes those conditions reproducible. The specific numbers (3 seconds of latency, a 5% failure rate) are not measured from any real ERP; they are configurable defaults chosen to be aggressive enough to expose timing bugs during development. Calibrating them to a specific vendor's actual behavior is a per-integration exercise this reference does not attempt.
 
 ## What this demonstrates
 
-The architecture here covers the scenarios that break simple WooCommerce inventory integrations: concurrent writes from multiple sources, network retries producing duplicate events, ERP slowness blocking webhook senders, and reconciliation gaps between systems. The code is PHP running on WordPress with Action Scheduler, which is the stack a WooCommerce retailer already operates. The documentation explains why each pattern exists, because the patterns are the transferable part. The ERP changes, the location count changes, the SKU volume changes. The need for idempotent intake, conflict-aware resolution, and human-reviewed reconciliation does not.
+The code here runs on the stack a WooCommerce retailer already operates: PHP, WordPress, and Action Scheduler, with no second infrastructure to stand up. The part worth taking from it if you are building something similar is the resolver-to-message-format mapping from the conflict resolution section. That mistake (assuming a resolution strategy is a safety property rather than a function of what format each source actually sends) is easy to make once and expensive to unwind once stock has already drifted across a live catalog.
 
 The code is at [github.com/d-voorhees/woo-multilocation-inventory-reference](https://github.com/d-voorhees/woo-multilocation-inventory-reference).

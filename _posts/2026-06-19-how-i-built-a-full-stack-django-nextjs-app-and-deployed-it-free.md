@@ -8,13 +8,13 @@ seo_description: "How I built and deployed Bird by Bird, a full-stack Django + N
 categories: ["engineering", "github projects", "integrations"]
 ---
 
-Every productivity app I've ever used wants to show me everything at once. The full list, the overdue items, the color-coded priorities, and often this overwhelms me. I wanted a tool that  could show me one item, let me finish it, and then show me the next one.
+Every productivity app I've ever used wants to show me everything at once. The full list, the overdue items, the color-coded priorities, and often this overwhelms me. I wanted a tool that could show me one item, let me finish it, and then show me the next one.
 
-The name came from Anne Lamott's *Bird by Bird*, from the story of her brother being overwhelmed as a child with a report he had to do on species of words, and their father telling him to just take it bird by bird, buddy, just take it bird by bird.
+The name came from Anne Lamott's *Bird by Bird*, from the story of her brother being overwhelmed as a child with a report on birds, and their father telling him: bird by bird, buddy, just take it bird by bird.
 
-And so I made this focus tool, where you take a short list of your most important tasks, and it shows you them, one bird at a time. I built it as a production app because I also wanted to work a specific stack end to end: Django, GraphQL, Next.js, PostgreSQL, deployed across Fly.io, Vercel, and Neon, and run entire thing runs for free.
+And so I made this focus tool, where you take a short list of your most important tasks, and it shows you them, one bird at a time. I built it as a production app because I also wanted to work a specific stack end to end: Django, GraphQL, Next.js, PostgreSQL, deployed across Fly.io, Vercel, and Neon.
 
-The build was as much about spending time inside the tools as about the product that came out of them. What I did not expect was how the deployment story would turn out. I have been shipping web projects for over a decade, and infrastructure cost has always been a real constraint on what you can run as a side project. That constraint has changed. The full production stack for Bird by Bird costs nothing per month to run, and that is worth documenting separately from the product decisions.
+The build was as much about spending time inside the tools as about the product that came out of them. What I did not expect was how the deployment story would turn out. I have been shipping web projects for over a decade, and infrastructure cost has always been a real constraint on what you can run as a side project. That constraint has changed. What follows covers both the build and what it actually costs to run today.
 
 ## The stack
 
@@ -52,7 +52,7 @@ async rewrites() {
 
 In production, `GRAPHQL_BACKEND_URL` is the Fly.io URL. The browser never sees a cross-origin request. The JWT lives in an HTTP-only cookie set by Django, readable by no JavaScript, sent automatically with every same-origin request. The CORS configuration on Django only needs to trust the Vercel origin for the server-to-server leg of the proxy, which is a much simpler surface to secure.
 
-This pattern also means the backend URL is never exposed in client-side code. The `NEXT_PUBLIC_GRAPHQL_URL` environment variable exists for server-side rendering, but the browser always calls `/graphql` on the Vercel domain.
+This pattern also means the backend URL is never exposed in client-side code. The `NEXT_PUBLIC_GRAPHQL_URL` environment variable exists for server-side rendering, but the browser always calls `/graphql` on the Vercel domain. The tradeoff is an extra hop: every request now passes through a Vercel serverless function before it reaches Fly.io, which adds latency a direct call would not have, and it means local development needs both servers running at once.
 
 ## What went wrong: the Dockerfile
 
@@ -88,7 +88,7 @@ CMD ["gunicorn", "bird_api.wsgi:application", "--bind", "0.0.0.0:8000", "--worke
 
 `uv pip install --system` installs into the system Python rather than a virtualenv. Gunicorn is also installed system-wide. Both share the same Python environment. Second deploy worked.
 
-The lesson: `fly launch` generates a reasonable starting point but it does not know your package manager or your production server requirements. Read the generated Dockerfile before deploying, not after the 502.
+`fly launch` generates a reasonable starting point, but it does not know your package manager or your production server requirements. Read the generated Dockerfile before deploying, not after the 502.
 
 ## The cold start problem and how to fix it for free
 
@@ -107,11 +107,11 @@ The fix is one line in `fly.toml`:
 min_machines_running = 1
 ```
 
-With one machine always running, the cold start disappears. On the free allowance for a shared-cpu-1x machine, keeping one instance warm is within the free tier limits. You are not charged extra for warmth, only for the machine size and uptime, and one small machine running continuously costs nothing on the free plan.
+With one machine always running, the cold start disappears. On the free allowance for a shared-cpu-1x machine, keeping one instance warm is within the free tier limits.
 
 ## The GraphQL mutation proliferation problem
 
-The original data model had three mutations for task state: `completeTask`, `skipTask`, and `abandonTask`. The flock view had a three-dot menu per row with Done, Skip, Promote, and Abandon options.
+The original data model had three mutations for task state: `completeTask`, `skipTask`, and `abandonTask`. Before the current one-task-at-a-time view, there was a flock view, a list of every task in your backlog, and each row had a three-dot menu with Done, Skip, Promote, and Abandon options.
 
 I built all of it. Then I deleted most of it.
 
@@ -123,9 +123,9 @@ This is the part of the build I would have gotten wrong if I had not actually us
 
 ## Deploying the split stack: Vercel + Fly + Neon + Resend
 
-The deployment sequence matters more than the individual services. Getting it wrong costs hours.
+The deployment sequence matters more than the individual services. Getting it wrong costs hours, mostly spent staring at environment variables that point to a service that does not exist yet.
 
-The right order is: database first, email second, backend third, frontend last. The reason is dependency direction. The backend needs a working database connection before it can run migrations, and it needs working email credentials before verification flows work. The frontend needs a deployed backend URL before its environment variables mean anything. Each service is a dependency of the next.
+The right order is: database first, email second, backend third, frontend last. The reason is dependency direction. The backend needs a working database connection before it can run migrations, and it needs working email credentials before verification flows work. The frontend needs a deployed backend URL before its environment variables mean anything.
 
 **Neon** took fifteen minutes. Create a project, copy the connection string, run `python manage.py migrate` against it locally to confirm the schema applies, done. The connection string goes directly into Fly secrets later; it never touches a config file that could be committed.
 
@@ -147,10 +147,10 @@ Without `SECURE_PROXY_SSL_HEADER`, Django sees plain HTTP from Fly's internal ne
 
 ## What the free tier story actually looks like in 2026
 
-A fully deployed, always-on, production-shaped web application, with managed Postgres, transactional email, HTTPS everywhere, and auto-deploy on push, costs nothing per month to run in 2026.
+A fully deployed, always-on, production-shaped web application, with managed Postgres, transactional email, HTTPS, and auto-deploy on push, costs nothing per month to run in 2026.
 
-That was not true three years ago. Heroku killed its free tier in 2022. Railway has a $5/month minimum. Render's free tier spins down after fifteen minutes of inactivity, which produces the same cold start problem without the fix available on Fly. The combination of Vercel Hobby, Fly.io's free allowance, Neon's free tier, and Resend's free tier is the stack that closed the gap.
+That was not true three years ago. Heroku killed its free tier in 2022. Railway has a $5/month minimum. Render's free tier spins down after fifteen minutes of inactivity, which produces the same cold start problem without the fix available on Fly. The combination of Vercel Hobby, Fly.io's allowance, Neon's free tier, and Resend's free tier is the stack that closed the gap.
 
-The practical implication: the barrier to keeping a side project live is no longer infrastructure cost. It is maintenance attention and the willingness to set `min_machines_running = 1` in a config file. Ship the thing, then iterate. The free tier will hold it while you figure out whether anyone cares.
+The practical implication: the barrier to keeping a side project live is no longer infrastructure cost. It is maintenance attention and the willingness to set `min_machines_running = 1` in a config file. Bird by Bird has been running the entire time I've been writing this post, and the bill has not changed.
 
 Bird by Bird is live at [bird-by-bird.vercel.app](https://bird-by-bird.vercel.app) and the full source, including the Dockerfile, `fly.toml`, and Terraform-shaped `infra/` directory for anyone who wants the AWS production architecture instead, is at [github.com/d-voorhees/bird-by-bird](https://github.com/d-voorhees/bird-by-bird).

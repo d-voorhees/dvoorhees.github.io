@@ -1,7 +1,7 @@
 ---
 date: 2026-03-08
 layout: post
-title: "Security Hardening for Systems Nobody Thinks of as Something Attackable"
+title: "Security Hardening for Systems Nobody Thinks of as Attackable"
 introduction: "The systems that get breached are rarely the ones everyone was already worried about. They are the internal tools nobody thought to harden, because they were not customer-facing. That is where the real exposure lives."
 seo_title: "Security Hardening for Internal Systems and Integration Layers"
 seo_description: "Public-facing sites get security attention by default. Internal tools, webhook handlers, and integration endpoints often do not. This is where the real exposure lives, and why it matters more for internal tooling, not less."
@@ -32,27 +32,21 @@ The whole change took less than a day. The exposure it closed had been open for 
 
 The webhook example is one instance of a broader pattern. Internal systems and integration endpoints are treated as trusted because they are supposed to be talking to trusted partners, and the trust gets built into the system as a default rather than as an earned property that is verified at every request. The signed-webhook problem is one version. Other versions I have run into repeatedly include:
 
-Over-permissioned API keys. A key that needs to read one specific resource is issued with full read-write access to the entire platform, because that was the default in the interface where the key was created, and nobody scoped it down.
+Over-permissioned API keys are the most common version. I inherited a Zapier integration once that only ever needed to read order totals from a payment processor's API, and the key behind it had full read-write access to refunds, payouts, and account settings, because that was the default scope in the interface where the key had been generated years earlier and nobody had gone back to narrow it.
 
-Long-lived tokens that never rotate. A token generated at project kickoff is still in use three years later, has been shared over email at least twice, and is stored in plaintext in an environment file that has been checked into private repositories multiple times.
+Long-lived tokens that never rotate are close behind. On that same client's stack, a token generated at project kickoff was still authenticating a nightly sync three years later. It had been pasted into a Slack thread at least once during an unrelated debugging session, and it was sitting in plaintext in an `.env` file that had, at some point, been committed to a private repository and never scrubbed from the history.
 
-Integration layers that write to production databases without any input validation, because the incoming data is coming from a trusted source, and if the trusted source ever sends something malformed or malicious, the database will accept it and act on it.
+The third version is quieter and harder to catch in a code review: integration layers that write to production databases without validating what comes in, because the sender is a trusted partner and trusted partners are assumed to send well-formed data. The fulfillment webhook from the earlier example did exactly this — before the fix, it would have accepted a malformed tracking number or an out-of-range order ID with no complaint, because nobody had ever asked what should happen if the trusted sender sent garbage.
 
 None of these are exotic. All of them show up regularly. All of them are invisible to a security review that focuses on the public-facing bits, because none of them are public-facing. And all of them have deeper access to sensitive data than the login page does, because they exist to move that data around.
 
 ## What I actually run before shipping
 
-The checklist I run before an integration goes into production has evolved over time and is not fancy. It is a series of questions I try to answer honestly, not a document I have to fill out.
+What I actually run before an integration goes into production isn't a document, it's a habit of asking the same handful of things out loud until the answers stop being comfortable. The one I lead with is who or what can actually call this endpoint — if the honest answer is "anyone who knows the URL," that isn't an answer, it's the same obscurity-as-security model that left the fulfillment webhook open for two years.
 
-Who or what can call this endpoint. If the answer is "anyone who knows the URL," that is not an answer.
+From there I want to know what credentials the integration is holding and whether they're scoped to the smallest set of permissions it actually uses, because a credential with more access than its job requires is a defect sitting there waiting for the day something else goes wrong nearby. I check what gets logged, since an attack that succeeds against a system with no logging is invisible until its effects surface somewhere downstream, sometimes weeks later. And I ask about rotation — not whether the credentials could be rotated, but whether there's an actual scheduled date for the next rotation, because "yes, we could" and "yes, it's scheduled" are different answers with very different track records.
 
-What credentials does this integration hold, and what is the smallest set of permissions those credentials need. If the credentials have more access than the integration uses, that is a defect, not a convenience.
-
-What gets logged when this runs. If nothing gets logged, an attack that succeeds will be invisible until its effects appear somewhere downstream.
-
-What is the rotation plan for the credentials, and when is the next rotation scheduled. If there is no answer, the credentials will not be rotated.
-
-What does the failure mode look like if a malformed or hostile request arrives. If the answer is "the system will process it," that is a bug.
+I don't run all of this with equal weight on every integration. A low-stakes internal tool reading non-sensitive data through a single trusted API doesn't need the same rotation cadence and logging depth as something touching customer records or payment data — treating every integration as maximum-stakes burns time that should go toward the ones that actually carry risk. The judgment call is sizing the response to what the integration can actually touch, not applying a uniform checklist regardless of stakes.
 
 None of this is OWASP Top 10 recitation. OWASP is useful for orienting; it is not a substitute for asking, of this specific integration, what actually happens if it gets called by someone who should not be calling it. That question is boring and specific and has to be asked one system at a time. Nobody enjoys asking it. It is exactly where the work is.
 
@@ -60,4 +54,4 @@ None of this is OWASP Top 10 recitation. OWASP is useful for orienting; it is no
 
 The public-facing exposure is bounded by what a random visitor to the website can do. It is not small, but it is bounded, and there is usually a decent amount of monitoring on it. The internal attack area, especially for systems that talk to each other, is often bounded by nothing. An integration layer that has read access to the customer database, write access to the fulfillment system, and API access to the CRM is a system that can, if compromised, do more damage in an afternoon than a public-facing SQL injection could do in a week. And it will do that damage from a source that everyone in the organization has been told to trust.
 
-The systems nobody thinks of as attackable are the ones with the deepest access. The engineer building them has, in my view, more responsibility for their security posture, not less, precisely because nobody else is watching.
+The webhook sat open for two years not because anyone decided the risk was acceptable, but because nobody had been assigned to ask about it — it wasn't on the list of things that got security attention, because it wasn't customer-facing. That is the actual failure mode I watch for now: not a bad decision, but the absence of anyone whose job it was to make one.

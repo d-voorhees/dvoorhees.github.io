@@ -26,7 +26,7 @@ On a WooCommerce build with a seven-location inventory sync, the documentation I
 
 Naming conventions do the same work at a smaller scale. A custom field called `client_priority_flag` tells you almost nothing. A custom field called `hubspot_sync_priority` tells you it is part of the HubSpot sync layer and its purpose is to control priority within that sync. The second name is not more documentation. It is documentation embedded in the artifact itself, which means the documentation cannot drift out of sync with the system, because it is the system.
 
-The habit I have landed on, after many years of doing this both ways, is that anything that would take more than a sentence to explain in code comments belongs in a maintenance log entry. Anything that can be explained in a name should be explained in a name. Anything that is genuinely self-evident from the code does not need documentation at all, and documenting it anyway is worse than useless because it teaches the reader that your documentation cannot be trusted to contain only signal.
+The habit I have landed on, after many years of doing this both ways, is a rough sort by where an explanation actually belongs. Something that would take more than a sentence in a code comment belongs in a maintenance log entry instead. Something that fits in a sentence usually fits in a name, so I put it there and skip the comment entirely. And if something is genuinely self-evident from the code, I leave it alone — documenting it anyway is worse than useless, because it teaches the next reader that the documentation can't be trusted to contain only signal, and once they've learned that lesson once they stop trusting all of it.
 
 ## A specific example
 
@@ -44,4 +44,6 @@ The best documentation gets written because the system was built to be explainab
 
 This is not a matter of writing better documents. It is a matter of building systems that do not require heroic documentation to be understandable. The engineer who thinks about explainability from the first field they create ends up producing less documentation than the engineer who thinks about it at handoff, and the documentation they do produce is the kind the next person actually opens.
 
-Documentation is infrastructure in the same sense that logging is infrastructure. It is not a deliverable at the end of a project. It is a property of the system, present in the design or absent from it, and no amount of retroactive effort will fully make up for building the wrong way in the first place.
+None of this is free. Naming a field `hubspot_sync_priority` instead of `flag_2` takes longer than typing `flag_2`, and on a two-day prototype that nobody will touch again, that extra time buys nothing — the system will be deleted before the naming ever matters. The discipline is worth the tax on anything meant to survive past the person who built it. It is not worth applying uniformly to code that was never going to live that long.
+
+The seven-location maintenance log and the hundred-form spreadsheet were the same kind of system: built to run for years, handed to people who were not the original builder. That is the condition where explainability pays for itself, and it is worth checking that condition is actually true before paying the tax.

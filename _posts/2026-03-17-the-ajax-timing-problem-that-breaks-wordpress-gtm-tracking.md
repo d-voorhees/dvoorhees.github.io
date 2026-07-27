@@ -5,7 +5,7 @@ title: "The AJAX Timing Problem That Breaks WordPress GTM Tracking"
 introduction: "Most WordPress GTM plugins push events from the wrong side of an AJAX request. The data layer fires, but GTM never sees it. This is the problem I set out to fix with WP Clean Data Layer, and the integration-specific timing solutions I built for Contact Form 7, Gravity Forms, and WooCommerce."
 seo_title: "The AJAX Timing Problem That Breaks WordPress GTM Tracking"
 seo_description: "Why Contact Form 7, Gravity Forms, and WooCommerce conversions go missing in GA4, and the WordPress plugin I built to fix the data layer timing for each one."
-categories: ["architecture", "github projects"]
+categories: ["architecture"]
 tags: []
 ---
 
@@ -25,7 +25,7 @@ Pushing everything from PHP hooks and hoping for the best does not hold up. Gett
 
 Before building a plugin, I looked at what already existed. The GTM4WP plugin by Thomas Geiger is the most widely installed option and handles WooCommerce ecommerce tracking well. For sites that only need WooCommerce events, it is a reasonable choice. Where it fell short for me was form tracking. The plugin focuses on ecommerce and does not provide the same depth of integration for Contact Form 7 or Gravity Forms, which meant layering a second plugin for forms on top of GTM4WP and hoping the two did not conflict on event naming or data layer initialization order.
 
-Google's own Site Kit plugin provides basic GA4 integration without GTM. It does not expose a data layer at all, which makes it useless for anyone who needs GTM triggers, custom event parameters, or ecommerce tracking beyond pageviews.
+Google's own Site Kit plugin sends pageview and default event data to GA4 directly through gtag.js, with no GTM container involved. It does not expose a data layer at all, which makes it useless for anyone who needs GTM triggers, custom event parameters, or ecommerce tracking beyond pageviews.
 
 I also considered building the tracking outside a plugin entirely, using custom JavaScript in the theme or a GTM custom HTML tag. That works for a single site where you control the theme and the GTM container. It does not generalize across client sites with different themes, different form plugins, and different WooCommerce configurations. The value of a plugin here is that the timing logic is encapsulated and tested once, and every site gets the same behavior.
 
@@ -39,17 +39,19 @@ The complication is that CF7 can be configured to skip AJAX entirely. When a sit
 
 ## Gravity Forms: the confirmation is the real event
 
-Gravity Forms has a similar AJAX problem with different mechanics. The PHP hook `gform_after_submission` fires during the AJAX request, before the confirmation message renders. The user has not seen a success state yet, and the front end has no reliable signal that tracking should fire.
+Gravity Forms surfaces a second problem underneath the timing problem. `gform_confirmation_loaded`, the client-side event that fires after the confirmation markup is injected, does not carry entry metadata by default. The form ID comes through, but the entry ID and form title do not, and both are useful for segmenting conversions by form variant later in GA4.
 
-The correct listener is `gform_confirmation_loaded`, which fires after Gravity Forms injects the confirmation markup into the page. At that point, the user has seen the confirmation, the form ID is available, and GTM is running in the same browser context.
+The timing half of the fix follows the same logic as Contact Form 7: listen client-side, not server-side. The PHP hook `gform_after_submission` fires during the AJAX request, before the confirmation message renders, so the user has not seen a success state and there is no reliable signal yet that tracking should fire. `gform_confirmation_loaded` fires after Gravity Forms injects the confirmation markup, at which point the user has seen the confirmation and GTM is running in the same browser context.
 
-The secondary problem is that `gform_confirmation_loaded` does not carry entry metadata by default. The form ID is available, but the entry ID and form title are not. I solved this by hooking the `gform_confirmation` filter on the PHP side to inject entry metadata into the confirmation response HTML as a data attribute, so the JavaScript listener can read it when the confirmation loads. This keeps the listener's data source in the DOM rather than requiring a separate AJAX call to fetch entry details.
+The metadata half required a separate fix: hooking the `gform_confirmation` filter on the PHP side to inject entry ID and form title into the confirmation response HTML as a data attribute, so the JavaScript listener reads them from the DOM rather than firing a second AJAX call to fetch entry details after the fact. That second call would have introduced its own timing risk, since it would need to complete before GTM processes the push.
+
+One limitation carries forward from this design: if a Gravity Forms confirmation is configured to redirect to a separate page rather than render inline, the injected data attribute never reaches the browser, and the listener has nothing to read. That configuration needs the same transient-based, next-page-load pattern the plugin uses for purchase and login events, and it is not yet handled by the Gravity Forms integration specifically.
 
 ## WooCommerce: three different timing problems in one integration
 
-WooCommerce is the most complex integration because the ecommerce funnel crosses multiple pages and multiple interaction types.
+WooCommerce is the most complex integration because the ecommerce funnel crosses multiple pages and multiple interaction types. Of the three problems below, the purchase event is the hardest, because it is the only one where the data has to survive a full document change with no client-side event to hook at all.
 
-Add-to-cart on most themes is AJAX. The PHP `woocommerce_add_to_cart` action runs server-side, but no page load occurs. The plugin listens for WooCommerce's `added_to_cart` jQuery event, which fires after the cart fragments update. For themes that bypass jQuery's AJAX handling, there is a `fetch` observer fallback that watches for requests to the WooCommerce add-to-cart endpoint.
+Add-to-cart on most themes is AJAX. The PHP `woocommerce_add_to_cart` action runs server-side, but no page load occurs. The plugin listens for WooCommerce's `added_to_cart` jQuery event, which fires after the cart fragments (the cached HTML snippets WooCommerce uses to update the cart widget without a full page reload) update. For themes that bypass jQuery's AJAX handling, there is a `fetch` observer fallback that watches for requests to the WooCommerce add-to-cart endpoint. That fallback has a gap of its own: a theme that writes its own custom AJAX handler outside both jQuery and the standard `fetch` API, using raw `XMLHttpRequest` with a nonstandard endpoint, will not trigger either listener, and add-to-cart tracking silently stops working on that theme until someone notices the gap in GA4 reporting.
 
 The purchase event has the opposite problem. The checkout page and the thank-you page are two different documents. Anything pushed to the data layer on the checkout page is gone when the thank-you page loads. The plugin handles this by queuing the purchase payload server-side (via the `DataLayer::queue` method) and injecting it into the thank-you page HTML before GTM's container snippet. The push is already in `window.dataLayer` when GTM initializes, so there is no timing gap.
 
@@ -63,7 +65,7 @@ It failed for two reasons. First, detecting "this AJAX response was a successful
 
 Second, and more fundamentally, the generic approach could not distinguish between a successful submission and an intermediate step. Gravity Forms multi-step forms fire AJAX requests between steps. WooCommerce fires AJAX requests for coupon application, shipping calculation, and cart updates. A generic interceptor would need negative rules for every interaction type that is not a conversion, and that list grows every time a plugin updates its AJAX behavior.
 
-Per-integration listeners are more code to maintain, but each one is small, obvious, and testable in isolation. The maintenance cost is predictable; the generic approach's maintenance cost would have grown with every plugin update.
+Per-integration listeners are more code to maintain, but each one runs 20 to 40 lines and tests in isolation against a single mock event. The generic interceptor, by the time it handled CF7's JSON responses, Gravity Forms' HTML confirmations, and WooCommerce's various AJAX shapes with negative rules for every non-conversion interaction, had grown past 150 lines and still missed cases. The maintenance cost of the per-integration approach is predictable and roughly constant; the generic approach's maintenance cost would have grown with every plugin update to any of the three integrations.
 
 ## Schema enforcement as a design choice
 
@@ -77,6 +79,6 @@ The plugin runs on client sites where I previously had to diagnose and fix track
 
 ## The transferable part
 
-The lesson from this project is that "data layer" problems are almost never about the data. The schema is documented. The fields are known. The problem is timing, and timing is integration-specific. There is no generic solution to "when does this plugin consider a form successfully submitted from the browser's perspective." Each plugin has its own answer, and the only way to get tracking right is to listen for that specific answer in the specific context where GTM can hear it.
+The lesson from this project is that "data layer" problems are almost never about the data itself. They are about timing, and timing is integration-specific in a way that resists a general solution. "When does this plugin consider a form successfully submitted, from the browser's perspective" has a different answer for every plugin: a DOM event for CF7, a confirmation-loaded event for Gravity Forms, a cart fragment update for WooCommerce. Anyone instrumenting a new WordPress plugin for GA4 should start by finding that plugin's specific answer to that question, rather than assuming a hook name that sounds like the right one actually fires at the right time.
 
 The code is at [github.com/d-voorhees/wp-clean-datalayer](https://github.com/d-voorhees/wp-clean-datalayer).
