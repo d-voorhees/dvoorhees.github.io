@@ -112,4 +112,4 @@ The repo is published as-is. Between client work and my own projects, I do not h
 
 If you want a version of this built for your own site and connected to your own CRM, I take on a limited number of these builds as client work. I can adapt the system prompt to your diagnostic or qualification flow, wire it into whichever email platform you use, and hand off a working install on your hosting. Reach out through the contact page if that is what you need.
 
-If this saves you time, a star on the repo helps others find it.
+If this saves you time, a star on the repo in Github helps others find it.
