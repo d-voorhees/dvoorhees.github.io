@@ -5,8 +5,9 @@ title: "The AJAX Timing Problem That Breaks WordPress GTM Tracking"
 introduction: "Most WordPress GTM plugins push events from the wrong side of an AJAX request. The data layer fires, but GTM never sees it. This is the problem I set out to fix with WP Clean Data Layer, and the integration-specific timing solutions I built for Contact Form 7, Gravity Forms, and WooCommerce."
 seo_title: "The AJAX Timing Problem That Breaks WordPress GTM Tracking"
 seo_description: "Why Contact Form 7, Gravity Forms, and WooCommerce conversions go missing in GA4, and the WordPress plugin I built to fix the data layer timing for each one."
-categories: ["architecture"]
+categories: ["architecture", "projects on github"]
 tags: []
+github_url: "https://github.com/d-voorhees/wp-clean-datalayer"
 ---
 
 Every WordPress GTM plugin I have used or audited makes the same architectural mistake. They hook PHP submission handlers and push to the data layer from the server side, assuming the push will reach GTM before the user sees a confirmation or the browser navigates away. That assumption is wrong for every major form plugin and for WooCommerce's AJAX cart flow. The data layer fires in a context where GTM is not listening, and the conversion vanishes.

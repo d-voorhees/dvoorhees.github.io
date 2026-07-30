@@ -78,6 +78,15 @@
                   %d, %Y" }}{% if page.updated %} <span>&#8226;</span> updated on {{ page.updated | date: "%B %d, %Y"
                   }}{% endif %}
                 </p>
+                {% if page.github_url %}
+                <div class="github-project-badge">
+                  {% include icon-github.html %}
+                  <span>
+                    <span class="github-highlight">GitHub project discussed in this post:</span>
+                    <a class="github-highlight" href="{{ page.github_url }}" target="_blank" rel="noopener">{{ page.github_url }}</a>
+                  </span>
+                </div>
+                {% endif %}
               </div>
             </header>
           </div>
@@ -105,25 +114,30 @@
         <div class="container">
           <div class="col-md-10 col-12">
             <div class="row py-4">
-              {% for category in page.categories %} {% assign category_slug =
+              {% assign shown_post_urls = "" %} {% for category in
+              page.categories %} {% assign category_slug =
               category | downcase | replace: '&', 'and' | replace: ' ', '-' |
               replace: ',', '' %} {% assign category_info =
               site.data.categories | where: "slug", category_slug | first %}
               {% assign related_posts = site.categories[category] | where_exp:
-              "post", "post.url != page.url" %} {% if related_posts.size > 0
-              %}
-              <h3 class="mt-4 mb-3">
-                More writing about
-                <span class="lowercase">{{ category }}</span>
-              </h3>
+              "post", "post.url != page.url" %}
 
-              {% for post in related_posts %}
+              {% capture category_posts_html %} {% for post in related_posts
+              %} {% unless shown_post_urls contains post.url %}
               <div class="single-blog-list">
                 <span class="square"
                   style="background-color: {{ category_info.color | default: '#cccccc' }}; border-radius: 12px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"></span>
                 <a href="{{ post.url }}">{{ post.title }}</a>
               </div>
-              {% endfor %} {% endif %} {% endfor %}
+              {% assign shown_post_urls = shown_post_urls | append: post.url |
+              append: "," %} {% endunless %} {% endfor %} {% endcapture %} {%
+              if category_posts_html contains "single-blog-list" %}
+              <h3 class="mt-4 mb-3">
+                More writing about
+                <span class="lowercase">{{ category }}</span>
+              </h3>
+
+              {{ category_posts_html }} {% endif %} {% endfor %}
             </div>
           </div>
         </div>

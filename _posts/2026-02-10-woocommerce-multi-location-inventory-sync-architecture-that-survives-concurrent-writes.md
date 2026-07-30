@@ -5,8 +5,9 @@ title: "WooCommerce Multi-Location Inventory Sync Architecture That Survives Con
 introduction: "WooCommerce tracks one stock number per SKU. Multi-location retailers need inventory that handles concurrent writes from an ERP, a POS, and online sales without losing data. This is the architecture I built, the conflict resolution strategies I shipped, and the reconciliation decision I almost got wrong."
 seo_title: "WooCommerce Multi-Location Inventory Sync Architecture That Survives Concurrent Writes"
 seo_description: "How to sync WooCommerce inventory across multiple retail locations with webhook ingestion, conflict resolution, and daily ERP reconciliation."
-categories: ["architecture"]
+categories: ["architecture", "projects on github"]
 tags: []
+github_url: "https://github.com/d-voorhees/woo-multilocation-inventory-reference"
 ---
 
 WooCommerce tracks a single stock quantity per SKU. That works for a warehouse. It stops working the moment inventory lives in seven physical retail locations, a point-of-sale system writes adjustments from the register, and online orders decrement the same pool. Native WooCommerce and the marketplace plugins that add location pickers do not solve the hard problems: what happens when two systems write to the same SKU at the same time, what happens when the webhook retries, and what happens when your own sync logic has a bug.

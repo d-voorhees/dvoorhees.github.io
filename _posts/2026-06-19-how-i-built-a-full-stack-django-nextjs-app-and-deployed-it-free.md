@@ -5,7 +5,8 @@ title: "How I Built and Deployed a Focus Tool Using Full-Stack Django + Next.js 
 introduction: "The full production stack for Bird by Bird, a Django + Next.js + GraphQL app with managed Postgres, transactional email, and HTTPS, costs nothing per month to run. Here is how I built it and what went wrong along the way."
 seo_title: "How I Built and Deployed a Full-Stack Django + Next.js App for Free in 2026"
 seo_description: "How I built and deployed Bird by Bird, a full-stack Django + Next.js + GraphQL app, for $0/month using Fly.io, Neon, Vercel, and Resend."
-categories: ["engineering", "github projects", "integrations"]
+categories: ["engineering", "projects on github", "integrations"]
+github_url: "https://github.com/d-voorhees/bird-by-bird"
 ---
 
 Every productivity app I've ever used wants to show me everything at once. The full list, the overdue items, the color-coded priorities, and often this overwhelms me. I wanted a tool that could show me one item, let me finish it, and then show me the next one.

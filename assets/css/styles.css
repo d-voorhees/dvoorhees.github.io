@@ -127,8 +127,16 @@ jumbotron {
 
 footer {
   background-color: #222;
-  color: white;
+  color: #999;
   padding: 40px 0;
+}
+
+footer a {
+  color: #999;
+}
+
+.footer-links>*+* {
+  margin-left: 10px;
 }
 
 footer .social-icons a {
@@ -169,8 +177,8 @@ p {
 }
 
 code {
-  font-size: 0.8em;
-  color: #00aa5b;
+  font-size: 1em;
+  color: #05a058;
 }
 
 /* categories */
@@ -403,6 +411,44 @@ body.dark-theme .post-content ol li::marker {
 .post .post-content {
   margin-top: 2em;
   margin-bottom: 5em;
+}
+
+.github-project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #24292f;
+  font-size: 0.9em;
+}
+
+.github-highlight {
+  background-image: linear-gradient(to top, #129b694a 50%, transparent 50%);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.icon-github {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.15em;
+}
+
+.github-project-badge a {
+  color: #24292f;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.github-project-badge a:hover {
+  opacity: 0.8;
+}
+
+body.dark-theme .github-project-badge {
+  color: #adbac7;
+}
+
+body.dark-theme .github-project-badge a {
+  color: #adbac7;
 }
 
 @media (min-width: 575px) {
@@ -770,6 +816,10 @@ body.dark-theme .blog-post {
   border-top: 1px solid #444444;
 }
 
+body.dark-theme .blog-post:first-of-type {
+  border-top: 1px solid transparent;
+}
+
 body.dark-theme .border-bottom {
   border-bottom: var(--bs-border-width) var(--bs-border-style) #626262 !important;
 }
@@ -826,6 +876,10 @@ body.dark-theme pre {
 
 body.dark-theme applause-button .style-root {
   --main-color: #03cdda !important;
+}
+
+body.dark-theme .clap-button svg {
+  fill: white !important;
 }
 
 /* Offcanvas dark theme styling */

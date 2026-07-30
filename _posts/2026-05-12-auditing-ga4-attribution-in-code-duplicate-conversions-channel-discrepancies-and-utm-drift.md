@@ -5,8 +5,9 @@ title: "Auditing GA4 Attribution in Code: Duplicate Conversions, Channel Discrep
 introduction: "GA4's interface can show you one attribution problem on one day. It cannot show you the same five problems across 30 days, three data sources, and a client-ready report. This is the toolkit I built to run those audits programmatically, and the decisions behind the duplicate detection logic, sample data design, and report structure."
 seo_title: "Auditing GA4 Attribution in Code: Duplicate Conversions, Channel Discrepancies, and UTM Drift"
 seo_description: "A Python toolkit for catching GA4 attribution errors at scale: duplicate conversions with CallRail, channel discrepancies with Google Ads, and UTM inconsistencies, with client-ready report output."
-categories: ["architecture"]
+categories: ["architecture", "projects on github"]
 tags: []
+github_url: "https://github.com/d-voorhees/ga4-attribution-audit"
 ---
 
 Attribution errors in GA4 hide well. A phone call conversion that fires in both GA4 and CallRail does not announce itself as a duplicate. A Google Ads click that GA4 assigns to Direct shows the same session count and the same conversion number as every other session. A campaign source spelled three different ways across UTM parameters looks like three small campaigns with modest results, when the combined total would change the channel mix calculation.

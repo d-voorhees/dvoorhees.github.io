@@ -2,9 +2,17 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <span>d@dvoorhees.com</span>
-          <span>&copy; {{ 'now' | date: "%Y" }}</span>
+          <span class="footer-links">
+            <span>&copy; {{ 'now' | date: "%Y" }}</span>
+            <span>&#8226;</span>
+            <a href="{{ '/about/' | relative_url }}">About</a>
+            <span>&#8226;</span>
+            <a href="https://github.com/d-voorhees" target="_blank" rel="noopener" aria-label="GitHub profile">
+              {% include icon-github.html %}
+            </a>
+          </span>
         </div>
       </div>
     </div>
