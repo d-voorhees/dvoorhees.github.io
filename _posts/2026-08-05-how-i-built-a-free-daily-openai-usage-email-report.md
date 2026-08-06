@@ -81,10 +81,4 @@ I like this as a portfolio project because it is small but real. It shows API wo
 
 It also reads well as a project where code solves a specific problem, the tradeoffs are visible, and the implementation is small enough that someone can inspect it without needing a tour.
 
-## The transferable lesson
-
-A useful internal tool does not need to be big. It needs to land at the right time, surface the right slice of information, and stay cheap enough that you keep using it.
-
-That is the standard I was aiming for here. A tiny workflow that shows up every night and tells me about my status today is more valuable than a bigger system I do not want to maintain.
-
 If you want to inspect the code, and implement it for yourself, you can find it here: [github.com/d-voorhees/openai-usage-reporter](https://github.com/d-voorhees/openai-usage-reporter).
