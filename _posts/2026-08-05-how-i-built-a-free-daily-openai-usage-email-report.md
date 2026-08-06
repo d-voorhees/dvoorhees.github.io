@@ -9,27 +9,21 @@ categories: ["engineering", "projects on github"]
 github_url: "https://github.com/d-voorhees/openai-usage-reporter"
 ---
 
-OpenAI usage is easy to check in the dashboard when you remember to open it. It is harder to keep an eye on when you are moving between client work, prototypes, and experiments and only notice spend after it has already gone awry.
-
-After making some projects public lately where I pay for usage on them, I wanted a daily openai usage report in my email, preferably one that cost nothing to run and that i could DIY. The result was a small Python script, a GitHub Actions schedule, and an email sent once a day with the numbers I care about.
+I wanted a simple way to see OpenAI API spend every day without paying for another monitoring tool, so I built a small scheduled reporter that emails me the numbers. Before this, I checked usage by opening the dashboard, which only happened when something reminded me to. Between client work, prototypes, and a few public projects I now pay to run, spend went unnoticed more than once.
 
 If you want the code first, the repo is here: [github.com/d-voorhees/openai-usage-reporter](https://github.com/d-voorhees/openai-usage-reporter).
 
 ## The constraints
 
-The project had three hard constraints. It had to stay free, it had to be small, and it had to run without a server.
+No server, no database, no new service to maintain. I wanted the whole thing to live inside a repo I already had, running on a schedule I'd never have to think about again. That ruled out a hosted app or anything with its own dashboard. It pointed me toward GitHub Actions, since the repo already existed and the workflow runner was enough for a job that fires once a day.
 
-That ruled out a hosted app, a database, and a more elaborate dashboard. It also pushed me toward GitHub Actions as the scheduler, because the repo already existed and the workflow runner was enough for a once-a-day job.
+## The first pass, and what was wrong with it
 
-## The first pass
-
-My first version reported yesterday's usage. That worked mechanically, but it did not match the way I wanted to read the report at 10 PM.
-
-I want to review usage towards the end of the day.
+My first version reported usage from the previous calendar day. Mechanically it worked. But I check this kind of thing in the evening, close to 10 PM, and a report about yesterday's spend didn't line up with how I actually wanted to read it. I moved the window. Each report now covers the 24 hours ending at 10 PM the day it sends, not midnight to midnight.
 
 ## The implementation
 
-The core script pulls usage data, formats a short report, and sends it through SMTP once a 24-hour period from 10 PM the previous day to 10 PM today. 
+The script pulls usage numbers from the API. It builds a short report and mails it through SMTP once a day, on the shifted window above.
 
 ```python
 from datetime import datetime, timedelta, time
@@ -53,7 +47,7 @@ def main():
     send_email(f"OpenAI Usage Report - {end.date()}", report)
 ```
 
-The schedule lives in GitHub Actions.
+The schedule lives in GitHub Actions:
 
 ```yaml
 on:
@@ -61,22 +55,20 @@ on:
     - cron: '0 4 * * *'
 ```
 
-That setup keeps the runtime cheap and predictable. There is no container to keep alive, no database to back up, and no extra infrastructure that exists only to support one small report.
+Nothing here needs to be kept alive between runs. There's no container idling, no database to back up, and one run a day stays nowhere near GitHub's free minute allotment, even on a private repo. I kept the email layer boring on purpose. SMTP isn't elegant, but for a tool only I look at, I'd rather debug something I understand at 11 PM than something clever.
 
-I also had to keep the email layer boring. SMTP is not glamorous, but it is easy to understand, and for a personal tool that matters more than elegance.
+## Why GitHub Actions, specifically
 
-## Why GitHub Actions made sense
+GitHub Actions won for a plain reason: the repo already existed, and cron support came built in. I didn't want to stand up a second service just to wake a script once a day. Anyone who clones the repo sees the setup in one place, code and schedule included, minus the actual secrets, which live in GitHub's encrypted repo variables instead of the file itself.
 
-I considered a few free ways to schedule it. GitHub Actions won because it was already available, it supports cron, and it did not require me to add another service just to wake the script up once per day.
+## Where this breaks
 
-That choice also keeps the repo portable. Anyone who clones the project can see the whole thing in one place: the code, the schedule, and the environment variables.
+It's a single email with no alerting behind it. If the workflow fails, GitHub marks the run as failed in the Actions tab, but nothing pings me directly. If my SMTP app password expires or Gmail starts throttling it, I won't know until I notice a night with no email, which could be days later. It also doesn't scale past one account. Multiple API keys or a team that wants the same visibility would need a different report per key, not a bigger version of this one.
 
-## What this is good for
+## What this is and isn't
 
-This is a good fit for a personal budget check, a small internal monitor, or a portfolio project that shows how a practical automation gets put together.It is not a full analytics system. 
+This is a fit for a personal budget check or a small internal monitor. It's not a full analytics system, and I didn't build it to become one.
 
-I like this as a portfolio project because it is small but real. It shows API work, scheduled automation, secrets handling, and a clear product decision about what to include and what to leave out.
+## The transferable principle
 
-It also reads well as a project where code solves a specific problem, the tradeoffs are visible, and the implementation is small enough that someone can inspect it without needing a tour.
-
-If you want to inspect the code, and implement it for yourself, you can find it here: [github.com/d-voorhees/openai-usage-reporter](https://github.com/d-voorhees/openai-usage-reporter).
+The tool sends one email every night. If I ever want per-project breakdowns or Slack instead of email, I know exactly which two functions to touch first. Until then it does the one job I built it for, and it cost nothing to run this month, which is the number I actually check.
