@@ -71,4 +71,4 @@ This is a fit for a personal budget check or a small internal monitor. It's not 
 
 ## The transferable principle
 
-The tool sends one email every night. If I ever want per-project breakdowns or Slack instead of email, I know exactly which two functions to touch first. Until then it does the one job I built it for, and it cost nothing to run this month, which is the number I actually check.
+The tool sends one email every night. If I ever want per-project breakdowns or Slack instead of email, I know exactly which two functions to touch first. Until then it does the one job I built it for, and it cost nothing to run this month, which is the number I like.
