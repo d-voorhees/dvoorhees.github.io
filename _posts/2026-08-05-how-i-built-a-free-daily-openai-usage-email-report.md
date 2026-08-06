@@ -75,8 +75,6 @@ That choice also keeps the repo portable. Anyone who clones the project can see 
 
 This is a good fit for a personal budget check, a small internal monitor, or a portfolio project that shows how a practical automation gets put together.It is not a full analytics system. 
 
-## Why it works as a portfolio piece
-
 I like this as a portfolio project because it is small but real. It shows API work, scheduled automation, secrets handling, and a clear product decision about what to include and what to leave out.
 
 It also reads well as a project where code solves a specific problem, the tradeoffs are visible, and the implementation is small enough that someone can inspect it without needing a tour.
