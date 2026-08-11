@@ -11,7 +11,7 @@ github_url: "https://github.com/d-voorhees/brevo-api-daily-report"
 
 I am into data. And I am into automated reporting, so I can review data in regular intervals to catch where things may be not going so well / where there's room for improvement. Currently I send a lot of transactional emails from one of my sites using Brevo via their api. What I haven't had is a good sense of how many of these are going out a day and to whom. 
 
-So following my github actions powered email reporting spree I've been on around OpenAI api usage and Fly.io usage, I thought I'd spin up this to report on Brevo usage. 
+So following my github actions powered email reporting spree I've been on around [OpenAI api usage](https://dvoorhees.com/2026/08/05/daily-openai-usage-email-report/) and [Fly.io usage](https://dvoorhees.com/2026/08/06/fly-io-doesnt-have-a-daily-billing-endpoint-so-i-built-one/), I thought I'd spin up this to report on Brevo usage. 
 
 This reports nightly at 10 PM in America/Denver. I like seeing a "here's what happened today" report before bed. You can change this to report yesterday's numbers the next morning, as well. 
 
