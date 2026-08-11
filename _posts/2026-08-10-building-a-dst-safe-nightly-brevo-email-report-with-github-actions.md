@@ -9,11 +9,13 @@ categories: ["engineering", "projects on github"]
 github_url: "https://github.com/d-voorhees/brevo-api-daily-report"
 ---
 
-Brevo's dashboard shows transactional email activity if you go look for it. It doesn't send a nightly summary. I wanted one email at 10 PM with the day's count and a category breakdown showing who got what.
+I am into data. And I am into automated reporting, so I can review data in regular intervals to catch where things may be not going so well / where there's room for improvement. Currently I send a lot of transactional emails from one of my sites using Brevo via their api. What I haven't had is a good sense of how many of these are going out a day and to whom. 
 
-A midnight cutoff splits the evening in two. I set the window from 10 PM to 10 PM in America/Denver. The script computes it against the Denver clock. It survives the March and November time changes.
+So following my github actions powered email reporting spree I've been on around OpenAI api usage and Fly.io usage, I thought I'd spin up this to report on Brevo usage. 
 
-GitHub Actions cron runs in UTC. It doesn't shift for daylight saving. No single UTC time hits 10 PM Mountain year-round. I set two schedules: one at 04:00 UTC for Mountain Daylight Time, one at 05:00 UTC for Mountain Standard. A guard in the script keeps both schedules from sending the same report twice.
+This reports nightly at 10 PM in America/Denver. I like seeing a "here's what happened today" report before bed. You can change this to report yesterday's numbers the next morning, as well. 
+
+TGitHub Actions cron runs in UTC. It doesn't shift for daylight saving. No single UTC time hits 10 PM Mountain year-round. To account for this I set two schedules: one at 04:00 UTC for Mountain Daylight Time, one at 05:00 UTC for Mountain Standard. A guard in the script keeps both schedules from sending the same report twice.
 
 Brevo's log endpoint filters by date. It has no timestamp precision. A two-day request can't express a 10 PM boundary. The script works around this with a buffered date range and a client-side timestamp filter.
 
@@ -41,4 +43,4 @@ The timestamp filter now reports every record it drops. The script counts record
 
 Both changes shipped in `1.1.0`. See the [changelog](https://github.com/d-voorhees/brevo-api-daily-report/blob/main/CHANGELOG.md).
 
-Code's on GitHub: [brevo-api-daily-report](https://github.com/d-voorhees/brevo-api-daily-report).
+Code can be found on GitHub here: [brevo-api-daily-report](https://github.com/d-voorhees/brevo-api-daily-report).
