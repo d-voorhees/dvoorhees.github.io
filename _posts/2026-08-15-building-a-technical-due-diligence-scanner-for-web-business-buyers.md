@@ -1,9 +1,9 @@
 ---
 date: 2026-08-15
 layout: post
-title: "Building a Technical Due Diligence Scanner for Web-Business Buyers"
+title: "A Technical Due Diligence Scanner for Web-Business Buyers"
 introduction: "A buyer evaluating a web business usually gets a five-minute look at the site and a gut feeling about the tech behind it. Here's how I built a scanner that turns that gut feeling into an evidence-linked report."
-seo_title: "Building a Technical Due Diligence Scanner for Web-Business Buyers"
+seo_title: "A Technical Due Diligence Scanner for Web-Business Buyers"
 seo_description: "How I built an evidence-first, deterministic scanning tool for pre-screening a web business's technical posture before deeper acquisition diligence."
 categories: ["engineering", "projects on github"]
 github_url: "https://github.com/d-voorhees/veritech-scan"
