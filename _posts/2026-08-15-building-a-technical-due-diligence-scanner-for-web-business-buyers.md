@@ -6,6 +6,7 @@ introduction: "A buyer evaluating a web business usually gets a five-minute look
 seo_title: "Building a Technical Due Diligence Scanner for Web-Business Buyers"
 seo_description: "How I built an evidence-first, deterministic scanning tool for pre-screening a web business's technical posture before deeper acquisition diligence."
 categories: ["engineering", "projects on github"]
+github_url: "https://github.com/d-voorhees/veritech-scan"
 ---
 
 # Building a Technical Due Diligence Scanner for Web-Business Buyers
