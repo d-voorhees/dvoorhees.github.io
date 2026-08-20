@@ -9,7 +9,7 @@
   slug: defense-forking
 - name: engineering
   slug: engineering
-  posts_count: 4
+  posts_count: 5
   color: "#B58269"
 - name: integrations
   slug: integrations
@@ -37,7 +37,7 @@
   slug: product-development
 - name: projects on github
   slug: projects-on-github
-  posts_count: 10
+  posts_count: 11
   color: "#166EC7"
 - name: ruby
   color: "#513BBF"
