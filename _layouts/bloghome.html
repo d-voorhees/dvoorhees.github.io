@@ -13,7 +13,9 @@
           <div class="row">
             <div class="col-12">
               <div class="p-100">
-                <h1 id="category-title">Writings About Code & Projects</h1>
+                <h1 id="category-title">Danielle Voorhees</h1>
+                <p class="h5 mb-4">Technical Project Manager | Software Engineer | PMP, CSM</p>
+                {{ content }}
               </div>
             </div>
           </div>
@@ -43,6 +45,19 @@
               </div>
             </div>
             <div class="col-md-9 pl-md-3">
+              <section aria-labelledby="selected-writing-title">
+                <h2 id="selected-writing-title">Selected Writing</h2>
+                {% for selected_url in page.selected_posts %}
+                {% assign selected_post = site.posts | where: "url", selected_url | first %}
+                {% if selected_post %}
+                <div class="blog-post">
+                  <h3><a href="{{ selected_post.url | relative_url }}">{{ selected_post.title }}</a></h3>
+                  <p>{{ selected_post.introduction | default: selected_post.seo_description }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </section>
+              <h2 class="mt-5">All Writing</h2>
               {% for post in site.posts %}
               <div class="blog-post">
                 <div class="category-list">

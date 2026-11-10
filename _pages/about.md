@@ -1,18 +1,29 @@
 ---
 layout: page
 title: "About"
-seo_title: "About"
-seo_description: "Full-stack engineer and technical diligence consultant building reliable integrations, automations, data pipelines, and evidence-based technical systems."
+seo_title: "About Danielle Voorhees | Technical Project Manager & Software Engineer"
+seo_description: "Danielle Voorhees, PMP and Certified ScrumMaster. Technical project delivery and software engineering across more than 100 software, web, and IT engagements since 2013."
+author: "Danielle Voorhees"
 permalink: /about/
 ---
 
 # About
 
+I am a Technical Project Manager and software engineer. I lead technical projects from discovery and planning through implementation and delivery, combining hands-on engineering with responsibility for scope, technical risk, stakeholder coordination, and delivery.
+
 I design and ship reliable integration and operational systems for businesses whose critical workflows cross multiple platforms. I work from technical discovery and data-model decisions through implementation, production failure handling, and documentation.
 
 I build full-stack products, API-driven tools, workflow automation, data pipelines, and production web infrastructure. The goal is not merely to connect systems: it is to turn ambiguous business problems and technical risk into reliable, usable workflows with clear ownership and evidence.
 
-I have led technical work on hundreds of engagements crossing ecommerce platforms, payment processors, fulfillment systems, analytics tools, internal databases, custom applications, CRMs, and ERPs.
+Since 2013, I have worked across more than 100 engagements in software, web, and IT, crossing ecommerce platforms, payment processors, fulfillment systems, analytics tools, internal databases, custom applications, CRMs, and ERPs.
+
+At Medium & Message, my work spans software engineering and technical consulting. Through Veritech Diligence, I provide technical due diligence and buy-side technical advisory for business acquisitions.
+
+## Technical project delivery
+
+My delivery work includes discovery, requirements, scope definition, scheduling, stakeholder communication, risk management, change control, and implementation. Engineering judgment helps me identify dependencies and technical risks early, explain tradeoffs, and keep the delivery plan grounded in what the system needs.
+
+When requirements change, I assess the effect on scope, timing, and implementation, then communicate those tradeoffs with stakeholders. The delivery work and the engineering work stay connected through testing, documentation, and handoff.
 
 ## What I actually build
 
@@ -78,7 +89,9 @@ If you are new here, start with the projects above or browse the posts on integr
 
 ## Background
 
-Before Medium & Message, I ran a digital newsroom website in the Fortune Top 25. I also taught Statistics and Macroeconomics at the college level.
+I hold the Project Management Professional (PMP) and Certified ScrumMaster (CSM) credentials, and I am pursuing an MS in Information Technology Management.
+
+Before Medium & Message, my experience included Bank of America and running a digital newsroom website in the Fortune Top 25. I also taught Statistics and Macroeconomics at the college level.
 
 Those experiences still influence how I work. Editorial discipline makes me care whether an explanation is actually clear, and statistics left me wary of false certainty. Years of client work taught me to ask whether a system still works after the original builder is gone.
 
@@ -88,4 +101,4 @@ I work primarily in JavaScript, TypeScript, Python, PHP, SQL, PostgreSQL, MySQL,
 
 ## Contact
 
-[d@dvoorhees.com](mailto:d@dvoorhees.com)
+[LinkedIn](https://www.linkedin.com/in/danielle-voorhees-pmp) · [d@dvoorhees.com](mailto:d@dvoorhees.com)
