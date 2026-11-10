@@ -1,7 +1,7 @@
 ---
 date: 2026-07-29
 layout: post
-title: "Building an MCP Server for PostHog's Documentation"
+title: "Building a MCP Server for PostHog's Documentation"
 introduction: "A working RAG pipeline that serves PostHog's docs to any MCP-compatible AI agent, built with FastMCP, OpenAI embeddings, and ChromaDB, deployed on Fly.io. Three real bugs shaped the final build."
 seo_title: "Building an MCP Server for PostHog Documentation"
 seo_description: "How to build and deploy an MCP server with FastMCP, OpenAI embeddings, and ChromaDB. Covers chunking strategy, retrieval tradeoffs, and Fly.io deployment bugs."
@@ -9,7 +9,7 @@ categories: ["architecture", "tutorials", "systems design", "projects on github"
 github_url: "https://github.com/d-voorhees/posthog-writer-agent"
 ---
 
-PostHog's job posting for a Context Engineer role names a specific internal project called a Writer agent: a RAG (retrieval-augmented generation) system that maintains the company's documentation. I read that line and decided to build a working version of it myself, against PostHog's real public docs, before ever applying.
+PostHog's idea for a Writer agent—a RAG (retrieval-augmented generation) system for maintaining documentation—caught my attention. I wanted to explore how retrieval over a real documentation set could support useful, source-backed answers, so I built a working version against PostHog's public docs.
 
 The result is `posthog-writer-agent`, an MCP server that answers questions about PostHog's Feature Flags, Product Analytics, and Session Replay documentation. Any MCP-compatible AI tool can connect to it and get sourced, current answers instead of guessing from stale training data. The code and a live deployment are both public. The build surfaced three real bugs worth documenting, none of which were obvious going in.
 
