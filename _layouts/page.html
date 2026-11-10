@@ -9,10 +9,10 @@
 <body>
     {% include navbar.html %}
     <main>
-        <div class="container py-5">
-            <div class="col-sm-10 col-12">
+        <div class="container py-5{% if page.content_class == 'about-document' %} about-shell{% endif %}">
+            <div class="{% if page.content_class == 'about-document' %}col-12{% else %}col-sm-10 col-12{% endif %}">
                 <article>
-                    <div class="page-content">{{ content }}</div>
+                    <div class="page-content {{ page.content_class }}">{{ content }}</div>
                 </article>
             </div>
         </div>

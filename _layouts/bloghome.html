@@ -1,106 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% include head.html %}
-    <!-- Other head content specific to this layout -->
-  </head>
-
+  <head>{% include head.html %}</head>
   <body class="blog-home">
     {% include navbar.html %}
-    <main>
-      <div class="container-fluid">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="p-100">
-                <h1 id="category-title">Danielle Voorhees</h1>
-                <p class="h5 mb-4">Technical Project Manager | Software Engineer | PMP, CSM</p>
-                {{ content }}
-              </div>
-            </div>
-          </div>
+    <main class="editorial-home container">
+      <header class="professional-intro">
+        <h1>Danielle Voorhees</h1>
+        <p class="professional-role">Technical Project Manager | Software Engineer | PMP, CSM</p>
+        {{ content }}
+      </header>
+      <section class="writing-feature" aria-labelledby="selected-writing-title">
+        <h2 id="selected-writing-title">Selected Writing</h2>
+        <div class="featured-grid">
+          {% for selected_url in page.selected_posts %}
+          {% assign post = site.posts | where: "url", selected_url | first %}
+          {% if post %}
+          <article class="editorial-card">
+            <p class="card-discipline">{{ post.categories | first }}</p>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p>{{ post.seo_description | default: post.introduction }}</p>
+            <a class="card-link" href="{{ post.url | relative_url }}" aria-label="Read {{ post.title | escape }}">Read article <span aria-hidden="true">→</span></a>
+          </article>
+          {% endif %}
+          {% endfor %}
         </div>
-        <div class="border-bottom w-105"></div>
-        <div class="container">
-          <div class="row vh-85 pt-5">
-            <div class="col-md-3 border-bottom">
-              <div class="category-list">
-                <h2 class="h5">View by category</h2>
-                {% assign sorted_categories = site.data.categories | sort:
-                "name" %} {% for category in sorted_categories
-                %}
-                <div class="category-item">
-                  <div
-                    class="square"
-                    style="background-color: {{ category.color | default: '#cccccc' }};"
-                  ></div>
-                  <a
-                    href="/categories/?category={{ category.slug }}"
-                    class="category-link"
-                  >
-                    {{ category.name }}
-                  </a>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-            <div class="col-md-9 pl-md-3">
-              <section aria-labelledby="selected-writing-title">
-                <h2 id="selected-writing-title">Selected Writing</h2>
-                {% for selected_url in page.selected_posts %}
-                {% assign selected_post = site.posts | where: "url", selected_url | first %}
-                {% if selected_post %}
-                <div class="blog-post">
-                  <h3><a href="{{ selected_post.url | relative_url }}">{{ selected_post.title }}</a></h3>
-                  <p>{{ selected_post.introduction | default: selected_post.seo_description }}</p>
-                </div>
-                {% endif %}
-                {% endfor %}
-              </section>
-              <h2 class="mt-5">All Writing</h2>
-              {% for post in site.posts %}
-              <div class="blog-post">
-                <div class="category-list">
-                  <div class="post-categories">
-                    {% for category in post.categories %} {% assign
-                    category_slug = category | downcase | replace: '&', 'and' |
-                    replace: ' ', '-' | replace: ',', '' %} {% assign
-                    category_info = site.data.categories | where: "slug",
-                    category_slug | first %}
-                    <span class="category-item">
-                      <div
-                        class="square"
-                        style="background-color: {{ category_info.color | default: '#bcaeae' }}; border-radius: 15px; display: inline-block; width: 12px; height: 12px; margin-right: 5px; vertical-align: middle;"
-                      ></div>
-                      <a
-                        href="{{ site.url }}/categories/?category={{ category_slug }}"
-                        class="category-link"
-                      >
-                        {{ category }}
-                      </a>
-                    </span>
-                    {% endfor %}
-                  </div>
-                </div>
-                <h3>
-                  <a href="{{ post.url }}">{{ post.title }}</a>{% if
-                  post.applause_button %} {{ ' ' }}
-                  <span
-                    class="clap-count"
-                    data-url="{{ post.url | absolute_url }}"
-                  ></span>
-                  {% endif %}
-                </h3>
-                <p>{{ post.introduction }}</p>
-              </div>
-
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
+      <section class="writing-archive" aria-labelledby="recent-writing-title">
+        <h2 id="recent-writing-title">Recent Writing</h2>
+        <nav class="archive-categories" aria-label="Browse writing by category">
+          <span>Browse by category</span>
+          {% assign sorted_categories = site.data.categories | sort: "name" %}
+          {% for category in sorted_categories %}
+          <a href="{{ '/categories/' | relative_url }}?category={{ category.slug }}"><span class="square" style="background-color: {{ category.color | default: '#bcaeae' }};"></span>{{ category.name }}</a>
+          {% endfor %}
+        </nav>
+        {% comment %}Filter explicitly so the featured URLs never appear twice.{% endcomment %}
+        {% assign archive_count = 0 %}
+        {% for post in site.posts %}
+          {% unless page.selected_posts contains post.url %}
+            {% assign archive_count = archive_count | plus: 1 %}
+            {% if archive_count <= 6 %}{% include archive-entry.html %}{% endif %}
+          {% endunless %}
+        {% endfor %}
+        {% if archive_count > 6 %}
+        <details class="archive-more" id="full-archive">
+          <summary>Browse the full archive <span>({{ archive_count | minus: 6 }} more articles)</span></summary>
+          {% assign archive_count = 0 %}
+          {% for post in site.posts %}
+            {% unless page.selected_posts contains post.url %}
+              {% assign archive_count = archive_count | plus: 1 %}
+              {% if archive_count > 6 %}{% include archive-entry.html %}{% endif %}
+            {% endunless %}
+          {% endfor %}
+        </details>
+        {% endif %}
+      </section>
     </main>
+    {% include footer.html %}
   </body>
-
-  {% include footer.html %}
 </html>

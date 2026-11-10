@@ -1,0 +1,5 @@
+<article class="archive-entry">
+  <p class="entry-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time> · {{ post.categories | join: ' / ' }}</p>
+  <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+  <p>{{ post.seo_description | default: post.introduction }}</p>
+</article>

@@ -11,8 +11,6 @@ selected_posts:
   - /2026/08/15/building-a-technical-due-diligence-scanner-for-web-business-buyers/
 ---
 
-I lead technical projects from assessment and planning through implementation and delivery. Since 2013, I've worked across more than 100 software, web, and IT engagements, combining hands-on engineering with responsibility for project scope, technical risk, stakeholder coordination, and delivery.
-
-My work also includes technical due diligence for business acquisitions, systems architecture, and software integrations.
+I lead technical projects from assessment and planning through implementation and delivery. Since 2013, I've worked across more than 100 software, web, and IT engagements, combining hands-on engineering with scope, technical risk, and stakeholder coordination. My work spans systems integration, operational tools, and technical due diligence for business acquisitions, with attention to how people use and maintain the systems I build.
 
 [LinkedIn](https://www.linkedin.com/in/danielle-voorhees-pmp) · [About]({{ '/about/' | relative_url }}) · [d@dvoorhees.com](mailto:d@dvoorhees.com)
